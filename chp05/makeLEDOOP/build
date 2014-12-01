@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Exploring BeagleBone - Building the makeLEDs application"
+g++ makeLEDs.cpp -o makeLEDs
+echo "Finished"

@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Building the ADXL345 example applications"
+g++ testADXL345.cpp -o testADXL345Cpp
+gcc testADXL345.c -o testADXL
+g++ ADXL345.cpp -o ADXL345

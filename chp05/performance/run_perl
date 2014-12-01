@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Exploring BeagleBone Chapter 5 Performance Test Code"
+echo "By Derek Molloy, using code from benchmarksgame.alioth.debian.org"
+echo "Please see the source files for the author details."
+echo "All source code has been edited to remove proccessor specific optimizations"
+echo "Running the Tests:"
+
+Duration="5000000"
+
+echo -e "\nThe Perl Code Example"
+T="$(date +%s%N)"
+perl n-body.pl $Duration
+T="$(($(date +%s%N)-T))"
+T=$((T/1000000))
+echo "It took ${T} milliseconds to run the Perl test"
+
+echo "Finished Running the Benchmarks"

@@ -1,0 +1,2 @@
+#!/bin/bash
+gcc BBBSerialServer.c -o BBBSerialServer

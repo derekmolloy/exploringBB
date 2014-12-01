@@ -1,0 +1,47 @@
+/dts-v1/;
+/plugin/;
+
+/{
+    compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+    part-number = "BB-BONE-KEYS";
+    version = "00A0";
+
+    fragment@0 {
+        target = <&am33xx_pinmux>;
+        __overlay__ {
+            pushbutton_pins: pinmux_pushbutton_pins{
+                pinctrl-single,pins = <
+                    0x040 0x37 // P9_15 pull-up mode 7 GPIO1_16
+                >;
+            };
+        };
+    };
+
+    fragment@1 {
+        target = <&ocp>;
+        __overlay__ {
+            /* avoid warnings */            
+            #address-cells = <1>;
+            #size-cells = <1>;                            
+
+            gpio_keys {
+                compatible = "gpio-keys";
+                pinctrl-names = "default";
+                pinctrl-0 = <&pushbutton_pins>;
+                #address-cells = <1>;
+                #size-cells = <0>;
+
+                button_P9_15 {
+                    debounce_interval = <50>;
+                    linux,code = <28>;
+                    label = "button9_15";
+                    gpios = <&gpio2 16 0x1>;
+                    gpio-key,wakeup;
+                    autorepeat;
+                };                
+            };
+        };
+    };
+};
+

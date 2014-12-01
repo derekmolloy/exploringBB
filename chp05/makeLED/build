@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "Exploring BeagleBone - Building the makeLED application"
+echo "The C++ version is called makeLED and the C version is called makeLEDC"
+g++ makeLED.cpp -o makeLED
+gcc makeLED.c -o makeLEDC
+echo "Finished"

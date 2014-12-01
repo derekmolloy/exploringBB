@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "Video for Beaglebone Video Applications - derekmolloy.ie"
+
+echo "Building the OpenCV example for the Beaglebone"
+g++ -O2 `pkg-config --cflags --libs opencv` boneCV.cpp -o boneCV
+
+echo "Building the OpenCV timing example for the Beaglebone"
+g++ -O2 `pkg-config --cflags --libs opencv` -lrt boneCVtiming.cpp -o boneCVtiming
+
+echo "Building the face detection example for the Beaglebone"
+g++ -O2 `pkg-config --cflags --libs opencv` face.cpp -o  face
+
+echo "Finished"

@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ StepperMotorApp.cpp ../../library/libEBBLibrary.so -o StepperApp -I "../../library"

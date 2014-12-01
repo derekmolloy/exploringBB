@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ SevenSegmentApp.cpp ../../library/libEBBLibrary.so -o SevenSegmentApp -I "../../library"

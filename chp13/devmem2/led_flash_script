@@ -1,0 +1,12 @@
+#!/bin/bash
+sudo sh -c "echo 49 > /sys/class/gpio/export"
+sudo sh -c "echo out > /sys/class/gpio/gpio49/value"
+echo "Using devmem2 to flash the gpio 49 LED on P9_19"
+echo "*** Setting the output high for 2 secs using devmem2 ***"
+sudo ./devmem2 0x4804c194 w 0x00020000
+sleep 2
+echo "*** Setting the output low for 2 secs using devmem2 ***"
+sudo ./devmem2 0x4804c190 w 0x00020000
+sleep 2
+echo "*** Reading the current state using devmem2 ***"
+sudo ./devmem2 0x4804c13c

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+export PRU_SDK=/home/molloyd/pru_2.0.0B2/
+
+echo "Compiling the testPRU application"
+
+$PRU_SDK/bin/clpru --silicon_version=3 -o3 testPRU.c \
+        -i$PRU_SDK/include \
+        -i$PRU_SDK/lib \
+        -z AM3359_PRU.cmd \
+        -o testPRU.out -m testPRU.map
+
+echo "Converting executable to a ARM object file"
+
+$PRU_SDK/bin/hexpru $PRU_SDK/bin.cmd testPRU.out
+
+gcc testBBB.c -o test -lpthread -lprussdrv

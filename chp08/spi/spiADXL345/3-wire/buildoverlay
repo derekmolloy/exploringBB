@@ -1,0 +1,2 @@
+#!/bin/bash
+dtc -o dtb -o DM-SPI3WIRE-00A0.dtbo -b 0 -@ DM-SPI3WIRE-00A0.dts 

@@ -1,0 +1,12 @@
+[Unit]
+Description=BBB Serial Server (from EBB)
+Before=getty.target
+
+[Service]
+ExecStart=/usr/bin/BBBSerialServer /dev/ttyGS0
+SyslogIdentifier=BBBSerialServer
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

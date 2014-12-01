@@ -1,0 +1,2 @@
+#!/bin/bash
+gcc spi595.c -o spi595

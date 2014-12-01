@@ -1,0 +1,3 @@
+#!/bin/sh
+pasm -b buttonTest.p
+gcc buttonTest.c -o buttonTest -lpthread -lprussdrv

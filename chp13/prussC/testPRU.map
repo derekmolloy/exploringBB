@@ -1,0 +1,85 @@
+******************************************************************************
+                     PRU Linker Unix v2.0.0                    
+******************************************************************************
+>> Linked Sun Aug 17 18:23:52 2014
+
+OUTPUT FILE NAME:   <testPRU.out>
+ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_noexit"  address: 00000090
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  PRUIMEM               00000000   00001000  000000b4  00000f4c  RWIX
+
+PAGE 1:
+  PRUDMEM               00000000   00001000  00000100  00000f00  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.text      0    00000000    000000b4     
+                  00000000    00000090     testPRU.obj (.text:main)
+                  00000090    00000014     rtspruv3_le.lib : boot_special.obj (.text:_c_int00_noinit_noargs_noexit)
+                  000000a4    00000008                     : exit.obj (.text:abort)
+                  000000ac    00000008                     : exit.obj (.text:loader_exit)
+
+.stack     1    00000000    00000100     UNINITIALIZED
+                  00000000    00000004     rtspruv3_le.lib : boot.obj (.stack)
+                  00000004    000000fc     --HOLE--
+
+.cinit     1    00000000    00000000     UNINITIALIZED
+
+
+SEGMENT ATTRIBUTES
+
+    id tag      seg value
+    -- ---      --- -----
+     0 PHA_PAGE 1   1    
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address    name
+--------   ----
+000000ac   C$$EXIT
+00000100   __TI_STACK_END
+00000100   __TI_STACK_SIZE
+00000001   __TI_args_main
+00000001   __TI_auto_init
+00000001   __TI_c_int00
+00000001   __TI_exit
+ffffffff   __binit__
+ffffffff   __c_args__
+00000090   _c_int00_noinit_noargs_noexit
+00000000   _stack
+000000a4   abort
+ffffffff   binit
+00000000   main
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address    name
+--------   ----
+00000000   _stack
+00000000   main
+00000001   __TI_args_main
+00000001   __TI_auto_init
+00000001   __TI_c_int00
+00000001   __TI_exit
+00000090   _c_int00_noinit_noargs_noexit
+000000a4   abort
+000000ac   C$$EXIT
+00000100   __TI_STACK_END
+00000100   __TI_STACK_SIZE
+ffffffff   __binit__
+ffffffff   __c_args__
+ffffffff   binit
+
+[14 symbols]

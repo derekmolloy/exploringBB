@@ -1,0 +1,3 @@
+KERNEL=="gpio*", SUBSYSTEM=="gpio", ACTION=="add", PROGRAM="/bin/sh -c 'chown -R molloyd:users /sys/class/gpio'"
+KERNEL=="gpio*", SUBSYSTEM=="gpio", ACTION=="add", PROGRAM="/bin/sh -c 'chown -R molloyd:users /sys/devices/virtual/gpio'"
+

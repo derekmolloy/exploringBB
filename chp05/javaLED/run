@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Executing the Java Application - requires root access for /sys"
+echo "Also, you have to add the java path to the sudoers file secure_path using: sudo visudo"
+sudo sh -c 'java exploringBB.LEDExample On'

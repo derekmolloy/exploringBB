@@ -1,0 +1,3 @@
+#!/bin/bash
+g++ readUptime.cpp -o readUptime
+gcc whologgedin.c -o who

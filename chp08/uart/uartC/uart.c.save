@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<fcntl.h>
+#include<unistd.h>
+#include<termios.h>
+
+int main(){
+   int file, count;
+
+   if ((file = open("/dev/ttyO4", O_RDWR | O_NOCTTY | O_NDELAY))<0){
+      perror("UART: Failed to open the file.");
+      return -1;
+   }
+   struct termios options;
+   tcgetattr(file, &options);
+   options.c_cflag = B115200 | CS8 | CREAD | CLOC
+   options.c_iflag = IGNPAR;
+   tcflush(file, TCIFLUSH);
+   tcsetattr(file, TCSANOW, &options);
+
+   unsigned char transmit[18] = "Hello BeagleBone!";
+
+   if ((count = write(file, &transmit,18))<0){
+      perror("Failed to write to the output");
+      return -1;
+   }
+
+   unsigned char receive[100];
+   if ((count = read(file, (void*)receive, 100))<0){
+      perror("Failed to read from the input");
+      return -1;
+   }
+   if (count==0) printf("There was no data available to read!");
+   else {
+      printf("The following was read in [%d]: %s",count,receive);
+   }
+   close(file);
+   return 0;
+}

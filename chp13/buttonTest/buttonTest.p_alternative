@@ -1,0 +1,18 @@
+// PRUSS program to turn off an LED if a button is pressed - speed test
+//  LED output - pru1_pru0_pru_r30_5 mode=5   P9_27
+//  Button input - pru1_pru0_pru_r31_3 mode=6 P9_28
+// Writen by Derek Molloy for the book Exploring BeagleBone
+
+.origin 0             
+.entrypoint START   
+
+START:
+	QBBS	PRESSED, r31.t3
+
+DEPRESSED:
+	SET	r30.t5
+        QBA	START
+
+PRESSED:
+	CLR	r30.t5
+        QBA	START	

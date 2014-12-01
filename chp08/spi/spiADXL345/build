@@ -1,0 +1,3 @@
+#!/bin/bash
+gcc spiADXL345.c -o spiADXL345
+

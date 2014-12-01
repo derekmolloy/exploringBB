@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Starting the Internet-over-USB script"
+/sbin/route add default gw 192.168.7.1
+/usr/sbin/ntpdate -b -s -u ie.pool.ntp.org
+echo "End of the settings script"

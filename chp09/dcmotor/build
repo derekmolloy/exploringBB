@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ DCMotorApp.cpp ../../library/libEBBLibrary.so -o DCApp -I "../../library"

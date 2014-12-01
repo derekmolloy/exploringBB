@@ -1,0 +1,3 @@
+#!/bin/sh
+pasm -b flashLED.p
+gcc flashLED.c -o flashLED -lpthread -lprussdrv

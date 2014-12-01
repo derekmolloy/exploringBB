@@ -1,0 +1,3 @@
+#!/bin/sh
+pasm -b memExample.p
+gcc memExample.c -o memExample -lpthread -lprussdrv

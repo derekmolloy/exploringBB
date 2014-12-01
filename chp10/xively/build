@@ -1,0 +1,4 @@
+#!/bin/bash
+gcc -Wall -std=c99 xivelySensor.c libxively/libxively.a -o xivelySensor -Ilibxively/include/
+gcc -Wall -std=c99 readXively.c libxively/libxively.a -o readXively -Ilibxively/include/
+

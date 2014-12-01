@@ -1,0 +1,3 @@
+#!/bin/bash
+g++ client.cpp network/SocketClient.cpp -o client
+g++ server.cpp network/SocketServer.cpp network/ConnectionHandler.cpp -o server -pthread

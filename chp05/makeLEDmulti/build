@@ -1,0 +1,20 @@
+#!/bin/bash
+echo "Exploring BeagleBone - Building the makeLED application"
+g++ makeLEDmulti.cpp -o makeLEDmulti
+if ! [ -e "onled" ]; then 
+    ln -s makeLEDmulti onled
+    echo "Created onled symbolic link" 
+fi
+if ! [ -e "offled" ]; then
+    ln -s makeLEDmulti offled
+    echo "Created offled symbolic link"
+fi
+if ! [ -e "ledstatus" ]; then
+    ln -s makeLEDmulti ledstatus
+    echo "Created ledstatus symbolic link"
+fi
+if ! [ -e "flashled" ]; then
+    ln -s makeLEDmulti flashled
+    echo "Created flashled symbolic link"
+fi
+echo "Finished"

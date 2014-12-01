@@ -1,0 +1,67 @@
+/* Device Tree Overlay for enabling the pins that are used in Chapter 13
+* This overlay is based on the BB-PRU-01 overlay
+* Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
+* Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
+* ISBN 9781118935125. Please see the file README.md in the repository root 
+* directory for copyright and GNU GPLv3 license information.
+*/
+/dts-v1/;
+/plugin/;
+
+/ {
+   compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+   part-number = "EBB-PRU-Example";
+   version = "00A0";
+
+   /* This overlay uses the following resources */
+   exclusive-use =
+         "P9.11", "P9.13", "P9.27", "P9.28", "pru0";
+
+   fragment@0 {
+      target = <&am33xx_pinmux>;
+      __overlay__ {
+
+//         pru_gpio_pins: pinmux_pru_gpio_pins { // The PRU pins
+//            pinctrl-single,pins = <
+//               0x1a4 0x0f  // P9_27 GPIO3_19: gpio3[19] | MODE7 | OUTPUT
+//            >;
+//         };
+
+         gpio_pins: pinmux_gpio_pins {         // The GPIO pins
+            pinctrl-single,pins = <
+               0x070 0x07  // P9_11 MODE7 | OUTPUT | GPIO pull-down
+               0x074 0x27  // P9_13 MODE7 | INPUT | GPIO pull-down
+            >;
+         };
+
+         pru_pru_pins: pinmux_pru_pru_pins {   // The PRU pin modes
+            pinctrl-single,pins = <
+               0x1a4 0x05  // P9_27 pr1_pru0_pru_r30_5, MODE5 | OUTPUT | PRU
+               0x19c 0x26  // P9_28 pr1_pru0_pru_r31_3, MODE6 | INPUT | PRU
+            >;
+         };
+      };
+   };
+
+   fragment@1 {         // Enable the PRUSS
+      target = <&pruss>;
+      __overlay__ {
+         status = "okay";
+         pinctrl-names = "default";
+         pinctrl-0 = <&pru_pru_pins>;
+      };
+   };
+
+   fragment@2 {         // Enable the GPIOs
+      target = <&ocp>;
+      __overlay__ {
+         gpio_helper {
+            compatible = "gpio-of-helper";
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&gpio_pins>;
+         };
+      };
+   };
+};

@@ -1,0 +1,20 @@
+CC      = g++
+CFLAGS  = -c -Wall $(shell pkg-config --cflags glib-2.0 gtk+-2.0)
+LDFLAGS = $(shell pkg-config --libs glib-2.0 gtk+-2.0)
+
+all: GTKsimple GTKtemperature
+
+GTKsimple: GTKsimple.o
+	$(CC) $(LDFLAGS) $< -o $@
+
+GTKsimple.o: GTKsimple.cpp
+	$(CC) $(CFLAGS) $< -o $@
+
+GTKtemperature: GTKtemperature.o
+	$(CC) $(LDFLAGS) $< -o $@
+
+GTKtemperature.o: GTKtemperature.cpp
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -rf *.o GTKsimple GTKtemperature

@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ syscall.cpp -o syscall

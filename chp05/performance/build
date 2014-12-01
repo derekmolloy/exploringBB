@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "Exploring BeagleBone Chapter 5 Performance Test Code"
+echo "Building the Executables"
+g++ -O3 n-body.cpp -o n-body
+g++ -O3 --std=c++11  n-body2.cpp -o n-body2
+
+echo "Building the Java Executable - Will not work on the BBB"
+javac nbody.java
+
+echo "Finished Building the Programs"

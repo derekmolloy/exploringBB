@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Compiling the Device Tree Overlay"
+dtc -O dtb -o BB-BONE-KEYS-00A0.dtbo -b o -@ BB-BONE-KEYS-00A0.dts
+echo "Compiling the bone_keys.cpp example"
+g++ bone_keys.cpp -o bone_keys

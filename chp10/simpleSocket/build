@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ simpleSocket.cpp ../../library/libEBBLibrary.so -o simpleSocket -I "../../library"

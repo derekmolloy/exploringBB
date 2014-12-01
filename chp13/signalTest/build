@@ -1,0 +1,3 @@
+#!/bin/sh
+pasm -b signalTest.p
+gcc signalTest.c -o signalTest -lpthread -lprussdrv

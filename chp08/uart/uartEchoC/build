@@ -1,0 +1,2 @@
+#!/bin/bash
+gcc BBBEcho.c -o BBBEcho
