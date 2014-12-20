@@ -1,2 +1,3 @@
 #!/bin/bash
 g++ syscall.cpp -o syscall
+g++ callchmod.cpp -o callchmod
