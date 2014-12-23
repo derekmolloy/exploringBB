@@ -42,7 +42,8 @@ int main() {
     int x=0, y=0;
     pthread_t thread;         //this is our handle to the pthread
     // create the thread, pass the reference, address of the function and data
-    if(pthread_create(&thread, NULL, &threadFunction, &x)){
+    // pthread_create() returns 0 on the successful creation of a thread
+    if(pthread_create(&thread, NULL, &threadFunction, &x)!=0){
     	cout << "Failed to create the thread" << endl;
     	return 1;
     }
