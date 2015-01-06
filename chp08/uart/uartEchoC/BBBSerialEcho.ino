@@ -2,9 +2,9 @@
 
 // This function is called once when the program starts. 
 void setup() {
-   // Choose a baud rate and configuration. 9600
+   // Choose a baud rate and configuration. 115200
    // Default is 8-bit with No parity and 1 stop bit
-   Serial.begin(9600, SERIAL_8N1);
+   Serial.begin(115200, SERIAL_8N1);
 }
 
 // This function will loop as quickly as possible, forever.
