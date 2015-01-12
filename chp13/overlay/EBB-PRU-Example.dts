@@ -22,12 +22,6 @@
       target = <&am33xx_pinmux>;
       __overlay__ {
 
-//         pru_gpio_pins: pinmux_pru_gpio_pins { // The PRU pins
-//            pinctrl-single,pins = <
-//               0x1a4 0x0f  // P9_27 GPIO3_19: gpio3[19] | MODE7 | OUTPUT
-//            >;
-//         };
-
          gpio_pins: pinmux_gpio_pins {         // The GPIO pins
             pinctrl-single,pins = <
                0x070 0x07  // P9_11 MODE7 | OUTPUT | GPIO pull-down
