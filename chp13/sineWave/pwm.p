@@ -1,9 +1,6 @@
 // PRUSS program to output a waveform that is passed from the C program
+// Writen by Derek Molloy for the book Exploring BeagleBone
 // Output is r30.5 (P9_27) and Input is r31.3 (P9_28)
-// Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
-// Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
-// ISBN 9781118935125. Please see the file README.md in the repository root 
-// directory for copyright and GNU GPLv3 license information.   
 
 .origin 0               // offset of start of program in PRU memory
 .entrypoint START       // program entry point used by the debugger

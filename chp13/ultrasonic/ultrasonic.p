@@ -1,9 +1,6 @@
 // PRUSS program to drive a HC-SR04 sensor and store the output in memory
 // that can be read by a Linux userspace program when an interrupt is sent
-// Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
-// Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
-// ISBN 9781118935125. Please see the file README.md in the repository root 
-// directory for copyright and GNU GPLv3 license information.   
+// Writen by Derek Molloy for the book Exploring BeagleBone
 
 .origin 0               // offset of start of program in PRU memory
 .entrypoint START       // program entry point used by the debugger

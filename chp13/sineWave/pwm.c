@@ -1,10 +1,8 @@
-/** Program to generate a simple PWM signal using the BBB PRU-ICSS
-* Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
-* Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
-* ISBN 9781118935125. Please see the file README.md in the repository root 
-* directory for copyright and GNU GPLv3 license information.            */
-
+/** Program to generate a simple PWM signal using the BBB PRUSS
+*   by Derek Molloy, for the book Exploring BeagleBone
+*/
 #include <stdio.h>
+#include <stdlib.h>
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 #include <math.h>
@@ -13,8 +11,12 @@
 static void *pru0DataMemory;
 static unsigned int *pru0DataMemory_int;
 
-void main (void)
+int main (void)
 {
+   if(getuid()!=0){
+      printf("You must run this program as root. Exiting.\n");
+      exit(EXIT_FAILURE);
+   }
    int n, i;
    // Initialize structure used by prussdrv_pruintc_intc
    // PRUSS_INTC_INITDATA is found in pruss_intc_mapping.h
@@ -60,5 +62,5 @@ void main (void)
    // Disable PRU and close memory mappings
    prussdrv_pru_disable(PRU_NUM);
    prussdrv_exit ();
-
+   return EXIT_SUCCESS;
 }

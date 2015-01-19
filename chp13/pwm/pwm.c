@@ -1,18 +1,20 @@
 /** Program to generate a simple PWM signal using the BBB PRUSS
 *   Output is P9_27 and input is P9_28, using PRU EGPIOs
-* Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
-* Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
-* ISBN 9781118935125. Please see the file README.md in the repository root 
-* directory for copyright and GNU GPLv3 license information.            */
-
+*   by Derek Molloy, for the book Exploring BeagleBone
+*/
 #include <stdio.h>
+#include <stdlib.h>
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 
 #define PRU_NUM   0
 
-void main (void)
+int main (void)
 {
+   if(getuid()!=0){
+      printf("You must run this program as root. Exiting.\n");
+      exit(EXIT_FAILURE);
+   }
    // Initialize structure used by prussdrv_pruintc_intc
    tpruss_intc_initdata pruss_intc_initdata = PRUSS_INTC_INITDATA;
 
@@ -40,4 +42,5 @@ void main (void)
    // Disable PRU and close memory mappings
    prussdrv_pru_disable(PRU_NUM);
    prussdrv_exit ();
+   return EXIT_SUCCESS;
 }

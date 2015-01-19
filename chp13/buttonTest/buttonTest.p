@@ -1,10 +1,7 @@
 // PRUSS program to turn off an LED if a button is pressed - speed test
-//  LED output   - pru1_pru0_pru_r30_5 mode=5   P9_27
-//  Button input - pru1_pru0_pru_r31_3 mode=6   P9_28
-// Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
-// Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
-// ISBN 9781118935125. Please see the file README.md in the repository root 
-// directory for copyright and GNU GPLv3 license information.     
+//  LED output - pru1_pru0_pru_r30_5 mode=5   P9_27
+//  Button input - pru1_pru0_pru_r31_3 mode=6 P9_28
+// Writen by Derek Molloy for the book Exploring BeagleBone
 
 .origin 0             
 .entrypoint START   

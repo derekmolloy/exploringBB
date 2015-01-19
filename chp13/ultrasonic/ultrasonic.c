@@ -1,11 +1,9 @@
 /* PRUSS program to drive a HC-SR04 sensor and display the sensor output
 *  in Linux userspace by sending an interrupt.
-* Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
-* Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
-* ISBN 9781118935125. Please see the file README.md in the repository root 
-* directory for copyright and GNU GPLv3 license information.            */
-
+*  written by Derek Molloy for the book Exploring BeagleBone
+*/
 #include <stdio.h>
+#include <stdlib.h>
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 #include <pthread.h>
@@ -27,8 +25,12 @@ void *threadFunction(void *value){
    } while (1);
 }
 
-void main (void)
+int  main (void)
 {
+   if(getuid()!=0){
+      printf("You must run this program as root. Exiting.\n");
+      exit(EXIT_FAILURE);
+   }
    pthread_t thread;
    tpruss_intc_initdata pruss_intc_initdata = PRUSS_INTC_INITDATA;
 
@@ -70,4 +72,5 @@ void main (void)
    /* Disable PRU and close memory mappings */
    prussdrv_pru_disable(PRU_NUM);
    prussdrv_exit ();
+   return EXIT_SUCCESS;
 }

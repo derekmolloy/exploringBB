@@ -1,9 +1,6 @@
 // PRUSS program to flash a LED on P9_27 (pru0_pru_r30_5) until a button 
-// that is connected to P9_28 (pru0_pru_r31_3 is pressed.
-// Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
-// Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
-// ISBN 9781118935125. Please see the file README.md in the repository root 
-// directory for copyright and GNU GPLv3 license information. 
+// that is connected to P9_28 (pru0_pru_r31_3 is pressed. This program 
+// was writen by Derek Molloy for the book Exploring BeagleBone
 
 .origin 0                        // start of program in PRU memory
 .entrypoint START                // program entry point (for a debugger)
