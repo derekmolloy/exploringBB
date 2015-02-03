@@ -1,0 +1,37 @@
+An example to use the PWM class on a PWM pin -- See pages 232-233 in the book 
+Exploring BeagleBone by Derek Molloy
+
+Before using this example, you MUST load the overlay for the PWM pin that you 
+are using. For example, the current code example code assumes that the pin
+P9_42 has been exported using the following steps:
+
+root@beaglebone:/lib/firmware# sudo sh -c "echo bone_pwm_P9_42 > $SLOTS"
+root@beaglebone:/lib/firmware# sudo sh -c "echo am33xx_pwm > $SLOTS"
+root@beaglebone:/lib/firmware# cat $SLOTS
+ 0: 54:PF---
+ 1: 55:PF---
+ 2: 56:PF---
+ 3: 57:PF---
+ 4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
+ 5: ff:P-O-- Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
+ 6: ff:P-O-- Bone-Black-HDMIN,00A0,Texas Instrument,BB-BONELT-HDMIN
+ 7: ff:P-O-L Override Board Name,00A0,Override Manuf,EBB-PRU-Example
+ 8: ff:P-O-L Override Board Name,00A0,Override Manuf,bone_pwm_P9_42
+ 9: ff:P-O-L Override Board Name,00A0,Override Manuf,am33xx_pwm
+
+root@beaglebone:/sys/devices/ocp.3# cd pwm_test_P9_42.13/
+root@beaglebone:/sys/devices/ocp.3/pwm_test_P9_42.13# ls -al
+total 0
+drwxr-xr-x  3 root root    0 Feb  3 00:28 .
+drwxr-xr-x 37 root root    0 May 23  2014 ..
+lrwxrwxrwx  1 root root    0 Feb  3 00:30 driver -> ../../../bus/platform/drivers/pwm_test
+-rw-------  1 root root 4096 Feb  3 00:30 duty
+-r--r--r--  1 root root 4096 Feb  3 00:30 modalias
+-rw-------  1 root root 4096 Feb  3 00:30 period
+-rw-------  1 root root 4096 Feb  3 00:30 polarity
+drwxr-xr-x  2 root root    0 Feb  3 00:30 power
+-rw-------  1 root root 4096 Feb  3 00:30 run
+lrwxrwxrwx  1 root root    0 Feb  3 00:28 subsystem -> ../../../bus/platform
+-rw-r--r--  1 root root 4096 Feb  3 00:28 uevent
+
+You can then use the code example in this directory.
