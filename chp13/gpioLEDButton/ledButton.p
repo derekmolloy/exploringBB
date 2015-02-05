@@ -1,6 +1,10 @@
 // PRUSS program to flash a LED on P9_11 (GPIO0_30) until a button 
 // that is connected to P9_13 (GPIO0_31) is pressed. This program 
 // was writen by Derek Molloy for the book Exploring BeagleBone
+//
+// Please note that it is a coincidence that I chose GPIO0_30 and GPIO0_31
+// this choice is nothing to do with the PRU registers r30 and r31 but rather
+// relates to the randomly chosen P9_11 and P9_13 GPIO numbers
 
 .origin 0                        // start of program in PRU memory
 .entrypoint START                // program entry point (for a debugger)
