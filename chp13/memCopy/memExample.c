@@ -10,6 +10,16 @@
 #include <pruss_intc_mapping.h>
 
 #define PRU_NUM	0   // using PRU0 for these examples
+#define MMAP_LOC "/sys/class/uio/uio0/maps/map1/"
+
+unsigned int readFileValue(char filename[]){
+   FILE* fp;
+   unsigned int value = 0;
+   fp = fopen(filename, "rt");
+   fscanf(fp, "%x", &value);
+   fclose(fp);
+   return value;
+}
 
 int main (void)
 {
@@ -21,19 +31,20 @@ int main (void)
    // PRUSS_INTC_INITDATA is found in pruss_intc_mapping.h
    tpruss_intc_initdata pruss_intc_initdata = PRUSS_INTC_INITDATA;
 
+   // Read in the location and address of the shared memory. This value changes
+   // each time a new block of memory is allocated.
+   unsigned int values[2];
+   values[0] = readFileValue(MMAP_LOC "addr");
+   values[1] = readFileValue(MMAP_LOC "size");
+   printf("The shared memory has location: %x and size %x\n", values[0], values[1]);
+
    // Allocate and initialize memory
    prussdrv_init ();
    prussdrv_open (PRU_EVTOUT_0);
 
-   // Write a single word into PRU0 Data RAM0
-   unsigned int pru0 = 0xFEEDBBB0;
-   prussdrv_pru_write_memory(PRUSS0_PRU0_DATARAM, 0, &pru0, 4);
-   unsigned int pru1 = 0xFEEDBBB1;
-   prussdrv_pru_write_memory(PRUSS0_PRU1_DATARAM, 0, &pru1, 4);
-   unsigned int pruins0 = 0xFEEDBBB2;
-   prussdrv_pru_write_memory(PRUSS0_PRU0_IRAM, 0, &pruins0, 4);
-   unsigned int pruins1 = 0xFEEDBBB3;
-   prussdrv_pru_write_memory(PRUSS0_PRU1_IRAM, 0, &pruins1, 4);
+   // Write the address and size into PRU0 Data RAM0. You can edit the value to
+   // PRUSS0_PRU1_DATARAM if you wish to write to PRU1
+   prussdrv_pru_write_memory(PRUSS0_PRU0_DATARAM, 0, values, 8);
 
    // Map PRU's interrupts
    prussdrv_pruintc_init(&pruss_intc_initdata);
