@@ -13,9 +13,10 @@
 #define GPIO1 0x4804c000         // GPIO Bank 1, Table 2.2 Peripheral Map
 #define GPIO2 0x481ac000         // GPIO Bank 2, 
 #define GPIO3 0x481ae000         // GPIO Bank 3,
+// See the TRM section 25.4.1 (i.e., Chapter 25)
 #define GPIO_CLEARDATAOUT 0x190  // for clearing the GPIO registers
 #define GPIO_SETDATAOUT   0x194  // for setting the GPIO registers
-#define GPIO_DATAOUT      0x138  // for reading the GPIO registers
+#define GPIO_DATAIN       0x138  // to read the register data read from GPIO pins
 #define GPIO0_30 1<<30           // P9_11 gpio0[30] Output - bit 30
 #define GPIO0_31 1<<31           // P9_13 gpio0[31] Input - bit 31
 
@@ -49,7 +50,7 @@ DELAYOFF:
 	SUB	r0, r0, 1        // decrement REG0 by 1
 	QBNE	DELAYOFF, r0, 0  // Loop to DELAYOFF, unless REG0=0
 
-	MOV	r5, GPIO0 | GPIO_DATAOUT      // load read addr for DATAOUT
+	MOV	r5, GPIO0 | GPIO_DATAIN      // load read addr for DATAIN
 	LBBO	r6, r5, 0, 4     // Load the value at r5 into r6
 	QBBC	MAINLOOP, r6.t31 // is the button pressed? If not, loop
 END:                             // notify the calling app that finished
