@@ -9,10 +9,10 @@
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 
-#define PRU_NUM	0   // using PRU0 for these examples
-#define MMAP_LOC "/sys/class/uio/uio0/maps/map0/"
+#define PRU_NUM	   0   // using PRU0 for these examples
+#define MMAP_LOC   "/sys/class/uio/uio0/maps/map0/"
 
-enum FREQUENCY {    // measured and calirated, but can be calculated
+enum FREQUENCY {    // measured and calibrated, but can be calculated
 	FREQ_12_5MHz =  1,
 	FREQ_6_25MHz =  5,
 	FREQ_5MHz    =  7,
