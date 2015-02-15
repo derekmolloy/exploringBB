@@ -10,8 +10,9 @@
 #include <pruss_intc_mapping.h>
 
 #define PRU_NUM	0   // using PRU0 for these examples
+#define MMAP_LOC "/sys/class/uio/uio0/maps/map0/"
 
-enum FREQUENCY {
+enum FREQUENCY {    // measured and calirated, but can be calculated
 	FREQ_12_5MHz =  1,
 	FREQ_6_25MHz =  5,
 	FREQ_5MHz    =  7,
@@ -33,6 +34,15 @@ enum CONTROL {
 	UPDATE = 3
 };
 
+unsigned int readFileValue(char filename[]){
+   FILE* fp;
+   unsigned int value = 0;
+   fp = fopen(filename, "rt");
+   fscanf(fp, "%x", &value);
+   fclose(fp);
+   return value;
+}
+
 int main (void)
 {
    if(getuid()!=0){
@@ -46,9 +56,10 @@ int main (void)
    // Read in the location and address of the shared memory. This value changes
    // each time a new block of memory is allocated.
    unsigned int values[2];
-   values[0] = FREQ_5MHz;
+   values[0] = FREQ_1MHz;
    values[1] = RUNNING;
-   printf("The shared memory has location: %x and size %x\n", values[0], values[1]);
+   printf("The clock state is set as period: %d (0x%x) and state: %d\n", values[0], values[0], values[1]);
+   printf("This is mapped at the base address: %x\n", readFileValue(MMAP_LOC "addr"));
 
    // Allocate and initialize memory
    prussdrv_init ();
@@ -63,13 +74,8 @@ int main (void)
 
    // Load and execute the PRU program on the PRU
    prussdrv_exec_program (PRU_NUM, "./PRUClock.bin");
+   printf("EBB Clock PRU program now running (%d)\n", values[0]);
 
-   // Wait for event completion from PRU, returns the PRU_EVTOUT_0 number
-   int n = prussdrv_pru_wait_event (PRU_EVTOUT_0);
-   printf("EBB PRU program completed, event number %d.\n", n);
-
-   // Disable PRU and close memory mappings
-   prussdrv_pru_disable(PRU_NUM);
    prussdrv_exit ();
    return EXIT_SUCCESS;
 }

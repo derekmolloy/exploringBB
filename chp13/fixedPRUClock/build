@@ -1,0 +1,3 @@
+#!/bin/sh
+pasm -b FixedPRUClock.p
+gcc FixedPRUClock.c -o fixedclock -lpthread -lprussdrv
