@@ -74,8 +74,16 @@ int main (void)
    prussdrv_pruintc_init(&pruss_intc_initdata);
 
    // Load and execute the PRU program on the PRU
+   prussdrv_exec_program (ADC_PRU_NUM, "./PRUADC.bin");
    prussdrv_exec_program (CLK_PRU_NUM, "./PRUClock.bin");
    printf("EBB Clock PRU1 program now running (%d)\n", values[0]);
+
+   // Wait for event completion from PRU, returns the PRU_EVTOUT_0 number
+   int n = prussdrv_pru_wait_event (PRU_EVTOUT_0);
+   printf("EBB ADC PRU program completed, event number %d.\n", n);
+
+// Disable PRU and close memory mappings
+   prussdrv_pru_disable(ADC_PRU_NUM);
 
    prussdrv_exit ();
    return EXIT_SUCCESS;
