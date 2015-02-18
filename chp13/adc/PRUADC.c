@@ -62,12 +62,17 @@ int main (void)
    printf("The clock state is set as period: %d (0x%x) and state: %d\n", values[0], values[0], values[1]);
    printf("This is mapped at the base address: %x + 2000\n", readFileValue(MMAP_LOC "addr"));
 
+   // data for PRU0
+//   unsigned char control[3] = {0x01, 0x80, 0x00};
+   unsigned int spi_control = 0x01800000;
+
    // Allocate and initialize memory
    prussdrv_init ();
    prussdrv_open (PRU_EVTOUT_0);
 
    // Write the address and size into PRU0 Data RAM0. You can edit the value to
    // PRUSS0_PRU1_DATARAM if you wish to write to PRU1
+   prussdrv_pru_write_memory(PRUSS0_PRU0_DATARAM, 0, &spi_control, 4);
    prussdrv_pru_write_memory(PRUSS0_PRU1_DATARAM, 0, values, 8);
 
    // Map PRU's interrupts
