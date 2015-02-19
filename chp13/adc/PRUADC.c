@@ -56,14 +56,15 @@ int main (void)
 
    // Read in the location and address of the shared memory. This value changes
    // each time a new block of memory is allocated.
-   unsigned int values[2];
-   values[0] = FREQ_100kHz;
-   values[1] = RUNNING;
-   printf("The clock state is set as period: %d (0x%x) and state: %d\n", values[0], values[0], values[1]);
-   printf("This is mapped at the base address: %x + 2000\n", readFileValue(MMAP_LOC "addr"));
+   unsigned int timerData[2];
+   timerData[0] = FREQ_100kHz;
+   timerData[1] = RUNNING;
+   printf("The clock state is set as period: %d (0x%x) and state: %d\n", timerData[0], timerData[0], timerData[1]);
+   unsigned int PRU_data_addr = readFileValue(MMAP_LOC "addr");
+   printf("This is mapped at the base address: %x\n", (PRU_data_addr + 0x2000));
+   printf("The clock on/off state is mapped at address: %x\n", (PRU_data_addr + 0x10000));
 
-   // data for PRU0
-//   unsigned char control[3] = {0x01, 0x80, 0x00};
+   // data for PRU0 based on the MCPXXXX datasheet
    unsigned int spi_control = 0x01800000;
 
    // Allocate and initialize memory
@@ -73,7 +74,7 @@ int main (void)
    // Write the address and size into PRU0 Data RAM0. You can edit the value to
    // PRUSS0_PRU1_DATARAM if you wish to write to PRU1
    prussdrv_pru_write_memory(PRUSS0_PRU0_DATARAM, 0, &spi_control, 4);
-   prussdrv_pru_write_memory(PRUSS0_PRU1_DATARAM, 0, values, 8);
+   prussdrv_pru_write_memory(PRUSS0_PRU1_DATARAM, 0, timerData, 8);
 
    // Map PRU's interrupts
    prussdrv_pruintc_init(&pruss_intc_initdata);
@@ -81,7 +82,7 @@ int main (void)
    // Load and execute the PRU program on the PRU
    prussdrv_exec_program (ADC_PRU_NUM, "./PRUADC.bin");
    prussdrv_exec_program (CLK_PRU_NUM, "./PRUClock.bin");
-   printf("EBB Clock PRU1 program now running (%d)\n", values[0]);
+   printf("EBB Clock PRU1 program now running (%d)\n", timerData[0]);
 
    // Wait for event completion from PRU, returns the PRU_EVTOUT_0 number
    int n = prussdrv_pru_wait_event (PRU_EVTOUT_0);

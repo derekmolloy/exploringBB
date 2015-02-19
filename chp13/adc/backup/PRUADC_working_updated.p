@@ -23,34 +23,21 @@ START:
 	MOV	r1, 0x00000000	 // load the base address into r1
 				 // PRU memory 0x00 stores the SPI command - e.g., 0x01 0x80 0x00
 				 // the SGL/DIFF and D2, D1, D0 are the four LSBs of byte 1 - e.g. 0x80
+	LBBO	r2, r1, 0, 4	 // the MCP3XXX states are now stored in r2 -- need the 16 MSBs
 	MOV	r3, 0x00000000	 // clear r3 to receive the response from the MCP3XXX
 	CLR	r30.t1		 // clear the data out line - MOSI
 
-GET_SAMPLE:			 // load the send value on each sample, allows sampling re-configuration
-	LBBO	r2, r1, 0, 4	 // the MCP3XXX states are now stored in r2 -- need the 16 MSBs
-
-	// Need to wait at this point until it is ready to take a sample - i.e., 0x00010000 
-	// store the address in r5
-	MOV	r5, 0x00010000   // LSB of value at this address is the clock flag
-SAMPLE_WAIT_HIGH:		 // wait until the PRU1 sample clock goes high
-	LBBO	r6, r5, 0, 4	 // load the value at address r5 into r6		
-	QBNE	SAMPLE_WAIT_HIGH, r6, 1 // if the 
-
+GET_SAMPLE:
 	CLR	r30.t5		 // set the CS line low (active low)
 	MOV	r4, 24		 // going to write/read 24 bits (3 bytes)
-SPICLK_BIT:                      // loop for each of the 24 bits
-	SUB	r4, r4, 1        // count down through the bits
-	CALL	SPICLK           // repeat call the SPICLK procedure until all 24-bits written/read
-	QBNE	SPICLK_BIT, r4, 0
-
+SPICLK_BIT:
+	SUB	r4, r4, 1
+	CALL	SPICLK
+	QBNE	SPICLK_BIT, r4, 0// keep going 
+END_SAMPLE:
 	SET	r30.t5		 // pull the CS line high (end of sample)
 	LSR	r3, r3, 1        // SPICLK shifts left too many times left, shift right once
 	SBBO	r3, r1, 4, 4     // store the data for debugging only -- REMOVE
-
-SAMPLE_WAIT_LOW:                 // need to wait here if the sample clock has not gone low
-	LBBO	r6, r5, 0, 4	 // load the value in PRU1 sample clock address r5 into r6
-	QBNE	SAMPLE_WAIT_LOW, r6, 0 // wait until the sample clock goes low (just in case)
-	QBA	GET_SAMPLE
 END:
 	MOV	r31.b0, PRU0_R31_VEC_VALID | PRU_EVTOUT_0	
 	HALT                     // End of program -- below are "procedures"
@@ -59,6 +46,7 @@ END:
 // Procedure to delay by 10ns times the value that is currently in r0
 // i.e. 5ns x r0 x 2, as there are 2 instructions per iteration
 DELAY_R0:
+	MOV	r0, TIME_CLOCK
 LOOPR0:	
 	SUB	r0, r0, 1
 	QBNE	LOOPR0, r0, 0
@@ -92,6 +80,8 @@ CLKHIGH:
 	CLR	r30.t2		 // set the clock low
 	QBBC	DATAINLOW, r31.t3
 	OR	r3, r3, 0x00000001
-DATAINLOW:	
+DATAINLOW:
 	LSL	r3, r3, 1 
 	RET
+
+
