@@ -11,22 +11,23 @@
 
 #define ADC_PRU_NUM	   0   // using PRU0 for the ADC capture
 #define CLK_PRU_NUM	   1   // using PRU1 for the sample clock
-#define MMAP_LOC   "/sys/class/uio/uio0/maps/map0/"
+#define MMAP0_LOC   "/sys/class/uio/uio0/maps/map0/"
+#define MMAP1_LOC   "/sys/class/uio/uio0/maps/map1/"
 
 enum FREQUENCY {    // measured and calibrated, but can be calculated
 	FREQ_12_5MHz =  1,
 	FREQ_6_25MHz =  5,
 	FREQ_5MHz    =  7,
 	FREQ_3_85MHz = 10,
-	FREQ_1MHz   =  47,
-	FREQ_500kHz =  97,
-	FREQ_250kHz = 247,
-	FREQ_100kHz = 497,
-	FREQ_25kHz = 1997,
-	FREQ_10kHz = 4997,
-	FREQ_5kHz =  9997,
-	FREQ_2kHz = 24997,
-	FREQ_1kHz = 49997
+	FREQ_1MHz   =  45,
+	FREQ_500kHz =  95,
+	FREQ_250kHz = 245,
+	FREQ_100kHz = 495,
+	FREQ_25kHz = 1995,
+	FREQ_10kHz = 4995,
+	FREQ_5kHz =  9995,
+	FREQ_2kHz = 24995,
+	FREQ_1kHz = 49995
 };
 
 enum CONTROL {
@@ -60,12 +61,17 @@ int main (void)
    timerData[0] = FREQ_100kHz;
    timerData[1] = RUNNING;
    printf("The clock state is set as period: %d (0x%x) and state: %d\n", timerData[0], timerData[0], timerData[1]);
-   unsigned int PRU_data_addr = readFileValue(MMAP_LOC "addr");
-   printf("This is mapped at the base address: %x\n", (PRU_data_addr + 0x2000));
+   unsigned int PRU_data_addr = readFileValue(MMAP0_LOC "addr");
+   printf("The PRU memory is mapped at the base address: %x\n", (PRU_data_addr + 0x2000));
    printf("The clock on/off state is mapped at address: %x\n", (PRU_data_addr + 0x10000));
 
    // data for PRU0 based on the MCPXXXX datasheet
-   unsigned int spi_control = 0x01800000;
+   unsigned int spiData[3];
+   spiData[0] = 0x01800000;
+   spiData[1] = readFileValue(MMAP1_LOC "addr");
+   spiData[2] = readFileValue(MMAP1_LOC "size");
+   printf("Sending the SPI Control Data: 0x%x\n", spiData[0]);
+   printf("The Shared memory has location: 0x%x and size 0x%x\n", spiData[1], spiData[2]);
 
    // Allocate and initialize memory
    prussdrv_init ();
@@ -73,8 +79,8 @@ int main (void)
 
    // Write the address and size into PRU0 Data RAM0. You can edit the value to
    // PRUSS0_PRU1_DATARAM if you wish to write to PRU1
-   prussdrv_pru_write_memory(PRUSS0_PRU0_DATARAM, 0, &spi_control, 4);
-   prussdrv_pru_write_memory(PRUSS0_PRU1_DATARAM, 0, timerData, 8);
+   prussdrv_pru_write_memory(PRUSS0_PRU0_DATARAM, 0, spiData, 12);  // spi code
+   prussdrv_pru_write_memory(PRUSS0_PRU1_DATARAM, 0, timerData, 8); // sample clock
 
    // Map PRU's interrupts
    prussdrv_pruintc_init(&pruss_intc_initdata);
@@ -88,8 +94,9 @@ int main (void)
    int n = prussdrv_pru_wait_event (PRU_EVTOUT_0);
    printf("EBB ADC PRU program completed, event number %d.\n", n);
 
-// Disable PRU and close memory mappings
+// Disable PRU and close memory mappings 
    prussdrv_pru_disable(ADC_PRU_NUM);
+   prussdrv_pru_disable(CLK_PRU_NUM);
 
    prussdrv_exit ();
    return EXIT_SUCCESS;

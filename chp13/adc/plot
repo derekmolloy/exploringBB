@@ -1,0 +1,11 @@
+#!/bin/bash
+./mem2file > capture.dat
+
+gnuplot <<_EOF_
+set term postscript enhanced color
+set output 'plot.ps'
+set title 'EBB Plot'
+plot 'capture.dat' with linespoints lc rgb 'blue'
+_EOF_
+
+ps2pdf plot.ps plot.pdf

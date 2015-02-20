@@ -10,3 +10,6 @@ pasm -b PRUADC.p
 
 echo "Building the PRU ADC binary application"
 gcc PRUADC.c -o pruadc -lpthread -lprussdrv
+
+echo "Building the memory to file utility"
+gcc mem2file.c -o mem2file
