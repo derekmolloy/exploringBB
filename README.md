@@ -1,12 +1,13 @@
-Exploring BeagleBone: Tools and Techniques for Building with Embedded Linux
-by Derek Molloy for John Wiley & Sons, 2014 -- ISBN 9781118935125
+Molloy, D. (2014). Exploring BeagleBone: Tools and Techniques for Building 
+with Embedded Linux. New York: Wiley, 978-1118935125, 568pp.
 
 This is the source code repository for all of the content in this book.
-Copyright (C) 2014- Derek Molloy 
-Please reference the book above if you use this source code within your research.
+Copyright (C) 2014- Derek Molloy. Please reference the book if you use this 
+source code within your research (the BibTeX citation is below).
 
-For further information on the code presented here, 
-please see: http://www.exploringbeaglebone.com/
+For further information on the code presented here, please see: 
+
+            http://www.exploringbeaglebone.com/
 
 This program is free software: you can redistribute it and/or modify it under 
 the terms of the GNU General Public License as published by the Free Software 
@@ -25,4 +26,13 @@ responsible for any loss, damage, or other claim caused by using the executable
 code or other files.
 
 You should have received a copy of the GNU General Public License along with 
-this repository in the License.txt file. If not, see http://www.gnu.org/licenses/
+this repository in the License.txt file.
+
+@book{9781118935125,
+   Author = {Derek Molloy},
+   Title = {Exploring BeagleBone: Tools and Techniques for Building with Embedded Linux},
+   Publisher = {Wiley},
+   Year = {2014},
+   ISBN = {1118935128},
+   URL = {http://www.exploringbeaglebone.com/}
+}
