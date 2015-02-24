@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Capturing the first 2000 samples from the memory and dumping to capture.dat"
-./mem2file 500 > capture.dat
+./mem2file 2000 > capture.dat
 
 echo "Plotting the data to a PS file"
 gnuplot <<_EOF_
