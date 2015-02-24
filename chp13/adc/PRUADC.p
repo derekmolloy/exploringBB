@@ -55,12 +55,12 @@ SPICLK_BIT:                      // loop for each of the 24 bits
 	SET	r30.t5		 // pull the CS line high (end of sample)
 	LSR	r3, r3, 1        // SPICLK shifts left too many times left, shift right once
 	AND	r3, r3, r7	 // AND the data with mask to give only the 10 LSBs
-	SBBO	r3, r1, 12, 4    // store the data for debugging only -- REMOVE
+//	SBBO	r3, r1, 12, 4    // store the data for debugging only -- REMOVE
 
 STORE_DATA:                      // store the sample value in memory
-	SUB	r9, r9, 4	 // reducing the number of samples
-	SBBO	r3, r8, 0, 4	 // store the value in memory
-	ADD	r8, r8, 4	 // shifting by 4 bytes
+	SUB	r9, r9, 2	 // reducing the number of samples - 2 bytes per sample
+	SBBO	r3.w0, r8, 0, 2	 // store the value r3 in memory
+	ADD	r8, r8, 2	 // shifting by 2 bytes - 2 bytes per sample
 	QBEQ	END, r9, 0       // have taken the full set of samples
 
 SAMPLE_WAIT_LOW:                 // need to wait here if the sample clock has not gone low

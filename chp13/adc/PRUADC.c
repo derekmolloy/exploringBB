@@ -60,10 +60,10 @@ int main (void)
    unsigned int timerData[2];
    timerData[0] = FREQ_100kHz;
    timerData[1] = RUNNING;
-   printf("The clock state is set as period: %d (0x%x) and state: %d\n", timerData[0], timerData[0], timerData[1]);
+   printf("The PRU clock state is set as period: %d (0x%x) and state: %d\n", timerData[0], timerData[0], timerData[1]);
    unsigned int PRU_data_addr = readFileValue(MMAP0_LOC "addr");
-   printf("The PRU memory is mapped at the base address: %x\n", (PRU_data_addr + 0x2000));
-   printf("The clock on/off state is mapped at address: %x\n", (PRU_data_addr + 0x10000));
+   printf("-> the PRUClock memory is mapped at the base address: %x\n", (PRU_data_addr + 0x2000));
+   printf("-> the PRUClock on/off state is mapped at address: %x\n", (PRU_data_addr + 0x10000));
 
    // data for PRU0 based on the MCPXXXX datasheet
    unsigned int spiData[3];
@@ -71,7 +71,9 @@ int main (void)
    spiData[1] = readFileValue(MMAP1_LOC "addr");
    spiData[2] = readFileValue(MMAP1_LOC "size");
    printf("Sending the SPI Control Data: 0x%x\n", spiData[0]);
-   printf("The Shared memory has location: 0x%x and size 0x%x\n", spiData[1], spiData[2]);
+   printf("The DDR External Memory pool has location: 0x%x and size: 0x%x\n", spiData[1], spiData[2]);
+   int numberSamples = spiData[2]*2;
+   printf("-> this space has capacity to store %d 16-bit samples (max)\n", numberSamples);
 
    // Allocate and initialize memory
    prussdrv_init ();
@@ -88,11 +90,11 @@ int main (void)
    // Load and execute the PRU program on the PRU
    prussdrv_exec_program (ADC_PRU_NUM, "./PRUADC.bin");
    prussdrv_exec_program (CLK_PRU_NUM, "./PRUClock.bin");
-   printf("EBB Clock PRU1 program now running (%d)\n", timerData[0]);
+   printf("EBBClock PRU1 program now running (%d)\n", timerData[0]);
 
    // Wait for event completion from PRU, returns the PRU_EVTOUT_0 number
    int n = prussdrv_pru_wait_event (PRU_EVTOUT_0);
-   printf("EBB ADC PRU program completed, event number %d.\n", n);
+   printf("EBBADC PRU0 program completed, event number %d.\n", n);
 
 // Disable PRU and close memory mappings 
    prussdrv_pru_disable(ADC_PRU_NUM);
