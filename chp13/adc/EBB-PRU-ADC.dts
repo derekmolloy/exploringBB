@@ -1,5 +1,6 @@
-/* Device Tree Overlay for enabling the pins that are used in Chapter 13
-* This overlay is based on the BB-PRU-01 overlay
+/* Device Tree Overlay for enabling the pins that are used in the Chapter 13
+* additional material example on High-Speed Analog to Digital Conversion (ADC) 
+* using the PRU-ICSS. This overlay is based on the BB-PRU-01 overlay
 * Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
 * Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
 * ISBN 9781118935125. Please see the file README.md in the repository root 

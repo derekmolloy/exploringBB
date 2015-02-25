@@ -1,7 +1,8 @@
-/** Program to load a PRU program that flashes an LED until a button is
-*   pressed. By Derek Molloy, for the book Exploring BeagleBone
-*   based on the example code at:
-*   http://processors.wiki.ti.com/index.php/PRU_Linux_Application_Loader_API_Guide
+/*  This program loads the two PRU programs into the PRU-ICSS transfers the configuration
+*   to the PRU memory spaces and starts the execution of both PRU programs.
+*   pressed. By Derek Molloy, for the book Exploring BeagleBone. Please see:
+*        www.exploringbeaglebone.com/chapter13
+*   for a full description of this code example and the associated programs.
 */
 
 #include <stdio.h>
@@ -36,6 +37,7 @@ enum CONTROL {
 	UPDATE = 3
 };
 
+// Short function to load a single unsigned int from a sysfs entry
 unsigned int readFileValue(char filename[]){
    FILE* fp;
    unsigned int value = 0;
@@ -71,8 +73,8 @@ int main (void)
    spiData[1] = readFileValue(MMAP1_LOC "addr");
    spiData[2] = readFileValue(MMAP1_LOC "size");
    printf("Sending the SPI Control Data: 0x%x\n", spiData[0]);
-   printf("The DDR External Memory pool has location: 0x%x and size: 0x%x\n", spiData[1], spiData[2]);
-   int numberSamples = spiData[2]*2;
+   printf("The DDR External Memory pool has location: 0x%x and size: 0x%x bytes\n", spiData[1], spiData[2]);
+   int numberSamples = spiData[2]/2;
    printf("-> this space has capacity to store %d 16-bit samples (max)\n", numberSamples);
 
    // Allocate and initialize memory
@@ -84,7 +86,7 @@ int main (void)
    prussdrv_pru_write_memory(PRUSS0_PRU0_DATARAM, 0, spiData, 12);  // spi code
    prussdrv_pru_write_memory(PRUSS0_PRU1_DATARAM, 0, timerData, 8); // sample clock
 
-   // Map PRU's interrupts
+   // Map the PRU's interrupts
    prussdrv_pruintc_init(&pruss_intc_initdata);
 
    // Load and execute the PRU program on the PRU
