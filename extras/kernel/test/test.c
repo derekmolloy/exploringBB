@@ -40,27 +40,27 @@ static struct file_operations fops =
 
 static int __init driver_init(void){
 	int i;
-	printk(KERN_INFO "Hello %s from the BBB LKM!\n", name);
-	i = register_chrdev(major, "test", &fops);
-	if (i<0) printk(KERN_ALERT "MyDevice failed to register\n");
-	else printk(KERN_INFO "MyDevice registered correctly\n");
+	printk(KERN_INFO "Hello %s from the EBBTest LKM!\n", name);
+	i = register_chrdev(major, "ebbtest", &fops);
+	if (i<0) printk(KERN_ALERT "EBBTest device failed to register\n");
+	else printk(KERN_INFO "EBBTest device registered correctly\n");
 	return i;
 }
 
 // The LKM cleanup function
 static void __exit driver_exit(void){
-	printk(KERN_INFO "Goodbye from the BBB LKM!\n");
-	unregister_chrdev(major, "MyDevice");
+	printk(KERN_INFO "Goodbye from the EBBTest LKM!\n");
+	unregister_chrdev(major, "ebbtest");
 }
 
 static int dev_open(struct inode *inodep, struct file *filep){
 	numberOpens++;
-	printk(KERN_INFO "Device has been opened %d times\n", numberOpens);
+	printk(KERN_INFO "EBBTest device has been opened %d times\n", numberOpens);
 	return 0;
 }
 
 static int dev_release(struct inode *inodep, struct file *filep){
-	printk(KERN_INFO "Device successfully closed\n");
+	printk(KERN_INFO "EBBTest device successfully closed\n");
 	return 0;
 }
 
