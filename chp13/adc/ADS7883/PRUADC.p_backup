@@ -1,8 +1,6 @@
-// PRU program to communicate to the MCPXXXX family of SPI ADC ICs. The program 
-// generates the SPI signals that are required to receive samples. To use this 
+// PRU program to communicate to the ADS7883 family of SPI ADC ICs. To use this 
 // program as is, use the following wiring configuration:
 //   Chip Select (CS):   P9_27    pr1_pru0_pru_r30_5  r30.t5
-//   MOSI            :   P9_29    pr1_pru0_pru_r30_1  r30.t1
 //   MISO            :   P9_28    pr1_pru0_pru_r31_3  r31.t3
 //   CLK             :   P9_30    pr1_pru0_pru_r30_2  r30.t2
 //   Sample Clock    :   P8_46    pr1_pru1_pru_r30_1  -- for testing only
@@ -33,7 +31,7 @@ START:
 	LBBO	r9, r1, 8, 4	 // load the size that is passed into r9 -- the number of samples to take
 
 	MOV	r3, 0x00000000	 // clear r3 to receive the response from the MCP3XXX
-	CLR	r30.t1		 // clear the data out line - MOSI
+	CLR	r30.t2		 // set the clock low
 
 GET_SAMPLE:			 // load the send value on each sample, allows sampling re-configuration
 	LBBO	r2, r1, 0, 4	 // the MCP3XXX states are now stored in r2 -- need the 16 MSBs
@@ -46,14 +44,14 @@ SAMPLE_WAIT_HIGH:		 // wait until the PRU1 sample clock goes high
 	QBNE	SAMPLE_WAIT_HIGH, r6, 1 // if the 
 
 	CLR	r30.t5		 // set the CS line low (active low)
-	MOV	r4, 24		 // going to write/read 24 bits (3 bytes)
+	MOV	r4, 16		 // going to write/read 24 bits (3 bytes)
 SPICLK_BIT:                      // loop for each of the 24 bits
 	SUB	r4, r4, 1        // count down through the bits
 	CALL	SPICLK           // repeat call the SPICLK procedure until all 24-bits written/read
 	QBNE	SPICLK_BIT, r4, 0
 
 	SET	r30.t5		 // pull the CS line high (end of sample)
-	LSR	r3, r3, 1        // SPICLK shifts left too many times left, shift right once
+	LSR	r3, r3, 3        // SPICLK shifts left too many times left, shift right once
 	AND	r3, r3, r7	 // AND the data with mask to give only the 10 LSBs
 	//SBBO	r3, r1, 12, 4    // store the data for debugging only -- REMOVE
 
@@ -84,22 +82,18 @@ SPICLK:
 CLKLOW:	
 	SUB	r0, r0, 1	 // decrement the counter by 1 and loop (next line)
 	QBNE	CLKLOW, r0, 0	 // check if the count is still low				 
-	QBBC	DATALOW, r2.t31  // The write state needs to be set right here -- bit 31 shifted left
-	SET	r30.t1
-	QBA	DATACONTD
-DATALOW:
-	CLR	r30.t1
-DATACONTD:
+
 	SET	r30.t2		 // set the clock high
-	MOV	r0, TIME_CLOCK	 // time for clock high
-CLKHIGH:
-	SUB	r0, r0, 1	 // decrement the counter by 1 and loop (next line)
-	QBNE	CLKHIGH, r0, 0	 // check the count
-	LSL	r2, r2, 1
-				 // clock goes low now -- read the response on MISO
-	CLR	r30.t2		 // set the clock low
+
 	QBBC	DATAINLOW, r31.t3
 	OR	r3, r3, 0x00000001
 DATAINLOW:	
 	LSL	r3, r3, 1 
+
+	MOV	r0, TIME_CLOCK	 // time for clock high
+CLKHIGH:
+	SUB	r0, r0, 1	 // decrement the counter by 1 and loop (next line)
+	QBNE	CLKHIGH, r0, 0	 // check the count
+
+	CLR	r30.t2		 // set the clock low
 	RET

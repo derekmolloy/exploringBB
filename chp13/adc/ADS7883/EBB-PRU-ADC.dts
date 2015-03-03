@@ -1,0 +1,49 @@
+/* Device Tree Overlay for enabling the pins that are used in the Chapter 13
+* additional material example on High-Speed Analog to Digital Conversion (ADC) 
+* using the PRU-ICSS. This overlay is based on the BB-PRU-01 overlay
+* Written by Derek Molloy for the book "Exploring BeagleBone: Tools and 
+* Techniques for Building with Embedded Linux" by John Wiley & Sons, 2014
+* ISBN 9781118935125. Please see the file README.md in the repository root 
+* directory for copyright and GNU GPLv3 license information.
+*/
+/dts-v1/;
+/plugin/;
+
+/ {
+   compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+   part-number = "EBB-PRU-ADC";
+   version = "00A0";
+
+   /* This overlay uses the following resources */
+   exclusive-use =
+          "P9.27", "P9.28", "P9.29", "P9.30", "P8.46", "pru0", "pru1";
+
+   fragment@0 {
+      target = <&am33xx_pinmux>;
+      __overlay__ {
+
+         pru_pru_pins: pinmux_pru_pru_pins {   // The PRU pin modes
+            pinctrl-single,pins = <
+	       // See Table 6-7, no pull up/down resistors enabled
+               0x1a4 0x0d  // CS   P9_27 pr1_pru0_pru_r30_5, MODE5 | OUTPUT | DIS  00001101=0x0d
+               0x19c 0x2e  // MISO P9_28 pr1_pru0_pru_r31_3, MODE6 | INPUT  | DIS  00101110=0x2e
+               0x194 0x0d  // MOSI P9_29 pr1_pru0_pru_r30_1, MODE5 | OUTPUT | DIS  00001101=0x0d
+               0x198 0x0d  // CLK  P9_30 pr1_pru0_pru_r30_2, MODE5 | OUTPUT | DIS  00001101=0x0d
+	       // This is for PRU1, the sample clock -- debug only
+               0x0a4 0x0d  // SAMP P8_46 pr1_pru1_pru_r30_1, MODE5 | OUTPUT | DIS  00001101=0x0d
+            >;
+         };
+      };
+   };
+
+   fragment@1 {         // Enable the PRUSS
+      target = <&pruss>;
+      __overlay__ {
+         status = "okay";
+         pinctrl-names = "default";
+         pinctrl-0 = <&pru_pru_pins>;
+      };
+   };
+
+};

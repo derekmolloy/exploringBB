@@ -1,0 +1,14 @@
+#!/bin/bash
+echo "Capturing the first 2000 samples from the memory and dumping to capture.dat"
+./ADCmulti > capture.dat
+
+echo "Plotting the data to a PS file"
+gnuplot <<_EOF_
+set term postscript enhanced color
+set output 'plot.ps'
+set title 'EBB Plot'
+plot 'capture.dat' with linespoints lc rgb 'blue'
+_EOF_
+
+echo "Converting the PS file to a PDF file"
+ps2pdf plot.ps plot.pdf

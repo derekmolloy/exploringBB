@@ -1,0 +1,3 @@
+#!/bin/bash
+g++ -o ADCmulti ADCmulti.cpp ../bus/SPIDevice.cpp ../bus/BusDevice.cpp -I.. -L..
+g++ -o ADCExample ADCExample.cpp ../bus/SPIDevice.cpp ../bus/BusDevice.cpp -I.. -L..

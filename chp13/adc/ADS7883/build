@@ -1,0 +1,15 @@
+#!/bin/bash
+echo "Compiling the EBB-ADC overlay from .dts to .dtbo"
+dtc -O dtb -o EBB-PRU-ADC-00A0.dtbo -b 0 -@ EBB-PRU-ADC.dts
+
+echo "Building the PRU Clock code"
+pasm -b PRUClock.p
+
+echo "Building the PRU ADC code"
+pasm -b PRUADC.p
+
+echo "Building the PRU ADC binary application"
+gcc PRUADC.c -o pruadc -lpthread -lprussdrv
+
+echo "Building the memory to file utility"
+gcc mem2file.c -o mem2file

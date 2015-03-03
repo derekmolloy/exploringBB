@@ -1,0 +1,8 @@
+The code in this directory is a test implementation of the ADC code in the parent directory applied to the ADS7883 IC. 
+This code was used to help develop the PRU version in the Chapter13 directory.
+
+This code is functional, but it suffers from jitter (as expected) and as such the data rate cannot be set higher than 
+the MCP3008, despite being a 12-bit 2MSps capable device. Note: this device does not require a MOSI as the data is 
+sampled on the falling edge of chip select (CS).
+
+Please see: exploringbeaglebone.com/chapter8 and exploringbeaglebone.com/chapter13 for more information.
