@@ -15,7 +15,7 @@
 #define PRU_EVTOUT_0    3        // the event number that is sent back
 
 // Constants from the MCP3004/3008 datasheet 
-#define TIME_CLOCK      16       // T_hi and t_lo = 125ns = 25 instructions (min)
+#define TIME_CLOCK      2       // T_hi and t_lo = 125ns = 25 instructions (min)
 
 START:
         // Enable the OCP master port -- allows transfer of data to Linux userspace

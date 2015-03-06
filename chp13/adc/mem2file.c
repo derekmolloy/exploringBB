@@ -53,7 +53,7 @@
 #include <sys/types.h>
 #include <sys/mman.h>
 
-#define MAP_SIZE 4096UL
+#define MAP_SIZE 0x0FFFFFFF
 #define MAP_MASK (MAP_SIZE - 1)
 #define MMAP_LOC   "/sys/class/uio/uio0/maps/map1/"
 

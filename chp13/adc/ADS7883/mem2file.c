@@ -53,7 +53,7 @@
 #include <sys/types.h>
 #include <sys/mman.h>
 
-#define MAP_SIZE 4096UL
+#define MAP_SIZE 0x0FFFFFFF
 #define MAP_MASK (MAP_SIZE - 1)
 #define MMAP_LOC   "/sys/class/uio/uio0/maps/map1/"
 
@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
     off_t target = addr;
 
     if(argc>1){     // There is an argument -- lists number of samples to dump
-                    // this defaults to the total DDR Memory Pool x 2 (16-bit samples) 
+                    // this defaults to the total DDR Memory Pool x 2 (16-bit samples)
 	numberOutputSamples = atoi(argv[1]);
     }
 
@@ -107,6 +107,7 @@ int main(int argc, char **argv) {
        printf("Failed to unmap memory");
        return -1;
     }
+
     close(fd);
     return 0;
 }

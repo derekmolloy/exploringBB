@@ -60,7 +60,7 @@ int main (void)
    // Read in the location and address of the shared memory. This value changes
    // each time a new block of memory is allocated.
    unsigned int timerData[2];
-   timerData[0] = FREQ_100kHz;
+   timerData[0] = FREQ_500kHz;
    timerData[1] = RUNNING;
    printf("The PRU clock state is set as period: %d (0x%x) and state: %d\n", timerData[0], timerData[0], timerData[1]);
    unsigned int PRU_data_addr = readFileValue(MMAP0_LOC "addr");
