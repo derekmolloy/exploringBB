@@ -3,3 +3,11 @@ High-Speed Analog to Digital Conversion (ADC) using the PRU-ICSS
 Written by Derek Molloy to support the book Exploring BeagleBone
 
 Please see http://www.exploringbeaglebone.com/chapter13/ for a full description of the code in this directory.
+
+There are two versions of the PRUADC.p:
+- One that captures up to 500kSps, the variable rate version
+- One that captures only 1MSps, the fixed rate version
+
+Copy the one that you require to the PRUADC.p and type build. While the ADS7883 is capable of 2MSps
+it will be very difficult to modify the code to support this rate as the data transfer clock is very
+close to its maximum rate at 1MSps.

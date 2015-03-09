@@ -45,18 +45,7 @@ SAMPLE_WAIT_HIGH:		 // wait until the PRU1 sample clock goes high
 	MOV	r4, 16		 // going to write/read 16 bits (2 bytes)
 SPICLK_BIT:                      // loop for each of the 16 bits
 	SUB	r4, r4, 1        // count down through the bits
-// *************************************
-	LSL	r3, r3, 1        // shift the captured data left by one position 
-	// Clock goes low for a time period
-	SET	r30.t2		 // set the clock high
-	SET	r30.t2		 // set the clock high
-	SET	r30.t2		 // set the clock high
-	QBBC	DATAINLOW, r31.t3   // check if the bit that is read in is low? jump
-	OR	r3, r3, 0x00000001  // set the stored bit LSB to 1 otherwise
-DATAINLOW:	                 
-	CLR	r30.t2		 // set the clock low
-	CLR	r30.t2		 // set the clock low
-// **************************************
+	CALL	SPICLK           // repeat call the SPICLK procedure until all 16 bits written/read
 	QBNE	SPICLK_BIT, r4, 0  // have we performed 16 cycles?
 
 	LSR	r3, r3, 2        // SPICLK shifts left too many times left, shift right once
@@ -78,3 +67,29 @@ END:
 	HALT                     // End of program -- below are the "procedures"
 
 
+// This procedure applies an SPI clock cycle to the SPI clock and on the rising edge of the clock
+// it writes the current MSB bit in r2 (i.e. r31) to the MOSI pin. On the falling edge, it reads
+// the input from MISO and stores it in the LSB of r3. 
+// The clock cycle is determined by the datasheet of the product where TIME_CLOCK is the
+// time that the clock must remain low and the time it must remain high (assuming 50% duty cycle)
+// The input and output data is shifted left on each clock cycle
+
+SPICLK:
+	LSL	r3, r3, 1        // shift the captured data left by one position 
+	// Clock goes low for a time period
+	MOV	r0, TIME_CLOCK	 // time for clock low -- assuming clock low before cycle
+CLKLOW:	
+	SUB	r0, r0, 1	 // decrement the counter by 1 and loop (next line)
+	QBNE	CLKLOW, r0, 0	 // check if the count is still low
+
+	SET	r30.t2		 // set the clock high
+	QBBC	DATAINLOW, r31.t3   // check if the bit that is read in is low? jump
+	OR	r3, r3, 0x00000001  // set the stored bit LSB to 1 otherwise
+DATAINLOW:	                 
+	// Clock goes high for a time period
+	MOV	r0, TIME_CLOCK	 // time for clock high
+CLKHIGH:
+	SUB	r0, r0, 1	 // decrement the counter by 1 and loop (next line)
+	QBNE	CLKHIGH, r0, 0	 // check the count
+	CLR	r30.t2		 // set the clock low
+	RET

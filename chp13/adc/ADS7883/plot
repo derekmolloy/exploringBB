@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Capturing the first 100000 samples from the memory and dumping to capture.dat"
+echo "Capturing the first 1,000,000 samples from the memory and dumping to capture.dat"
 ./mem2file 1000000 > capture.dat
 
 echo "Plotting the data to a PS file"
