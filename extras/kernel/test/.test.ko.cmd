@@ -1,0 +1,1 @@
+cmd_/home/molloyd/exploringBB/extras/kernel/test/test.ko := ld -EL -r  -T /usr/src/linux-headers-3.8.13-bone70/scripts/module-common.lds --build-id  -o /home/molloyd/exploringBB/extras/kernel/test/test.ko /home/molloyd/exploringBB/extras/kernel/test/test.o /home/molloyd/exploringBB/extras/kernel/test/test.mod.o

@@ -1,8 +1,8 @@
-cmd_/home/molloyd/exploringBB/extras/kernel/hello/hello.o := gcc -Wp,-MD,/home/molloyd/exploringBB/extras/kernel/hello/.hello.o.d  -nostdinc -isystem /usr/lib/gcc/arm-linux-gnueabihf/4.6/include -I/usr/src/linux-headers-3.8.13-bone70/arch/arm/include -Iarch/arm/include/generated  -Iinclude -I/usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I/usr/src/linux-headers-3.8.13-bone70/include/uapi -Iinclude/generated/uapi -include /usr/src/linux-headers-3.8.13-bone70/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-omap2/include -Iarch/arm/plat-omap/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Wno-error=pointer-sign -fno-stack-protector -O2 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -mthumb -Wa,-mimplicit-it=always -Wa,-mno-warn-deprecated -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack  -DMODULE  -fno-optimize-sibling-calls -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(hello)"  -D"KBUILD_MODNAME=KBUILD_STR(hello)" -c -o /home/molloyd/exploringBB/extras/kernel/hello/.tmp_hello.o /home/molloyd/exploringBB/extras/kernel/hello/hello.c
+cmd_/home/molloyd/exploringBB/extras/kernel/test/test.o := gcc -Wp,-MD,/home/molloyd/exploringBB/extras/kernel/test/.test.o.d  -nostdinc -isystem /usr/lib/gcc/arm-linux-gnueabihf/4.6/include -I/usr/src/linux-headers-3.8.13-bone70/arch/arm/include -Iarch/arm/include/generated  -Iinclude -I/usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I/usr/src/linux-headers-3.8.13-bone70/include/uapi -Iinclude/generated/uapi -include /usr/src/linux-headers-3.8.13-bone70/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-omap2/include -Iarch/arm/plat-omap/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Wno-error=pointer-sign -fno-stack-protector -O2 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -mthumb -Wa,-mimplicit-it=always -Wa,-mno-warn-deprecated -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack  -DMODULE  -fno-optimize-sibling-calls -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(test)"  -D"KBUILD_MODNAME=KBUILD_STR(test)" -c -o /home/molloyd/exploringBB/extras/kernel/test/.tmp_test.o /home/molloyd/exploringBB/extras/kernel/test/test.c
 
-source_/home/molloyd/exploringBB/extras/kernel/hello/hello.o := /home/molloyd/exploringBB/extras/kernel/hello/hello.c
+source_/home/molloyd/exploringBB/extras/kernel/test/test.o := /home/molloyd/exploringBB/extras/kernel/test/test.c
 
-deps_/home/molloyd/exploringBB/extras/kernel/hello/hello.o := \
+deps_/home/molloyd/exploringBB/extras/kernel/test/test.o := \
   include/linux/init.h \
     $(wildcard include/config/broken/rodata.h) \
     $(wildcard include/config/modules.h) \
@@ -402,7 +402,64 @@ deps_/home/molloyd/exploringBB/extras/kernel/hello/hello.o := \
     $(wildcard include/config/have/mod/arch/specific.h) \
     $(wildcard include/config/modules/use/elf/rel.h) \
     $(wildcard include/config/modules/use/elf/rela.h) \
+  include/linux/fs.h \
+    $(wildcard include/config/fs/posix/acl.h) \
+    $(wildcard include/config/security.h) \
+    $(wildcard include/config/quota.h) \
+    $(wildcard include/config/fsnotify.h) \
+    $(wildcard include/config/ima.h) \
+    $(wildcard include/config/epoll.h) \
+    $(wildcard include/config/debug/writecount.h) \
+    $(wildcard include/config/file/locking.h) \
+    $(wildcard include/config/auditsyscall.h) \
+    $(wildcard include/config/block.h) \
+    $(wildcard include/config/fs/xip.h) \
+    $(wildcard include/config/migration.h) \
+  include/linux/kdev_t.h \
+  include/uapi/linux/kdev_t.h \
+  include/linux/dcache.h \
+  include/linux/rculist.h \
+  include/linux/rculist_bl.h \
+  include/linux/list_bl.h \
+  include/linux/bit_spinlock.h \
+  include/linux/path.h \
+  include/linux/radix-tree.h \
+  include/linux/pid.h \
+  include/linux/capability.h \
+  include/uapi/linux/capability.h \
+  include/linux/semaphore.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/linux/fiemap.h \
+  include/linux/shrinker.h \
+  include/linux/migrate_mode.h \
+  include/linux/percpu-rwsem.h \
+  include/linux/blk_types.h \
+    $(wildcard include/config/blk/cgroup.h) \
+    $(wildcard include/config/blk/dev/integrity.h) \
+  include/uapi/linux/fs.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/linux/limits.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/linux/ioctl.h \
+  arch/arm/include/generated/asm/ioctl.h \
+  include/asm-generic/ioctl.h \
+  include/uapi/asm-generic/ioctl.h \
+  include/linux/quota.h \
+    $(wildcard include/config/quota/netlink/interface.h) \
+  include/linux/percpu_counter.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/linux/dqblk_xfs.h \
+  include/linux/dqblk_v1.h \
+  include/linux/dqblk_v2.h \
+  include/linux/dqblk_qtree.h \
+  include/linux/projid.h \
+  include/uapi/linux/quota.h \
+  include/linux/nfs_fs_i.h \
+  include/linux/fcntl.h \
+  include/uapi/linux/fcntl.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi/asm/fcntl.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/asm-generic/fcntl.h \
+  include/linux/err.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/uaccess.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/unified.h \
+    $(wildcard include/config/arm/asm/unified.h) \
 
-/home/molloyd/exploringBB/extras/kernel/hello/hello.o: $(deps_/home/molloyd/exploringBB/extras/kernel/hello/hello.o)
+/home/molloyd/exploringBB/extras/kernel/test/test.o: $(deps_/home/molloyd/exploringBB/extras/kernel/test/test.o)
 
-$(deps_/home/molloyd/exploringBB/extras/kernel/hello/hello.o):
+$(deps_/home/molloyd/exploringBB/extras/kernel/test/test.o):

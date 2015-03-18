@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo mknod /dev/test c 92 1
+chmod a+rw /dev/test
+

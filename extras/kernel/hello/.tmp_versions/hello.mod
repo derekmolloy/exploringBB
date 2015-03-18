@@ -1,2 +1,2 @@
-/root/exploringBB/extras/kernel/hello/hello.ko
-/root/exploringBB/extras/kernel/hello/hello.o
+/home/molloyd/exploringBB/extras/kernel/hello/hello.ko
+/home/molloyd/exploringBB/extras/kernel/hello/hello.o

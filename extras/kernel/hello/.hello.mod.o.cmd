@@ -1,8 +1,8 @@
-cmd_/root/exploringBB/extras/kernel/hello/hello.mod.o := gcc -Wp,-MD,/root/exploringBB/extras/kernel/hello/.hello.mod.o.d  -nostdinc -isystem /usr/lib/gcc/arm-linux-gnueabihf/4.6/include -I/usr/src/linux-headers-3.8.13-bone50/arch/arm/include -Iarch/arm/include/generated  -Iinclude -I/usr/src/linux-headers-3.8.13-bone50/arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I/usr/src/linux-headers-3.8.13-bone50/include/uapi -Iinclude/generated/uapi -include /usr/src/linux-headers-3.8.13-bone50/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-omap2/include -Iarch/arm/plat-omap/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Wno-error=pointer-sign -fno-stack-protector -O2 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -mthumb -Wa,-mimplicit-it=always -Wa,-mno-warn-deprecated -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(hello.mod)"  -D"KBUILD_MODNAME=KBUILD_STR(hello)" -DMODULE  -fno-optimize-sibling-calls -c -o /root/exploringBB/extras/kernel/hello/hello.mod.o /root/exploringBB/extras/kernel/hello/hello.mod.c
+cmd_/home/molloyd/exploringBB/extras/kernel/hello/hello.mod.o := gcc -Wp,-MD,/home/molloyd/exploringBB/extras/kernel/hello/.hello.mod.o.d  -nostdinc -isystem /usr/lib/gcc/arm-linux-gnueabihf/4.6/include -I/usr/src/linux-headers-3.8.13-bone70/arch/arm/include -Iarch/arm/include/generated  -Iinclude -I/usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I/usr/src/linux-headers-3.8.13-bone70/include/uapi -Iinclude/generated/uapi -include /usr/src/linux-headers-3.8.13-bone70/include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-omap2/include -Iarch/arm/plat-omap/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Wno-error=pointer-sign -fno-stack-protector -O2 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -funwind-tables -mthumb -Wa,-mimplicit-it=always -Wa,-mno-warn-deprecated -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(hello.mod)"  -D"KBUILD_MODNAME=KBUILD_STR(hello)" -DMODULE  -fno-optimize-sibling-calls -c -o /home/molloyd/exploringBB/extras/kernel/hello/hello.mod.o /home/molloyd/exploringBB/extras/kernel/hello/hello.mod.c
 
-source_/root/exploringBB/extras/kernel/hello/hello.mod.o := /root/exploringBB/extras/kernel/hello/hello.mod.c
+source_/home/molloyd/exploringBB/extras/kernel/hello/hello.mod.o := /home/molloyd/exploringBB/extras/kernel/hello/hello.mod.c
 
-deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
+deps_/home/molloyd/exploringBB/extras/kernel/hello/hello.mod.o := \
     $(wildcard include/config/module/unload.h) \
   include/linux/module.h \
     $(wildcard include/config/sysfs.h) \
@@ -28,13 +28,13 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
     $(wildcard include/config/64bit.h) \
   include/uapi/linux/types.h \
   arch/arm/include/generated/asm/types.h \
-  /usr/src/linux-headers-3.8.13-bone50/include/uapi/asm-generic/types.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/asm-generic/types.h \
   include/asm-generic/int-ll64.h \
   include/uapi/asm-generic/int-ll64.h \
   arch/arm/include/generated/asm/bitsperlong.h \
   include/asm-generic/bitsperlong.h \
   include/uapi/asm-generic/bitsperlong.h \
-  /usr/src/linux-headers-3.8.13-bone50/include/uapi/linux/posix_types.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/linux/posix_types.h \
   include/linux/stddef.h \
   include/uapi/linux/stddef.h \
   include/linux/compiler.h \
@@ -48,13 +48,13 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
     $(wildcard include/config/optimize/inlining.h) \
   include/linux/compiler-gcc4.h \
     $(wildcard include/config/arch/use/builtin/bswap.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/uapi/asm/posix_types.h \
-  /usr/src/linux-headers-3.8.13-bone50/include/uapi/asm-generic/posix_types.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi/asm/posix_types.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/asm-generic/posix_types.h \
   include/linux/poison.h \
     $(wildcard include/config/illegal/pointer/value.h) \
-  /usr/src/linux-headers-3.8.13-bone50/include/uapi/linux/const.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/linux/const.h \
   include/linux/stat.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/uapi/asm/stat.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi/asm/stat.h \
   include/uapi/linux/stat.h \
   include/linux/time.h \
     $(wildcard include/config/arch/uses/gettimeoffset.h) \
@@ -68,22 +68,22 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
     $(wildcard include/config/symbol/prefix.h) \
   /usr/lib/gcc/arm-linux-gnueabihf/4.6/include/stdarg.h \
   include/linux/linkage.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/linkage.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/linkage.h \
   include/linux/bitops.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/bitops.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/bitops.h \
   include/linux/irqflags.h \
     $(wildcard include/config/trace/irqflags.h) \
     $(wildcard include/config/irqsoff/tracer.h) \
     $(wildcard include/config/preempt/tracer.h) \
     $(wildcard include/config/trace/irqflags/support.h) \
   include/linux/typecheck.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/irqflags.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/ptrace.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/irqflags.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/ptrace.h \
     $(wildcard include/config/arm/thumb.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/uapi/asm/ptrace.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi/asm/ptrace.h \
     $(wildcard include/config/cpu/endian/be8.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/hwcap.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/uapi/asm/hwcap.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/hwcap.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi/asm/hwcap.h \
   include/asm-generic/bitops/non-atomic.h \
   include/asm-generic/bitops/fls64.h \
   include/asm-generic/bitops/sched.h \
@@ -92,13 +92,13 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
   include/asm-generic/bitops/const_hweight.h \
   include/asm-generic/bitops/lock.h \
   include/asm-generic/bitops/le.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/uapi/asm/byteorder.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi/asm/byteorder.h \
   include/linux/byteorder/little_endian.h \
   include/uapi/linux/byteorder/little_endian.h \
   include/linux/swab.h \
   include/uapi/linux/swab.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/swab.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/uapi/asm/swab.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/swab.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/uapi/asm/swab.h \
   include/linux/byteorder/generic.h \
   include/asm-generic/bitops/ext2-atomic-setbit.h \
   include/linux/log2.h \
@@ -114,24 +114,24 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
   include/linux/string.h \
     $(wildcard include/config/binary/printf.h) \
   include/uapi/linux/string.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/string.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/string.h \
   include/linux/errno.h \
   include/uapi/linux/errno.h \
   arch/arm/include/generated/asm/errno.h \
-  /usr/src/linux-headers-3.8.13-bone50/include/uapi/asm-generic/errno.h \
-  /usr/src/linux-headers-3.8.13-bone50/include/uapi/asm-generic/errno-base.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/asm-generic/errno.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/asm-generic/errno-base.h \
   include/uapi/linux/kernel.h \
-  /usr/src/linux-headers-3.8.13-bone50/include/uapi/linux/sysinfo.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/div64.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/compiler.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/bug.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/linux/sysinfo.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/div64.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/compiler.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/bug.h \
     $(wildcard include/config/bug.h) \
     $(wildcard include/config/thumb2/kernel.h) \
     $(wildcard include/config/debug/bugverbose.h) \
     $(wildcard include/config/arm/lpae.h) \
   include/asm-generic/bug.h \
     $(wildcard include/config/generic/bug/relative/pointers.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/cache.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/cache.h \
     $(wildcard include/config/arm/l1/cache/shift.h) \
     $(wildcard include/config/aeabi.h) \
   include/linux/seqlock.h \
@@ -148,39 +148,39 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
     $(wildcard include/config/compat.h) \
     $(wildcard include/config/debug/stack/usage.h) \
   include/linux/bug.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/thread_info.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/thread_info.h \
     $(wildcard include/config/crunch.h) \
     $(wildcard include/config/arm/thumbee.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/fpstate.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/fpstate.h \
     $(wildcard include/config/vfpv3.h) \
     $(wildcard include/config/iwmmxt.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/domain.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/domain.h \
     $(wildcard include/config/io/36.h) \
     $(wildcard include/config/cpu/use/domains.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/barrier.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/barrier.h \
     $(wildcard include/config/cpu/32v6k.h) \
     $(wildcard include/config/cpu/xsc3.h) \
     $(wildcard include/config/cpu/fa526.h) \
     $(wildcard include/config/arch/has/barriers.h) \
     $(wildcard include/config/arm/dma/mem/bufferable.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/outercache.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/outercache.h \
     $(wildcard include/config/outer/cache/sync.h) \
     $(wildcard include/config/outer/cache.h) \
   include/linux/stringify.h \
   include/linux/bottom_half.h \
   include/linux/spinlock_types.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/spinlock_types.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/spinlock_types.h \
   include/linux/lockdep.h \
     $(wildcard include/config/lockdep.h) \
     $(wildcard include/config/lock/stat.h) \
     $(wildcard include/config/prove/rcu.h) \
   include/linux/rwlock_types.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/spinlock.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/processor.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/spinlock.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/processor.h \
     $(wildcard include/config/have/hw/breakpoint.h) \
     $(wildcard include/config/mmu.h) \
     $(wildcard include/config/arm/errata/754327.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/hw_breakpoint.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/hw_breakpoint.h \
   include/linux/rwlock.h \
   include/linux/spinlock_api_smp.h \
     $(wildcard include/config/inline/spin/lock.h) \
@@ -215,8 +215,8 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
   include/linux/atomic.h \
     $(wildcard include/config/arch/has/atomic/or.h) \
     $(wildcard include/config/generic/atomic64.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/atomic.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/cmpxchg.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/atomic.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/cmpxchg.h \
     $(wildcard include/config/cpu/sa1100.h) \
     $(wildcard include/config/cpu/sa110.h) \
     $(wildcard include/config/cpu/v6.h) \
@@ -274,16 +274,16 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
     $(wildcard include/config/hugetlb/page.h) \
     $(wildcard include/config/hugetlb/page/size/variable.h) \
   include/generated/bounds.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/page.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/page.h \
     $(wildcard include/config/cpu/copy/v4wt.h) \
     $(wildcard include/config/cpu/copy/v4wb.h) \
     $(wildcard include/config/cpu/copy/feroceon.h) \
     $(wildcard include/config/cpu/copy/fa.h) \
     $(wildcard include/config/cpu/xscale.h) \
     $(wildcard include/config/cpu/copy/v6.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/glue.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/pgtable-2level-types.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/memory.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/glue.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/pgtable-2level-types.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/memory.h \
     $(wildcard include/config/need/mach/memory/h.h) \
     $(wildcard include/config/page/offset.h) \
     $(wildcard include/config/dram/size.h) \
@@ -339,14 +339,17 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
   include/linux/jiffies.h \
   include/linux/timex.h \
   include/uapi/linux/timex.h \
-  /usr/src/linux-headers-3.8.13-bone50/include/uapi/linux/param.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/linux/param.h \
   arch/arm/include/generated/asm/param.h \
   include/asm-generic/param.h \
     $(wildcard include/config/hz.h) \
   include/uapi/asm-generic/param.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/timex.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/timex.h \
     $(wildcard include/config/arch/multiplatform.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/mach/timex.h \
+  arch/arm/mach-omap2/include/mach/timex.h \
+  arch/arm/plat-omap/include/plat/timex.h \
+    $(wildcard include/config/omap/32k/timer.h) \
+    $(wildcard include/config/omap/32k/timer/hz.h) \
   include/linux/topology.h \
     $(wildcard include/config/sched/smt.h) \
     $(wildcard include/config/sched/mc.h) \
@@ -354,17 +357,17 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
     $(wildcard include/config/use/percpu/numa/node/id.h) \
   include/linux/smp.h \
     $(wildcard include/config/use/generic/smp/helpers.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/smp.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/smp.h \
   include/linux/percpu.h \
     $(wildcard include/config/need/per/cpu/embed/first/chunk.h) \
     $(wildcard include/config/need/per/cpu/page/first/chunk.h) \
     $(wildcard include/config/have/setup/per/cpu/area.h) \
   include/linux/pfn.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/percpu.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/percpu.h \
   include/asm-generic/percpu.h \
   include/linux/percpu-defs.h \
     $(wildcard include/config/debug/force/weak/per/cpu.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/topology.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/topology.h \
     $(wildcard include/config/arm/cpu/topology.h) \
   include/asm-generic/topology.h \
   include/linux/mmdebug.h \
@@ -375,10 +378,10 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
   include/linux/rbtree.h \
   include/uapi/linux/sysctl.h \
   include/linux/elf.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/elf.h \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/user.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/elf.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/user.h \
   include/uapi/linux/elf.h \
-  /usr/src/linux-headers-3.8.13-bone50/include/uapi/linux/elf-em.h \
+  /usr/src/linux-headers-3.8.13-bone70/include/uapi/linux/elf-em.h \
   include/linux/kobject.h \
   include/linux/sysfs.h \
   include/linux/kobject_ns.h \
@@ -393,7 +396,7 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
     $(wildcard include/config/jump/label.h) \
   include/linux/export.h \
     $(wildcard include/config/modversions.h) \
-  /usr/src/linux-headers-3.8.13-bone50/arch/arm/include/asm/module.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/module.h \
     $(wildcard include/config/arm/unwind.h) \
   include/asm-generic/module.h \
     $(wildcard include/config/have/mod/arch/specific.h) \
@@ -402,6 +405,6 @@ deps_/root/exploringBB/extras/kernel/hello/hello.mod.o := \
   include/linux/vermagic.h \
   include/generated/utsrelease.h \
 
-/root/exploringBB/extras/kernel/hello/hello.mod.o: $(deps_/root/exploringBB/extras/kernel/hello/hello.mod.o)
+/home/molloyd/exploringBB/extras/kernel/hello/hello.mod.o: $(deps_/home/molloyd/exploringBB/extras/kernel/hello/hello.mod.o)
 
-$(deps_/root/exploringBB/extras/kernel/hello/hello.mod.o):
+$(deps_/home/molloyd/exploringBB/extras/kernel/hello/hello.mod.o):
