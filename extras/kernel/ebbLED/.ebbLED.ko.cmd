@@ -1,0 +1,1 @@
+cmd_/home/molloyd/exploringBB/extras/kernel/ebbLED/ebbLED.ko := ld -EL -r  -T /usr/src/linux-headers-3.8.13-bone70/scripts/module-common.lds --build-id  -o /home/molloyd/exploringBB/extras/kernel/ebbLED/ebbLED.ko /home/molloyd/exploringBB/extras/kernel/ebbLED/ebbLED.o /home/molloyd/exploringBB/extras/kernel/ebbLED/ebbLED.mod.o
