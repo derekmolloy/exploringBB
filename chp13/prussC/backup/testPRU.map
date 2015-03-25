@@ -1,10 +1,10 @@
 ******************************************************************************
                      PRU Linker Unix v2.0.0                    
 ******************************************************************************
->> Linked Wed Mar 25 22:12:05 2015
+>> Linked Wed Mar 25 22:03:59 2015
 
 OUTPUT FILE NAME:   <testPRU.out>
-ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_noexit"  address: 0000008c
+ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_noexit"  address: 00000024
 
 
 MEMORY CONFIGURATION
@@ -12,10 +12,10 @@ MEMORY CONFIGURATION
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
 PAGE 0:
-  PRUIMEM               00000000   00001000  000000b0  00000f50  RWIX
+  PRUIMEM               00000000   00001000  000000ac  00000f54  RWIX
 
 PAGE 1:
-  PRUDMEM               00000000   00001000  00000100  00000f00  RWIX
+  PRUDMEM               00000000   00001000  00000104  00000efc  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -23,31 +23,38 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.text      0    00000000    000000b0     
-                  00000000    0000008c     testPRU.obj (.text:main)
-                  0000008c    00000014     rtspruv3_le.lib : boot_special.obj (.text:_c_int00_noinit_noargs_noexit)
-                  000000a0    00000008                     : exit.obj (.text:abort)
-                  000000a8    00000008                     : exit.obj (.text:loader_exit)
+.text      0    00000000    00000048     
+                  00000000    00000024     testPRU.obj (.text:main)
+                  00000024    00000014     rtspruv3_le.lib : boot_special.obj (.text:_c_int00_noinit_noargs_noexit)
+                  00000038    00000008                     : exit.obj (.text:abort)
+                  00000040    00000008                     : exit.obj (.text:loader_exit)
 
 .stack     1    00000000    00000100     UNINITIALIZED
                   00000000    00000004     rtspruv3_le.lib : boot.obj (.stack)
                   00000004    000000fc     --HOLE--
 
+.bss       1    00000100    00000004     UNINITIALIZED
+                  00000100    00000004     testPRU.obj (.bss)
+
 .cinit     1    00000000    00000000     UNINITIALIZED
+
+.creg.EXT_MEM.near 
+*          0    00000048    00000064     UNINITIALIZED
+                  00000048    00000064     testPRU.obj (.creg.EXT_MEM.near)
 
 
 SEGMENT ATTRIBUTES
 
     id tag      seg value
     -- ---      --- -----
-     0 PHA_PAGE 1   1    
+     0 PHA_PAGE 2   1    
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
 
 address    name
 --------   ----
-000000a8   C$$EXIT
+00000040   C$$EXIT
 00000100   __TI_STACK_END
 00000100   __TI_STACK_SIZE
 00000001   __TI_args_main
@@ -56,11 +63,13 @@ address    name
 00000001   __TI_exit
 ffffffff   __binit__
 ffffffff   __c_args__
-0000008c   _c_int00_noinit_noargs_noexit
+00000024   _c_int00_noinit_noargs_noexit
 00000000   _stack
-000000a0   abort
+00000038   abort
 ffffffff   binit
+00000100   local_data
 00000000   main
+00000048   shared_buf
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -73,13 +82,15 @@ address    name
 00000001   __TI_auto_init
 00000001   __TI_c_int00
 00000001   __TI_exit
-0000008c   _c_int00_noinit_noargs_noexit
-000000a0   abort
-000000a8   C$$EXIT
+00000024   _c_int00_noinit_noargs_noexit
+00000038   abort
+00000040   C$$EXIT
+00000048   shared_buf
 00000100   __TI_STACK_END
 00000100   __TI_STACK_SIZE
+00000100   local_data
 ffffffff   __binit__
 ffffffff   __c_args__
 ffffffff   binit
 
-[14 symbols]
+[16 symbols]

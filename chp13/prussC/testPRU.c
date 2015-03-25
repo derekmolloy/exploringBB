@@ -11,15 +11,15 @@ volatile register unsigned int __R31, __R30;
 
 int main()
 {
-   unsigned int i;                  // the counter in the time delay
-   unsigned int delay = 588260;     // the delay (manually determined)
+    unsigned int i;                  // the counter in the time delay
+    unsigned int delay = 588260;     // the delay (manually determined)
 
    // Just a test to show how you can use assembly instructions directly
    // subtract 1 from REG1
-   __asm__ __volatile__
+/*   __asm__ __volatile__
    (
       " SUB r1, r1, 1 \n"
-   );
+   ); */
 
    // while the button r31.3 has not been pressed, keep looping
    while(!(__R31 & 1<<3)){
@@ -29,7 +29,7 @@ int main()
       for(i=0; i<delay; i++) {}     // sleep for the delay
    }
 
-   // Exiting the application - send thee interrupt
-   __R31 = 35;                      // PRUEVENT_0 on PRU0_R31_VEC_VALID 
+   // Exiting the application - send the interrupt
+   __R31 = 35;                      // PRUEVENT_0 on PRU0_R31_VEC_VALID
    __halt();                        // halt the PRU
 }

@@ -2,3 +2,4 @@
 echo "Copying the cgi files to the /usr/lib/cgi-bin/"
 sudo cp *.cgi /usr/lib/cgi-bin/
 sudo chmod +s /usr/lib/cgi-bin/getLED.cgi
+sudo chmod +s /usr/lib/cgi-bin/postLED.cgi

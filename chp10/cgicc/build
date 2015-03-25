@@ -4,3 +4,6 @@ g++ hello.cpp -o hello.cgi
 
 echo "Building the getLED.cgi C++ CGI Program"
 g++ getLED.cpp LED.cpp -o getLED.cgi -lcgicc
+
+echo "Building the postLED.cgi C++ CGI Program"
+g++ postLED.cpp LED.cpp -o postLED.cgi -lcgicc
