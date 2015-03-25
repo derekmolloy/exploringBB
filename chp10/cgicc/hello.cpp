@@ -15,7 +15,7 @@ int main(){
 	cout << "</head><body>\n";
 	cout << "<h1>BeagleBone System Uptime</h1>\n";
 	int mins = info.uptime / 60;                   // the uptime comes from the sysinfo struct
-        int ram = info.freeram / 1024 / 1024;          // the available memory in Mb
+	int ram = info.freeram / 1024 / 1024;          // the available memory in Mb
 	cout << "<div> The BBB system uptime is " << mins << " minutes.\n";
 	cout << "There is " << ram << " Mb of memory available.</div>\n";
 	cout << "<div> The CGI REMOTE_ADDR environment variable is " << value << "</div>";
