@@ -27,8 +27,15 @@ int main(){
 	cout << "<h1>BeagleBone GET Example</h1>\n";
 
 	form_iterator it = form.getElement("command");	// read the URL get command string
-	string cmd(**it);				// convert to a C++ std::string object
-	if (!it->isEmpty() && it!=(*form).end()) {	// if there is a valid command
+	if (it == form.getElements().end() || it->getValue()==""){
+		cout << "<div> The LED command is missing or invalid.</div>";
+		cout << "<div> Valid commands are on, off, flash, and status </div>";
+	}
+	else{
+		string cmd(**it);
+//	string cmd(**it);				// convert to a C++ std::string object
+//	if (!it->isEmpty() && it!=(*form).end()) {	// if there is a valid command
+
 		cout << "<div> The LED command is " << cmd << ".</div>";
 
 		/** This code sets the USR3 LED state using the LED class **/
@@ -41,9 +48,6 @@ int main(){
 			cout << "</div>";
 		}
 		else cout << "<div> Invalid command! </div>";
-	}
-	else{
-		cout << "<div> The LED command is missing or invalid.</div>";
 	}
 	cout << "<div> The CGI REMOTE_ADDR environment variable is " << value << "</div>";
 	cout << "</body></html>\n";
