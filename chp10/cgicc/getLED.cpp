@@ -1,36 +1,34 @@
-/* C++ CGI BeagleBone GET example -- Written by Derek Molloy (www.derekmolloy.ie) 
+/* C++ CGI BeagleBone GET example -- Written by Derek Molloy (www.derekmolloy.ie)
 	You must set the sticky bit for this script in order that it can
-	access the on-board LED sysfs file system.
+	access the on-board LED sysfs file system. See the web page for instructions.
 */
 
 #include <iostream>         // for the input/output
 #include <stdlib.h>         // for the getenv call
 #include <sys/sysinfo.h>    // for the system uptime call
-
 #include <cgicc/Cgicc.h>    // the cgicc headers
 #include <cgicc/CgiDefs.h>
 #include <cgicc/HTTPHTMLHeader.h>
 #include <cgicc/HTMLClasses.h>
-
 #include "LED.h"            // the LED class from Chapter 5 of the book
-
 using namespace std;
 using namespace cgicc;
 
 int main(){
-	Cgicc form;
-	LED *led3 = new LED(3);
+	Cgicc form;					// The Cgicc object
+	LED *led3 = new LED(3);				// The LED object -- USR3
 
-	char *value = getenv("REMOTE_ADDR");           // The remote address CGI environment variable
-	cout << "Content-type:text/html\r\n\r\n";      // Generate the HTML output
+	// Generate the response HTML page
+	char *value = getenv("REMOTE_ADDR");		// the remote address CGI env. variable
+	cout << "Content-type:text/html\r\n\r\n";	// generate the HTML output
 	cout << "<html><head>\n";
 	cout << "<title>EBB C++ GET Example</title>\n";
 	cout << "</head><body>\n";
 	cout << "<h1>BeagleBone GET Example</h1>\n";
 
-	form_iterator it = form.getElement("command");
-	string cmd(**it);
-	if (!it->isEmpty() && it!=(*form).end()) {
+	form_iterator it = form.getElement("command");	// read the URL get command string
+	string cmd(**it);				// convert to a C++ std::string object
+	if (!it->isEmpty() && it!=(*form).end()) {	// if there is a valid command
 		cout << "<div> The LED command is " << cmd << ".</div>";
 
 		/** This code sets the USR3 LED state using the LED class **/
