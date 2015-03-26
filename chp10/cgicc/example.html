@@ -1,0 +1,11 @@
+<html><head><title>EBB C++ Post LED Example</title></head>
+<body><h1>BeagleBone POST LED Example</h1>
+<form action="/cgi-bin/postLED.cgi" method="POST">
+<div>LED state: 
+<input type="radio" name="command" value="on"/> On 
+<input type="radio" name="command" value="off"checked/> Off 
+<input type="radio" name="command" value="flash"/> Flash 
+<input type="checkbox" name="status"  /> Display Status </div>
+<div>Flash period: <input type="text" name="period" size="6" value="100"> ms   
+<input type="submit" value="Execute Command" /></div></form>
+</body></html>
