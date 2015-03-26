@@ -33,11 +33,7 @@ int main(){
 	}
 	else{
 		string cmd(**it);
-//	string cmd(**it);				// convert to a C++ std::string object
-//	if (!it->isEmpty() && it!=(*form).end()) {	// if there is a valid command
-
 		cout << "<div> The LED command is " << cmd << ".</div>";
-
 		/** This code sets the USR3 LED state using the LED class **/
 		if(cmd=="on") led3->turnOn();
 		else if(cmd=="off") led3->turnOff();
