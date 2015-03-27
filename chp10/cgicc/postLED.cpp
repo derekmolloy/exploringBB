@@ -1,5 +1,5 @@
 /* C++ CGI BeagleBone POST example -- Written by Derek Molloy (www.derekmolloy.ie)
-	You must set the sticky bit for this script in order that it can
+	You must set the setuid bit for this script in order that it can
 	access the on-board LED sysfs file system. This example integrates the form
 	for ease of use -- i.e., it is a form that calls itself. It could just as
 	easily receive the input from a regular HTML page.
