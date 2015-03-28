@@ -12,7 +12,6 @@
 -stack 0x100
 -heap 0x100
 
-
 MEMORY
 {
     PAGE 0:
@@ -23,13 +22,14 @@ MEMORY
 
 SECTIONS
 {
-    .text          >  PRUIMEM, PAGE 0
-    .stack         >  PRUDMEM, PAGE 1
-    .bss           >  PRUDMEM, PAGE 1
-    .cio           >  PRUDMEM, PAGE 1
-    .const         >  PRUDMEM, PAGE 1
-    .data          >  PRUDMEM, PAGE 1
-    .switch        >  PRUDMEM, PAGE 1
-    .sysmem        >  PRUDMEM, PAGE 1
-    .cinit         >  PRUDMEM, PAGE 1
+    /* Thanks to Jakub for the next line! */
+    .text:_c_int00* >  0x0, PAGE 0
+    .stack          >  PRUDMEM, PAGE 1
+    .bss            >  PRUDMEM, PAGE 1
+    .cio            >  PRUDMEM, PAGE 1
+    .const          >  PRUDMEM, PAGE 1
+    .data           >  PRUDMEM, PAGE 1
+    .switch         >  PRUDMEM, PAGE 1
+    .sysmem         >  PRUDMEM, PAGE 1
+    .cinit          >  PRUDMEM, PAGE 1
 }
