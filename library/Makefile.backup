@@ -1,0 +1,20 @@
+SHELL		= /bin/bash
+CXX		= g++
+CXXFLAGS	= -fPIC -Wall -g -pthread
+RELEASEFLAGS 	= -O3 -combine
+SOURCES		= $(shell echo *.cpp)
+HEADERS		= $(shell echo *.h)
+OBJECTS		= $(SOURCES:.cpp=.o)
+LDFLAGS		= -shared
+
+TARGET		= test.so
+PREFIX		= $(DESTDIR)/usr/local
+
+all: $(TARGET)
+
+clean:
+	rm -f $(OBJECTS) $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $(DEBUGFLAGS) -o $(TARGET) $(OBJECTS) $(LDFLAGS)
+

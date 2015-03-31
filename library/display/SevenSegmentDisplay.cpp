@@ -72,9 +72,9 @@ int SevenSegmentDisplay::write(float number, int places){
 	// output least-significant digit and divide by base
     for(int i=0; i<this->numberSegments; i++){
        output[i] = this->symbols[intNumber%this->numberBase];
+       if(i==places) output[i] = output[i] | 0b10000000; // turn on "decimal point"
        if(this->isCommonAnode) output[i]=~output[i]; //invert the bits for common anode
        intNumber = intNumber/this->numberBase;
-       if(i==places) output[i] = output[i] | 0b10000000; // turn on "decimal point"
     }
     this->spidevice->write(output, this->numberSegments);
 	return 0;
