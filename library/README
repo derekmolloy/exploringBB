@@ -1,0 +1,17 @@
+To build the code in this library, enter the directory build and then type "cmake .."
+Then type make in the build directory and the shared library libEBBLibrary.so should be
+built. The example programs in the exploringBB repository expect the shared library to
+be in the /exploringBB/library directory, so move it from the library/build directory
+to the parent directory. 
+
+The parent directory /exploringBB/library currently contains a shared (.so) and statically
+linked version (.a) of the library. See the examples on how to use this library. For 
+example see exploringBB/chp09/LCDcharacter/build, which contains:
+
+g++ LCDApp.cpp ../../library/libEBBLibrary.so -o LCDApp -I "../../library"
+
+You can also use the static library by typing:
+
+g++ LCDApp.cpp ../../library/libEBBLibrary.a -o LCDApp -I "../../library"
+
+The steps involved are explained in detail at exploringbeaglebone.com/chapter9/

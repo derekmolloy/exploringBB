@@ -50,7 +50,6 @@ GPIO::GPIO(int number) {
 	this->togglePeriod=100;
 	this->toggleNumber=-1; //infinite number
 	this->callbackFunction = NULL;
-	this->thread = NULL;
 	this->threadRunning = false;
 
 	ostringstream s;

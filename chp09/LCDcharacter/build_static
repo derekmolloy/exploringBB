@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ LCDApp.cpp ../../library/libEBBLibrary.a -o LCDApp -I "../../library"
