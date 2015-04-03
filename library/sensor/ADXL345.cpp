@@ -1,12 +1,12 @@
 /*
  * ADXL345.cpp  Created on: 17 May 2014
  * Copyright (c) 2014 Derek Molloy (www.derekmolloy.ie)
- * Made available for the book "Exploring BeagleBone" 
+ * Made available for the book "Exploring BeagleBone"
  * See: www.exploringbeaglebone.com
  * Licensed under the EUPL V.1.1
  *
- * This Software is provided to You under the terms of the European 
- * Union Public License (the "EUPL") version 1.1 as published by the 
+ * This Software is provided to You under the terms of the European
+ * Union Public License (the "EUPL") version 1.1 as published by the
  * European Union. Any use of this Software, other than as authorized 
  * under this License is strictly prohibited (to the extent such use 
  * is covered by a right of the copyright holder of this Software).

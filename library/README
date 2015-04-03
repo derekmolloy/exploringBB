@@ -1,8 +1,8 @@
-To build the code in this library, enter the directory build and then type "cmake .."
-Then type make in the build directory and the shared library libEBBLibrary.so should be
-built. The example programs in the exploringBB repository expect the shared library to
-be in the /exploringBB/library directory, so move it from the library/build directory
-to the parent directory. 
+To build the code in this library, "cd build" and then type "cmake ..". Then type "make" 
+in the build directory and the shared library libEBBLibrary.so should be
+built. To deploy the library to your BeagleBone type "sudo make install" in the same 
+directory. You should also place the library in the /exploringBB/library directory if you
+are building the various examples in the chapters.
 
 The parent directory /exploringBB/library currently contains a shared (.so) and statically
 linked version (.a) of the library. See the examples on how to use this library. For 
@@ -14,4 +14,12 @@ You can also use the static library by typing:
 
 g++ LCDApp.cpp ../../library/libEBBLibrary.a -o LCDApp -I "../../library"
 
-The steps involved are explained in detail at exploringbeaglebone.com/chapter9/
+The steps involved are explained in detail at www.exploringbeaglebone.com/chapter9/
+
+BUILDING DOCUMENTATION (perform this step on a desktop computer - not the BBB)
+
+To build the documentation for this library, enter the docs directory and type:
+  exploringBB/library/docs$ sudo apt-get install doxygen
+  exploringBB/library/docs$ doxygen ExploringBB.Doxyfile 
+The html documentation is built in the html directory and the LaTeX documentation can be built
+latex directory if you have LaTeX installed (not recommended on the BBB itself).
