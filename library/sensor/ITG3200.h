@@ -32,6 +32,10 @@
 
 namespace exploringBB {
 
+/**
+ * @class ITG3200
+ * @brief A class to interface with the ITG3200 gyroscope (untested)
+ */
 class ITG3200 {
 
 	// This is required for the DLPF_CFG value - Digital low-pass filter configuration
@@ -42,8 +46,8 @@ class ITG3200 {
 		LP_42HZ 	= 3,	// sets internal sampling rate Fs to be 1kHz
 		LP_20HZ 	= 4,	// sets internal sampling rate Fs to be 1kHz
 		LP_10HZ 	= 5,	// sets internal sampling rate Fs to be 1kHz
-		LP_5HZ  	= 6		// sets internal sampling rate Fs to be 1kHz
-							// 7 is a reserved value
+		LP_5HZ  	= 6	// sets internal sampling rate Fs to be 1kHz
+					// 7 is a reserved value
 	};
 
 private:

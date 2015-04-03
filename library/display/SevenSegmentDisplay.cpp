@@ -36,6 +36,11 @@ const unsigned char SevenSegmentDisplay::symbols[16] = { //(msb) HGFEDCBA (lsb)
      0b00111001, 0b01011110, 0b01111001, 0b01110001      //CdEF
 };
 
+/**
+ * The constructor for the 7-segment display that defines the number of segments.
+ * @param device The pointer to the SPI device bus
+ * @param numberSegments The number of 7-segment modules attached to the bus
+ */
 SevenSegmentDisplay::SevenSegmentDisplay(SPIDevice *device, int numberSegments) {
 	this->spidevice = device;
 	this->numberSegments = numberSegments;

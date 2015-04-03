@@ -32,6 +32,10 @@
 
 namespace exploringBB {
 
+/**
+ * @class SocketServer
+ * @brief A class that encapsulates a server socket for network communication
+ */
 class SocketServer {
 private:
 	int 		portNumber;

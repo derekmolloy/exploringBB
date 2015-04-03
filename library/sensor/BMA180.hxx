@@ -29,6 +29,10 @@
 
 namespace exploringBB {
 
+/**
+ * @class BMA180
+ * @brief A class to control a BMA180 accelerometer (untested)
+ */
 class BMA180 {
 
 	enum RANGE {

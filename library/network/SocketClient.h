@@ -33,12 +33,16 @@
 
 namespace exploringBB {
 
+/**
+ * @class SocketClient
+ * @brief A class that encapsulates a socket client to be used for network communication
+ */
 class SocketClient {
 
 private:
-    int 	    socketfd;
-    struct 	    sockaddr_in   serverAddress;
-    struct 	    hostent       *server;
+    int		socketfd;
+    struct 	sockaddr_in   serverAddress;
+    struct 	hostent       *server;
     std::string serverName;
     int         portNumber;
     bool        isConnected;

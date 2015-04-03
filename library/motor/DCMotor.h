@@ -32,6 +32,11 @@
 
 namespace exploringBB {
 
+/**
+ * @class DCMotor
+ * @brief A generic DC motor class that controls a motor driver board using a
+ * PWM signal,and a GPIO state to control the motor direction.
+ */
 class DCMotor {
 public:
 	enum DIRECTION{ CLOCKWISE, ANTICLOCKWISE };

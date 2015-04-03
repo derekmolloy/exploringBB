@@ -28,13 +28,16 @@
 
 namespace exploringBB {
 
+/**
+ * @class SevenSegmentDisplay
+ * @brief A class that allows you to drive an array of 7 segment displays using an array of 74XX595 ICs
+ */
 class SevenSegmentDisplay {
 private:
-	SPIDevice *spidevice; // The SPI bus device
-	int numberSegments;   // The number of segments connected
-	int numberBase;       // base can be between 2 (binary) and 16 (hexadecimal).
-	                      // The default is 10(decimal)
-	bool isCommonAnode;    // false by default
+	SPIDevice *spidevice; //!< The SPI bus device
+	int numberSegments;   //!< The number of segments connected
+	int numberBase;       //!< Base can be between 2 (binary) and 16 (hexadecimal). Default is decimal (base 10)
+	bool isCommonAnode;   //!< Is a common anode display -- false by default
 
 public:
 	SevenSegmentDisplay(SPIDevice *device, int numberSegments);
@@ -47,7 +50,7 @@ public:
 	virtual ~SevenSegmentDisplay();       // closes the SPI device
 
 private:
-	const static unsigned char symbols[];
+	const static unsigned char symbols[]; //!< The array of symbols (i.e., characters to LED segments)
 };
 
 } /* namespace exploringBB */

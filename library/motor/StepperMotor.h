@@ -10,7 +10,7 @@
  * European Union. Any use of this Software, other than as authorized 
  * under this License is strictly prohibited (to the extent such use 
  * is covered by a right of the copyright holder of this Software).
- * 
+ *
  * This Software is provided under the License on an "AS IS" basis and 
  * without warranties of any kind concerning the Software, including 
  * without limitation merchantability, fitness for a particular purpose, 
@@ -18,7 +18,7 @@
  * intellectual property rights other than copyright. This disclaimer 
  * of warranty is an essential part of the License and a condition for 
  * the grant of any rights to this Software.
- * 
+ *
  * For more details, see http://www.derekmolloy.ie/
  */
 
@@ -28,6 +28,11 @@
 
 namespace exploringBB {
 
+/**
+ * @class StepperMotor
+ * @brief A class to control a stepper motor using a motor driver board, such as the
+ * Easy Driver board, or compatible. The class uses five GPIOs to control each motor.
+ */
 class StepperMotor {
 
 public:

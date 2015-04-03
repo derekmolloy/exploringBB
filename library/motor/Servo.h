@@ -30,6 +30,11 @@ using std::string;
 
 namespace exploringBB {
 
+/**
+ * @class Servo
+ * @brief An extremely basic Servo class stub -- does nothing more than the PWM class but
+ * is here for future use.
+ */
 class Servo: public PWM {
 public:
 	Servo(string pinName);
