@@ -1,24 +1,24 @@
 /*
  * SPIDevice.cpp  Created on: 22 May 2014
  * Copyright (c) 2014 Derek Molloy (www.derekmolloy.ie)
- * Made available for the book "Exploring BeagleBone" 
+ * Made available for the book "Exploring BeagleBone"
  * See: www.exploringbeaglebone.com
  * Licensed under the EUPL V.1.1
  *
- * This Software is provided to You under the terms of the European 
- * Union Public License (the "EUPL") version 1.1 as published by the 
- * European Union. Any use of this Software, other than as authorized 
- * under this License is strictly prohibited (to the extent such use 
+ * This Software is provided to You under the terms of the European
+ * Union Public License (the "EUPL") version 1.1 as published by the
+ * European Union. Any use of this Software, other than as authorized
+ * under this License is strictly prohibited (to the extent such use
  * is covered by a right of the copyright holder of this Software).
- * 
- * This Software is provided under the License on an "AS IS" basis and 
- * without warranties of any kind concerning the Software, including 
- * without limitation merchantability, fitness for a particular purpose, 
- * absence of defects or errors, accuracy, and non-infringement of 
- * intellectual property rights other than copyright. This disclaimer 
- * of warranty is an essential part of the License and a condition for 
+ *
+ * This Software is provided under the License on an "AS IS" basis and
+ * without warranties of any kind concerning the Software, including
+ * without limitation merchantability, fitness for a particular purpose,
+ * absence of defects or errors, accuracy, and non-infringement of
+ * intellectual property rights other than copyright. This disclaimer
+ * of warranty is an essential part of the License and a condition for
  * the grant of any rights to this Software.
- * 
+ *
  * For more details, see http://www.derekmolloy.ie/
  */
 
@@ -104,9 +104,9 @@ unsigned char SPIDevice::readRegister(unsigned int registerAddress){
 	unsigned char send[2], receive[2];
 	memset(send, 0, sizeof send);
 	memset(receive, 0, sizeof receive);
-	send[0] = (unsigned char) (0x80 + registerAddress);
+	send[0] = (unsigned char) (0x80 | registerAddress);
 	this->transfer(send, receive, 2);
-    //cout << "The value that was received is: " << (int) receive[1] << endl;
+	//cout << "The value that was received is: " << (int) receive[1] << endl;
 	return receive[1];
 }
 
@@ -114,7 +114,7 @@ unsigned char* SPIDevice::readRegisters(unsigned int number, unsigned int fromAd
 	unsigned char* data = new unsigned char[number];
 	unsigned char send[number+1], receive[number+1];
 	memset(send, 0, sizeof send);
-	send[0] =  (unsigned char) (0x80 + 0x40 + fromAddress); //set read bit and MB bit
+	send[0] =  (unsigned char) (0x80 | 0x40 | fromAddress); //set read bit and MB bit
 	this->transfer(send, receive, number+1);
 	memcpy(data, receive+1, number);  //ignore the first (address) byte in the array returned
 	return data;
