@@ -1,0 +1,3 @@
+#!/bin/bash
+g++ testADXL345.cpp /home/molloyd/exploringBB/library/libEBBLibrary.so -o testADXL345 -I"../../../library"
+echo "Before executing testADXL345, ensure that the libEBBLibrary.so is in your path -- e.g., in /usr/lib"

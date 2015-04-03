@@ -20,3 +20,5 @@ file(GLOB_RECURSE SOURCES "./*.cpp")
 add_library(EBBLibrary SHARED ${SOURCES})
 
 target_link_libraries(EBBLibrary ${CMAKE_THREAD_LIBS_INIT})
+
+install (TARGETS EBBLibrary DESTINATION /usr/lib)
