@@ -1,8 +1,8 @@
 /**
- * @file ebbLED.c
+ * @file   ebbLED.c
  * @author Derek Molloy
- * @date 4 April 2015
- * @brief A kernel module for controlling a GPIO LED/button pair. The device appears as
+ * @date   4 April 2015
+ * @brief  A kernel module for controlling a GPIO LED/button pair. The device appears as
  * /dev/ebbLED and the LEDs are available via sysfs /sys/class/gpio/gpio115 and gpio49
  * This circuit for the BeagleBone assumes that an LED is attached to GPIO 49 which is
  * on P9_23 and the button is attached to GPIO 115 on P9_27.
@@ -26,7 +26,7 @@ MODULE_AUTHOR("Derek Molloy");
 MODULE_DESCRIPTION("A simple Linux LED driver for the BBB");
 MODULE_VERSION("0.1");
 
-static int    majorNumber;
+static int    majorNumber;                  //!< Used to store the device number
 static char   message[1024] = {0};
 static short  position;
 static int    numberOpens = 0;
