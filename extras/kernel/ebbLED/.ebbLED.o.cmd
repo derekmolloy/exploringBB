@@ -630,6 +630,21 @@ deps_/home/molloyd/exploringBB/extras/kernel/ebbLED/ebbLED.o := \
   include/linux/pinctrl/pinctrl.h \
   include/linux/seq_file.h \
   include/linux/pinctrl/pinctrl-state.h \
+  include/linux/interrupt.h \
+    $(wildcard include/config/generic/hardirqs.h) \
+    $(wildcard include/config/irq/forced/threading.h) \
+    $(wildcard include/config/generic/irq/probe.h) \
+  include/linux/irqreturn.h \
+  include/linux/irqnr.h \
+  include/uapi/linux/irqnr.h \
+  include/linux/hardirq.h \
+  include/linux/ftrace_irq.h \
+    $(wildcard include/config/ftrace/nmi/enter.h) \
+  include/linux/vtime.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/hardirq.h \
+  /usr/src/linux-headers-3.8.13-bone70/arch/arm/include/asm/irq.h \
+    $(wildcard include/config/sparse/irq.h) \
+  include/linux/irq_cpustat.h \
 
 /home/molloyd/exploringBB/extras/kernel/ebbLED/ebbLED.o: $(deps_/home/molloyd/exploringBB/extras/kernel/ebbLED/ebbLED.o)
 

@@ -12,7 +12,7 @@ int main(){
 	int ret, fd;
 
 	printf("Starting device test code example...\n");
-	fd = open("/dev/ebbchar", O_RDWR);
+	fd = open("/dev/ebbLED", O_RDWR);
 	if (fd < 0){
 		perror("Failed to open the device...");
 		return errno;
