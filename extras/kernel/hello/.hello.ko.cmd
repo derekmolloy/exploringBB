@@ -1,1 +1,0 @@
-cmd_/home/molloyd/exploringBB/extras/kernel/hello/hello.ko := ld -EL -r  -T /usr/src/linux-headers-3.8.13-bone70/scripts/module-common.lds --build-id  -o /home/molloyd/exploringBB/extras/kernel/hello/hello.ko /home/molloyd/exploringBB/extras/kernel/hello/hello.o /home/molloyd/exploringBB/extras/kernel/hello/hello.mod.o
