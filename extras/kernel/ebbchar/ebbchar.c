@@ -25,7 +25,10 @@ static int     dev_release(struct inode *, struct file *);
 static ssize_t dev_read(struct file *, char *, size_t, loff_t *);
 static ssize_t dev_write(struct file *, const char *, size_t, loff_t *);
 
-// This structure lists the callback functions
+/**
+ * This structure lists the callback functions
+ * char devices usually implement open, read, write and release system calls.
+ */
 static struct file_operations fops =
 {
 	.open = dev_open,

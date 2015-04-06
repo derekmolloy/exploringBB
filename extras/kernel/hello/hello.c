@@ -19,7 +19,7 @@ MODULE_DESCRIPTION("A simple Linux driver for the BBB.");  /// The description -
 
 static char *name = "world";        /// An example LKM argument -- default value is "world"
 module_param(name, charp, S_IRUGO); /// Param desc. charp = char ptr, S_IRUGO can be read/not changed
-MODULE_PARM_DESC(name, "The name to dislay in /var/log/kern.log");  /// parameter description
+MODULE_PARM_DESC(name, "The name to display in /var/log/kern.log");  /// parameter description
 
 /** @brief The LKM initialization function
  *  The static keyword restricts the visibility of the function to within this C file. The __init
