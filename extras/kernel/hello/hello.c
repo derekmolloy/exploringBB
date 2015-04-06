@@ -2,8 +2,9 @@
  * @file   hello.c
  * @author Derek Molloy
  * @date   4 April 2015
+ * @version 0.1
  * @brief  An introductory "Hello World!" loadable kernel module (LKM) that can displays a message
- * in the /var/log/kernel.log file when the module is loaded and removed. The module can accepts an
+ * in the /var/log/kern.log file when the module is loaded and removed. The module can accepts an
  * argument when it is loaded -- the name to address.
  * @see http://www.derekmolloy.ie/ for a full description and follow-up descriptions.
 */
@@ -14,11 +15,11 @@
 
 MODULE_LICENSE("GPL");              /// The license type -- this affects available functionality
 MODULE_AUTHOR("Derek Molloy");      /// The author -- visible when you use modinfo
-MODULE_DESCRIPTION("A simple Linux driver for the BBB.");  //!< The description -- see modinfo
+MODULE_DESCRIPTION("A simple Linux driver for the BBB.");  /// The description -- see modinfo
 
 static char *name = "world";        /// An example LKM argument -- default value is "world"
 module_param(name, charp, S_IRUGO); /// Param desc. charp = char ptr, S_IRUGO can be read/not changed
-MODULE_PARM_DESC(name, "The name to dislay in /var/log/kernel.log."); /// parameter description
+MODULE_PARM_DESC(name, "The name to dislay in /var/log/kern.log");  /// parameter description
 
 /** @brief The LKM initialization function
  *  The static keyword restricts the visibility of the function to within this C file. The __init
@@ -26,8 +27,7 @@ MODULE_PARM_DESC(name, "The name to dislay in /var/log/kernel.log."); /// parame
  *  time and that it can be discarded and its memory freed up after that point.
  *  @return returns 0 if successful
  */
-static int __init helloBBB_init(void)
-{
+static int __init helloBBB_init(void){
 	printk(KERN_INFO "EBB: Hello %s from the BBB LKM!\n", name);
 	return 0;
 }
@@ -36,8 +36,7 @@ static int __init helloBBB_init(void)
  *  Similar to the initialization function, it is static. The __exit macro notifies that if this
  *  code is used for a built-in driver (not a LKM) that this function is not required.
  */
-static void __exit helloBBB_exit(void)
-{
+static void __exit helloBBB_exit(void){
 	printk(KERN_INFO "EBB: Goodbye %s from the BBB LKM!\n", name);
 }
 
