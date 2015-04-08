@@ -25,8 +25,8 @@ MODULE_DESCRIPTION("A simple Linux char driver for the BBB");  /// The descripti
 MODULE_VERSION("0.1");            /// A version number to inform users
 
 static int    majorNumber;                  /// This will store the device number -- determined automatically
-static char   message[1024] = {0};          /// Memory for the string that is passed from userspace
-static short  position;                     /// Used to remember the position in the string
+static char   message[256] = {0};           /// Memory for the string that is passed from userspace
+static short  size_of_message;              /// Used to remember the size of the string stored
 static int    numberOpens = 0;              /// For information counts the number of times the device is opened
 static struct class*  ebbcharClass  = NULL; /// The device-driver class struct pointer
 static struct device* ebbcharDevice = NULL; /// The device-driver device struct pointer
@@ -107,7 +107,7 @@ static void __exit ebbchar_exit(void){
  */
 static int dev_open(struct inode *inodep, struct file *filep){
 	numberOpens++;
-	printk(KERN_INFO "EBBChar: Device has been opened %d times\n", numberOpens);
+	printk(KERN_INFO "EBBChar: Device has been opened %d time(s)\n", numberOpens);
 	return 0;
 }
 
@@ -121,12 +121,12 @@ static int dev_open(struct inode *inodep, struct file *filep){
  */
 static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *offset){
 	int error_count = 0;
-	// copy_to_user has the format ( * to, *from, n) and returns 0 on success
-	error_count = copy_to_user(buffer, message, position);
+	// copy_to_user has the format ( * to, *from, size) and returns 0 on success
+	error_count = copy_to_user(buffer, message, size_of_message);
 
 	if (error_count==0){          // success!
-		printk(KERN_INFO "EBBChar: Sent %d characters to the user\n", position);
-		return (position=0);  // clear the position to the start and return 0
+		printk(KERN_INFO "EBBChar: Sent %d characters to the user\n", size_of_message);
+		return (size_of_message=0);  // clear the position to the start and return 0
 	}
 	else {
 		printk(KERN_INFO "EBBChar: Failed to send %d characters to the user\n", error_count);
@@ -143,14 +143,10 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
  *  @param offset The offset if required
  */
 static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, loff_t *offset){
-	position = 0;
-	memset(message,0,100);
-	while(position<len){
-		message[position] = buffer[position];
-		position++;
-	}
-	printk(KERN_INFO "EBBChar: Received %d characters from the user\n", position);
-	return position;
+	sprintf(message, "%s(%d letters)", buffer, len);   // appending received string with its length
+	size_of_message = strlen(message);                 // store the length of the stored message
+	printk(KERN_INFO "EBBChar: Received %d characters from the user\n", len);
+	return len;
 }
 
 
