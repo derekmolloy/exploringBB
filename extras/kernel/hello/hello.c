@@ -28,8 +28,8 @@ MODULE_PARM_DESC(name, "The name to display in /var/log/kern.log");  /// paramet
  *  @return returns 0 if successful
  */
 static int __init helloBBB_init(void){
-	printk(KERN_INFO "EBB: Hello %s from the BBB LKM!\n", name);
-	return 0;
+   printk(KERN_INFO "EBB: Hello %s from the BBB LKM!\n", name);
+   return 0;
 }
 
 /** @brief The LKM cleanup function
@@ -37,7 +37,7 @@ static int __init helloBBB_init(void){
  *  code is used for a built-in driver (not a LKM) that this function is not required.
  */
 static void __exit helloBBB_exit(void){
-	printk(KERN_INFO "EBB: Goodbye %s from the BBB LKM!\n", name);
+   printk(KERN_INFO "EBB: Goodbye %s from the BBB LKM!\n", name);
 }
 
 /** @brief A module must use the module_init() module_exit() macros from linux/init.h, which
