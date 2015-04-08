@@ -1,3 +1,17 @@
+# gitignore set by Derek Molloy for the exploringBB repository
+# For the EBB Repository
+*.o
+*.obj
+
+# Specific to kernel development
+*.mod
+*.cmd
+*.symvers
+*.order
+
+# Retain shared libraries .so and static libraries .a for the exploringBB repo
+
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -26,7 +40,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
