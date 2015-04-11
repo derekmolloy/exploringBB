@@ -27,7 +27,7 @@ int main(){
       return errno;
    }
    printf("Type in a short string to send to the kernel module:\n");
-   scanf("%[^\n]%*c", stringToSend);              /// Read in a string (with spaces)
+   scanf("%[^\n]%*c", stringToSend);                /// Read in a string (with spaces)
    printf("Writing message to the device [%s].\n", stringToSend);
    ret = write(fd, stringToSend, strlen(stringToSend)); /// Send the string to the LKM
    if (ret < 0){
@@ -35,7 +35,7 @@ int main(){
       return errno;
    }
 
-   printf("Press ENTER to read back from the device...");
+   printf("Press ENTER to read back from the device...\n");
    getchar();
 
    printf("Reading from the device...\n");
