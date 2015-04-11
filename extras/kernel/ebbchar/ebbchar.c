@@ -24,10 +24,10 @@ MODULE_AUTHOR("Derek Molloy");    /// The author -- visible when you use modinfo
 MODULE_DESCRIPTION("A simple Linux char driver for the BBB");  /// The description -- see modinfo
 MODULE_VERSION("0.1");            /// A version number to inform users
 
-static int    majorNumber;                  /// This will store the device number -- determined automatically
+static int    majorNumber;                  /// Stores the device number -- determined automatically
 static char   message[256] = {0};           /// Memory for the string that is passed from userspace
 static short  size_of_message;              /// Used to remember the size of the string stored
-static int    numberOpens = 0;              /// For information counts the number of times the device is opened
+static int    numberOpens = 0;              /// Counts the number of times the device is opened
 static struct class*  ebbcharClass  = NULL; /// The device-driver class struct pointer
 static struct device* ebbcharDevice = NULL; /// The device-driver device struct pointer
 
@@ -38,9 +38,9 @@ static ssize_t dev_read(struct file *, char *, size_t, loff_t *);
 static ssize_t dev_write(struct file *, const char *, size_t, loff_t *);
 
 /**
- * Devices are represented as file structure in the kernel. The file_operations structure from /linux/fs.h
- * lists the callback functions that you wish to associated with your file operations using a C99 syntax
- * structure. char devices usually implement open, read, write and release calls
+ * Devices are represented as file structure in the kernel. The file_operations structure from
+ * /linux/fs.h lists the callback functions that you wish to associated with your file operations
+ * using a C99 syntax structure. char devices usually implement open, read, write and release calls
  */
 static struct file_operations fops =
 {
@@ -148,7 +148,6 @@ static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, lof
    printk(KERN_INFO "EBBChar: Received %d characters from the user\n", len);
    return len;
 }
-
 
 /** @brief The device release function that is called whenever the device is closed/released by
  *  the userspace program

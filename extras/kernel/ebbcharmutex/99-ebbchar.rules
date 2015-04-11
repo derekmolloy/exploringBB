@@ -1,0 +1,2 @@
+#Rules file for the ebbchar device driver
+KERNEL=="ebbchar", SUBSYSTEM=="ebb", MODE="0666"
