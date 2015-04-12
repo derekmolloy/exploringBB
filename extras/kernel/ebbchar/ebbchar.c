@@ -136,7 +136,7 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
 
 /** @brief This function is called whenever the device is being written to from user space i.e.
  *  data is sent to the device from the user. The data is copied to the message[] array in this
- *  LKM using message[x] = buffer[x]
+ *  LKM using the sprintf() function along with the length of the string.
  *  @param filep A pointer to a file object
  *  @param buffer The buffer to that contains the string to write to the device
  *  @param len The length of the array of data that is being passed in the const char buffer

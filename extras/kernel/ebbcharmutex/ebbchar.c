@@ -6,7 +6,7 @@
  * @brief  An introductory character driver to support the second article of my series on
  * Linux loadable kernel module (LKM) development. This module maps to /dev/ebbchar and
  * comes with a helper C program that can be run in Linux user space to communicate with
- * this the LKM.
+ * this the LKM. This version has mutex locks to deal with synchronization problems.
  * @see http://www.derekmolloy.ie/ for a full description and follow-up descriptions.
 */
 
@@ -32,9 +32,9 @@ static int    numberOpens = 0;              /// Xounts the number of times the d
 static struct class*  ebbcharClass  = NULL; /// The device-driver class struct pointer
 static struct device* ebbcharDevice = NULL; /// The device-driver device struct pointer
 
-static DEFINE_MUTEX(ebbchar_mutex);	    /// Only want one program to use this device at any one time
+static DEFINE_MUTEX(ebbchar_mutex);	    /// Macro to declare a new mutex
 
-// The prototype functions for the character driver -- must come before the struct definition
+/// The prototype functions for the character driver -- must come before the struct definition
 static int     dev_open(struct inode *, struct file *);
 static int     dev_release(struct inode *, struct file *);
 static ssize_t dev_read(struct file *, char *, size_t, loff_t *);
@@ -62,7 +62,7 @@ static struct file_operations fops =
 static int __init ebbchar_init(void){
    printk(KERN_INFO "EBBChar: Initializing the EBBChar LKM\n");
 
-   // Try to dynamically allocate a major number for the device -- more difficult but worth it
+   /// Try to dynamically allocate a major number for the device -- more difficult but worth it
    majorNumber = register_chrdev(0, DEVICE_NAME, &fops);
    if (majorNumber<0){
       printk(KERN_ALERT "EBBChar failed to register a major number\n");
@@ -70,25 +70,25 @@ static int __init ebbchar_init(void){
    }
    printk(KERN_INFO "EBBChar: registered correctly with major number %d\n", majorNumber);
 
-   // Register the device class
+   /// Register the device class
    ebbcharClass = class_create(THIS_MODULE, CLASS_NAME);
-   if (IS_ERR(ebbcharClass)){                // Check for error and clean up if there is
+   if (IS_ERR(ebbcharClass)){           /// Check for error and clean up if there is
       unregister_chrdev(majorNumber, DEVICE_NAME);
       printk(KERN_ALERT "Failed to register device class\n");
-      return PTR_ERR(ebbcharClass);     // Correct way to return an error on a pointer
+      return PTR_ERR(ebbcharClass);     /// Correct way to return an error on a pointer
    }
    printk(KERN_INFO "EBBChar: device class registered correctly\n");
 
-   // Register the device driver
+   /// Register the device driver
    ebbcharDevice = device_create(ebbcharClass, NULL, MKDEV(majorNumber, 0), NULL, DEVICE_NAME);
-   if (IS_ERR(ebbcharDevice)){               // Clean up if there is an error
-      class_destroy(ebbcharClass);      // Repeated code but the alternative is goto statements
+   if (IS_ERR(ebbcharDevice)){          /// Clean up if there is an error
+      class_destroy(ebbcharClass);      /// Repeated code but the alternative is goto statements
       unregister_chrdev(majorNumber, DEVICE_NAME);
       printk(KERN_ALERT "Failed to create the device\n");
       return PTR_ERR(ebbcharDevice);
    }
-   printk(KERN_INFO "EBBChar: device class created correctly\n"); // Made it! device was initialized
-   mutex_init(&ebbchar_mutex);
+   printk(KERN_INFO "EBBChar: device class created correctly\n"); /// Made it! device was initialized
+   mutex_init(&ebbchar_mutex);          /// Initialize the mutex dynamically
    return 0;
 }
 
@@ -97,10 +97,11 @@ static int __init ebbchar_init(void){
  *  code is used for a built-in driver (not a LKM) that this function is not required.
  */
 static void __exit ebbchar_exit(void){
-   device_destroy(ebbcharClass, MKDEV(majorNumber, 0));     // remove the device
-   class_unregister(ebbcharClass);                          // unregister the device class
-   class_destroy(ebbcharClass);                             // remove the device class
-   unregister_chrdev(majorNumber, DEVICE_NAME);             // unregister the major number
+   mutex_destroy(&ebbchar_mutex);                       /// destroy the dynamically-allocated mutex
+   device_destroy(ebbcharClass, MKDEV(majorNumber, 0)); /// remove the device
+   class_unregister(ebbcharClass);                      /// unregister the device class
+   class_destroy(ebbcharClass);                         /// remove the device class
+   unregister_chrdev(majorNumber, DEVICE_NAME);         /// unregister the major number
    printk(KERN_INFO "EBBChar: Goodbye from the LKM!\n");
 }
 
@@ -111,7 +112,7 @@ static void __exit ebbchar_exit(void){
  */
 static int dev_open(struct inode *inodep, struct file *filep){
 
-   if(!mutex_trylock(&ebbchar_mutex)){
+   if(!mutex_trylock(&ebbchar_mutex)){                  /// Try to acquire the mutex (returns 0 on fail)
 	printk(KERN_ALERT "EBBChar: Device in use by another process");
 	return -EBUSY;
    }
@@ -130,16 +131,16 @@ static int dev_open(struct inode *inodep, struct file *filep){
  */
 static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *offset){
    int error_count = 0;
-   // copy_to_user has the format ( * to, *from, size) and returns 0 on success
+   /// copy_to_user has the format ( * to, *from, size) and returns 0 on success
    error_count = copy_to_user(buffer, message, size_of_message);
 
-   if (error_count==0){          // success!
+   if (error_count==0){           /// success!
       printk(KERN_INFO "EBBChar: Sent %d characters to the user\n", size_of_message);
-      return (size_of_message=0);  // clear the position to the start and return 0
+      return (size_of_message=0); /// clear the position to the start and return 0
    }
    else {
       printk(KERN_INFO "EBBChar: Failed to send %d characters to the user\n", error_count);
-      return -EFAULT;       // Failed -- return a bad address message (i.e. -14)
+      return -EFAULT;      /// Failed -- return a bad address message (i.e. -14)
    }
 }
 
@@ -153,8 +154,8 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
  */
 static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, loff_t *offset){
 
-   sprintf(message, "%s(%d letters)", buffer, len);   // appending received string with its length
-   size_of_message = strlen(message);                 // store the length of the stored message
+   sprintf(message, "%s(%d letters)", buffer, len);   /// appending received string with its length
+   size_of_message = strlen(message);                 /// store the length of the stored message
    printk(KERN_INFO "EBBChar: Received %d characters from the user\n", len);
    return len;
 }
@@ -165,7 +166,7 @@ static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, lof
  *  @param filep A pointer to a file object (defined in linux/fs.h)
  */
 static int dev_release(struct inode *inodep, struct file *filep){
-   mutex_unlock(&ebbchar_mutex);
+   mutex_unlock(&ebbchar_mutex);                      /// release the mutex (i.e., lock goes up)
    printk(KERN_INFO "EBBChar: Device successfully closed\n");
    return 0;
 }
