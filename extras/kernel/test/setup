@@ -1,3 +1,0 @@
-#!/bin/bash
-sudo mknod /dev/ebbtest c 92 1
-sudo chmod a+rw /dev/ebbtest
