@@ -1,5 +1,5 @@
 // PRUSS program to flash a LED on P9_27 (pru0_pru_r30_5) until a button 
-// that is connected to P9_28 (pru0_pru_r31_3 is pressed. This program 
+// that is connected to P9_28 (pru0_pru_r31_3 is pressed). This program 
 // was writen by Derek Molloy for the book Exploring BeagleBone
 
 .origin 0                        // start of program in PRU memory
