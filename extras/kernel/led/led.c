@@ -31,15 +31,31 @@ MODULE_PARM_DESC(blinkPeriod, " LED blink period in ms (min=1, default=1000, max
 
 static char ledName[7] = "ledXXX";          /// Null terminated default string -- just in case
 static bool ledOn = 0;                      /// Is the LED on or off? Used for flashing
+enum modes { OFF, ON, FLASH };              /// The available LED modes -- static not useful here
+static enum modes mode = FLASH;             /// Default mode is flashing
 
-/* @brief A callback function to display if the LED is on or off
+/* @brief A callback function to display the LED mode
  * @param kobj represents a kernel object device that appears in the sysfs filesystem
  * @param attr the pointer to the kobj_attribute struct
  * @param buf the buffer to which to write the number of presses
- * @return return the ledOn state as an integer
+ * @return return the number of characters of the mode string successfully displayed
  */
-static ssize_t ledOn_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
-   return sprintf(buf, "%d\n", ledOn);
+static ssize_t mode_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
+   switch(mode){
+      case OFF:   return sprintf(buf, "off\n");       /// Display the state -- simplistic approach
+      case ON:    return sprintf(buf, "on\n");
+      case FLASH: return sprintf(buf, "flash\n");
+      default:    return sprintf(buf, "LKM Error\n"); /// Cannot get here
+   }
+}
+
+/* @brief A callback function to store the LED mode using the enum above */
+static ssize_t mode_store(struct kobject *kobj, struct kobj_attribute *attr, const char *buf, size_t count){
+   // the count-1 is important as otherwise the \n is used in the comparison
+   if (strncmp(buf,"on",count-1)==0) { mode = ON; }   /// strncmp() compare with fixed number chars
+   else if (strncmp(buf,"off",count-1)==0) { mode = OFF; }
+   else if (strncmp(buf,"flash",count-1)==0) { mode = FLASH; }
+   return count;
 }
 
 /* @brief A callback function to display the LED period */
@@ -63,16 +79,14 @@ static ssize_t period_store(struct kobject *kobj, struct kobj_attribute *attr, c
  *  with mode 0666 using the period_show and period_store functions above
  */
 static struct kobj_attribute period_attr = __ATTR(blinkPeriod, 0666, period_show, period_store);
-
-/** The __ATTR_RO macro defines a read-only attribute. The function is called _show */
-static struct kobj_attribute ledon_attr = __ATTR_RO(ledOn);
+static struct kobj_attribute mode_attr = __ATTR(mode, 0666, mode_show, mode_store);
 
 /** The ebb_attrs[] is an array of attributes that is used to create the attribute group below.
  *  The attr property of the kobj_attribute is used to extract the attribute struct
  */
 static struct attribute *ebb_attrs[] = {
    &period_attr.attr,                       /// The period at which the LED flashes
-   &ledon_attr.attr,                        /// Is the LED on or off?
+   &mode_attr.attr,                        /// Is the LED on or off?
    NULL,
 };
 
@@ -96,7 +110,9 @@ static struct task_struct *task;            /// The pointer to the thread task
 static int flash(void *arg){
    printk(KERN_INFO "EBB LED: Thread has started running \n");
    while(!kthread_should_stop()){           /// Returns true when kthread_stop() is called
-      ledOn = !ledOn;                       /// Invert the LED state
+      if (mode==FLASH) ledOn = !ledOn;      /// Invert the LED state
+      else if (mode==ON) ledOn = true;
+      else ledOn = false;
       gpio_set_value(gpioLED, ledOn);       /// Use the LED state to light/turn off the LED
       msleep(blinkPeriod/2);                /// millisecond sleep for half of the period
    }
