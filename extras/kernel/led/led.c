@@ -110,10 +110,12 @@ static struct task_struct *task;            /// The pointer to the thread task
 static int flash(void *arg){
    printk(KERN_INFO "EBB LED: Thread has started running \n");
    while(!kthread_should_stop()){           /// Returns true when kthread_stop() is called
+      set_current_state(TASK_RUNNING);
       if (mode==FLASH) ledOn = !ledOn;      /// Invert the LED state
       else if (mode==ON) ledOn = true;
       else ledOn = false;
       gpio_set_value(gpioLED, ledOn);       /// Use the LED state to light/turn off the LED
+      set_current_state(TASK_INTERRUPTIBLE);
       msleep(blinkPeriod/2);                /// millisecond sleep for half of the period
    }
    printk(KERN_INFO "EBB LED: Thread has run to completion \n");
