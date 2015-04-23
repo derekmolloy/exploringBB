@@ -16,6 +16,7 @@
 #include <linux/interrupt.h>  /// Required for the IRQ code
 #include <linux/kobject.h>    /// Using kobjects for the sysfs bindings
 #include <linux/time.h>       /// Using the clock to measure time between button presses
+#define  DEBOUNCE_TIME 200
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Derek Molloy");
@@ -38,6 +39,7 @@ static char   gpioName[8] = "gpioXXX";      /// Null terminated default string -
 static int    irqNumber;                    /// Used to share the IRQ number within this file
 static int    numberPresses = 0;            /// For information, store the number of button presses
 static bool   ledOn = 0;                    /// Is the LED on or off? Used to invert its state (off by default)
+static bool   isDebounce = 1;               /// Use to store the debounce state (on by default)
 static struct timespec ts_last, ts_current, ts_diff;  /// timespecs from linux/time.h (has nano precision)
 
 /// Function prototype for the custom IRQ handler function -- see below for the implementation
@@ -50,7 +52,7 @@ static irq_handler_t  ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct
  * @return return the total number of characters written to the buffer (excluding null)
  */
 static ssize_t numberPresses_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
-	return sprintf(buf, "%d\n", numberPresses);
+   return sprintf(buf, "%d\n", numberPresses);
 }
 
 /* @brief A callback function to read in the numberPresses variable
@@ -62,24 +64,40 @@ static ssize_t numberPresses_show(struct kobject *kobj, struct kobj_attribute *a
  */
 static ssize_t numberPresses_store(struct kobject *kobj, struct kobj_attribute *attr,
                                    const char *buf, size_t count){
-	sscanf(buf, "%du", &numberPresses);
-	return count;
+   sscanf(buf, "%du", &numberPresses);
+   return count;
 }
 
 /* @brief Displays if the LED is on or off */
 static ssize_t ledOn_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
-	return sprintf(buf, "%d\n", ledOn);
+   return sprintf(buf, "%d\n", ledOn);
 }
 
 /* @brief Displays the last time the button was pressed -- manually output the date (no localization) */
 static ssize_t lastTime_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
-	return sprintf(buf, "%.2lu:%.2lu:%.2lu:%.9lu \n", (ts_last.tv_sec/3600)%24,
-			(ts_last.tv_sec/60) % 60, ts_last.tv_sec % 60, ts_last.tv_nsec );
+   return sprintf(buf, "%.2lu:%.2lu:%.2lu:%.9lu \n", (ts_last.tv_sec/3600)%24,
+          (ts_last.tv_sec/60) % 60, ts_last.tv_sec % 60, ts_last.tv_nsec );
 }
 
 /* @brief Display the time difference in the form secs.nanosecs to 9 places */
 static ssize_t diffTime_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
-	return sprintf(buf, "%lu.%.9lu\n", ts_diff.tv_sec, ts_diff.tv_nsec);
+   return sprintf(buf, "%lu.%.9lu\n", ts_diff.tv_sec, ts_diff.tv_nsec);
+}
+
+/* @brief Displays if button debouncing is on or off */
+static ssize_t isDebounce_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
+   return sprintf(buf, "%d\n", isDebounce);
+}
+
+/* @brief Stores and sets the debounce state */
+static ssize_t isDebounce_store(struct kobject *kobj, struct kobj_attribute *attr, const char *buf, size_t count){
+   unsigned int temp;
+   sscanf(buf, "%du", &temp);
+   gpio_set_debounce(gpioButton,0);
+   isDebounce = temp;
+   if(isDebounce) { gpio_set_debounce(gpioButton, DEBOUNCE_TIME); }
+   else { gpio_set_debounce(gpioButton, 1); }
+   return count;
 }
 
 /** Use these helper macros to define the name and access levels of the kobj_attributes
@@ -88,6 +106,7 @@ static ssize_t diffTime_show(struct kobject *kobj, struct kobj_attribute *attr, 
  *  with mode 0666 using the numberPresses_show and numberPresses_store functions above
  */
 static struct kobj_attribute count_attr = __ATTR(numberPresses, 0666, numberPresses_show, numberPresses_store);
+static struct kobj_attribute debounce_attr = __ATTR(isDebounce, 0666, isDebounce_show, isDebounce_store);
 
 /** The __ATTR_RO macro defines a read-only attribute. There is no need to identify that the
  *  function is called _show, but it must be present. __ATTR_WO can be  used for a write-only
@@ -101,11 +120,12 @@ static struct kobj_attribute diff_attr  = __ATTR_RO(diffTime);  /// the differen
  *  The attr property of the kobj_attribute is used to extract the attribute struct
  */
 static struct attribute *ebb_attrs[] = {
-	&count_attr.attr,                  /// The number of button presses
-	&ledon_attr.attr,                  /// Is the LED on or off?
-	&time_attr.attr,                   /// Time of the last button press in HH:MM:SS:NNNNNNNNN
-	&diff_attr.attr,                   /// The difference in time between the last two presses
-	NULL,
+      &count_attr.attr,                  /// The number of button presses
+      &ledon_attr.attr,                  /// Is the LED on or off?
+      &time_attr.attr,                   /// Time of the last button press in HH:MM:SS:NNNNNNNNN
+      &diff_attr.attr,                   /// The difference in time between the last two presses
+      &debounce_attr.attr,               /// Is the debounce state true or false
+      NULL,
 };
 
 /** The attribute group uses the attribute array and a name, which is exposed on sysfs -- in this
@@ -113,8 +133,8 @@ static struct attribute *ebb_attrs[] = {
  *  using the custom kernel parameter that can be passed when the module is loaded.
  */
 static struct attribute_group attr_group = {
-	.name  = gpioName,                 /// The name is generated in ebbButton_init()
-	.attrs = ebb_attrs,                /// The attributes array defined just above
+      .name  = gpioName,                 /// The name is generated in ebbButton_init()
+      .attrs = ebb_attrs,                /// The attributes array defined just above
 };
 
 static struct kobject *ebb_kobj;
@@ -158,6 +178,7 @@ static int __init ebbButton_init(void){
 			                    /// the bool argument prevents the direction from being changed
    gpio_request(gpioButton, "sysfs");       /// Set up the gpioButton
    gpio_direction_input(gpioButton);        /// Set the button GPIO to be an input
+   gpio_set_debounce(gpioButton, DEBOUNCE_TIME); /// Debounce the button with a delay of 200ms
    gpio_export(gpioButton, false);          /// Causes gpio115 to appear in /sys/class/gpio
 			                    /// the bool argument prevents the direction from being changed
 

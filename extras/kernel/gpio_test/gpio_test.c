@@ -53,6 +53,7 @@ static int __init ebbgpio_init(void){
 			                    /// the bool argument prevents the direction from being changed
    gpio_request(gpioButton, "sysfs");       /// Set up the gpioButton
    gpio_direction_input(gpioButton);        /// Set the button GPIO to be an input
+   gpio_set_debounce(gpioButton, 200);      /// Debounce the button with a delay of 200ms
    gpio_export(gpioButton, false);          /// Causes gpio115 to appear in /sys/class/gpio
 			                    /// the bool argument prevents the direction from being changed
    /// Perform a quick test to see that the button is working as expected on LKM load
