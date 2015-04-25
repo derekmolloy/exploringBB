@@ -1,5 +1,5 @@
 /**
- * @file   testebbchar.c
+ * @file   testebbcharmutex.c
  * @author Derek Molloy
  * @date   7 April 2015
  * @version 0.1
