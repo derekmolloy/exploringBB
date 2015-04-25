@@ -95,8 +95,12 @@ static ssize_t isDebounce_store(struct kobject *kobj, struct kobj_attribute *att
    sscanf(buf, "%du", &temp);
    gpio_set_debounce(gpioButton,0);
    isDebounce = temp;
-   if(isDebounce) { gpio_set_debounce(gpioButton, DEBOUNCE_TIME); }
-   else { gpio_set_debounce(gpioButton, 1); }
+   if(isDebounce) { gpio_set_debounce(gpioButton, DEBOUNCE_TIME);
+      printk(KERN_INFO "EBB Button: Debounce on\n");
+   }
+   else { gpio_set_debounce(gpioButton, 0);
+      printk(KERN_INFO "EBB Button: Debounce off\n");
+   }
    return count;
 }
 
