@@ -12,8 +12,8 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
-#include <linux/gpio.h>                 ///< Required for the GPIO functions
-#include <linux/interrupt.h>            ///< Required for the IRQ code
+#include <linux/gpio.h>                 // Required for the GPIO functions
+#include <linux/interrupt.h>            // Required for the IRQ code
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Derek Molloy");

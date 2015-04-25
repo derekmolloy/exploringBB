@@ -11,34 +11,34 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
-#include <linux/gpio.h>       /// Required for the GPIO functions
-#include <linux/kobject.h>    /// Using kobjects for the sysfs bindings
-#include <linux/kthread.h>    /// Using kthreads for the flashing functionality
-#include <linux/delay.h>      /// Using this header for the msleep() function
+#include <linux/gpio.h>       // Required for the GPIO functions
+#include <linux/kobject.h>    // Using kobjects for the sysfs bindings
+#include <linux/kthread.h>    // Using kthreads for the flashing functionality
+#include <linux/delay.h>      // Using this header for the msleep() function
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Derek Molloy");
 MODULE_DESCRIPTION("A simple Linux LED driver LKM for the BBB");
 MODULE_VERSION("0.1");
 
-static unsigned int gpioLED = 49;           /// Default GPIO for the LED is 49
-module_param(gpioLED, uint, S_IRUGO);       /// Param desc. S_IRUGO can be read/not changed
-MODULE_PARM_DESC(gpioLED, " GPIO LED number (default=49)");     /// parameter description
+static unsigned int gpioLED = 49;           ///< Default GPIO for the LED is 49
+module_param(gpioLED, uint, S_IRUGO);       ///< Param desc. S_IRUGO can be read/not changed
+MODULE_PARM_DESC(gpioLED, " GPIO LED number (default=49)");     ///< parameter description
 
-static unsigned int blinkPeriod = 1000;     /// The blink period in ms
-module_param(blinkPeriod, uint, S_IRUGO);   /// Param desc. S_IRUGO can be read/not changed
+static unsigned int blinkPeriod = 1000;     ///< The blink period in ms
+module_param(blinkPeriod, uint, S_IRUGO);   ///< Param desc. S_IRUGO can be read/not changed
 MODULE_PARM_DESC(blinkPeriod, " LED blink period in ms (min=1, default=1000, max=10000)");
 
-static char ledName[7] = "ledXXX";          /// Null terminated default string -- just in case
-static bool ledOn = 0;                      /// Is the LED on or off? Used for flashing
-enum modes { OFF, ON, FLASH };              /// The available LED modes -- static not useful here
-static enum modes mode = FLASH;             /// Default mode is flashing
+static char ledName[7] = "ledXXX";          ///< Null terminated default string -- just in case
+static bool ledOn = 0;                      ///< Is the LED on or off? Used for flashing
+enum modes { OFF, ON, FLASH };              ///< The available LED modes -- static not useful here
+static enum modes mode = FLASH;             ///< Default mode is flashing
 
-/* @brief A callback function to display the LED mode
- * @param kobj represents a kernel object device that appears in the sysfs filesystem
- * @param attr the pointer to the kobj_attribute struct
- * @param buf the buffer to which to write the number of presses
- * @return return the number of characters of the mode string successfully displayed
+/** @brief A callback function to display the LED mode
+ *  @param kobj represents a kernel object device that appears in the sysfs filesystem
+ *  @param attr the pointer to the kobj_attribute struct
+ *  @param buf the buffer to which to write the number of presses
+ *  @return return the number of characters of the mode string successfully displayed
  */
 static ssize_t mode_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
    switch(mode){
@@ -49,7 +49,7 @@ static ssize_t mode_show(struct kobject *kobj, struct kobj_attribute *attr, char
    }
 }
 
-/* @brief A callback function to store the LED mode using the enum above */
+/** @brief A callback function to store the LED mode using the enum above */
 static ssize_t mode_store(struct kobject *kobj, struct kobj_attribute *attr, const char *buf, size_t count){
    // the count-1 is important as otherwise the \n is used in the comparison
    if (strncmp(buf,"on",count-1)==0) { mode = ON; }   // strncmp() compare with fixed number chars
@@ -58,12 +58,12 @@ static ssize_t mode_store(struct kobject *kobj, struct kobj_attribute *attr, con
    return count;
 }
 
-/* @brief A callback function to display the LED period */
+/** @brief A callback function to display the LED period */
 static ssize_t period_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
    return sprintf(buf, "%d\n", blinkPeriod);
 }
 
-/* @brief A callback function to store the LED period value */
+/** @brief A callback function to store the LED period value */
 static ssize_t period_store(struct kobject *kobj, struct kobj_attribute *attr, const char *buf, size_t count){
    unsigned int period;                     // Using a variable to validate the data sent
    sscanf(buf, "%du", &period);             // Read in the period as an unsigned int

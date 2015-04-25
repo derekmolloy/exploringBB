@@ -9,9 +9,9 @@
  * @see http://www.derekmolloy.ie/ for a full description and follow-up descriptions.
 */
 
-#include <linux/init.h>             ///< Macros used to mark up functions e.g., __init __exit
-#include <linux/module.h>           ///< Core header for loading LKMs into the kernel
-#include <linux/kernel.h>           ///< Contains types, macros, functions for the kernel
+#include <linux/init.h>             // Macros used to mark up functions e.g., __init __exit
+#include <linux/module.h>           // Core header for loading LKMs into the kernel
+#include <linux/kernel.h>           // Contains types, macros, functions for the kernel
 
 MODULE_LICENSE("GPL");              ///< The license type -- this affects runtime behavior
 MODULE_AUTHOR("Derek Molloy");      ///< The author -- visible when you use modinfo
