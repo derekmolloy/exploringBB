@@ -37,7 +37,7 @@ namespace exploringBB {
 
 class PWM {
 public:
-	enum POLARITY{ ACTIVE_LOW=0, ACTIVE_HIGH=1 };
+	enum POLARITY{ ACTIVE_HIGH=0, ACTIVE_LOW=1 };
 
 private:
 	string name, path;
