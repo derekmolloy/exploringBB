@@ -16,6 +16,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<linux/input.h>
+#include <unistd.h>
 using namespace std;
 
 #define KEY_PRESS 1
