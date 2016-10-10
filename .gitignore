@@ -9,6 +9,7 @@
 *.symvers
 *.order
 *.mod.c
+*.ko
 
 # Retain shared libraries .so and static libraries .a for the exploringBB repo
 
