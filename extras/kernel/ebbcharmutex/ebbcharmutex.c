@@ -154,9 +154,9 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
  */
 static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, loff_t *offset){
 
-   sprintf(message, "%s(%d letters)", buffer, len);   // appending received string with its length
+   sprintf(message, "%s(%zu letters)", buffer, len);   // appending received string with its length
    size_of_message = strlen(message);                 // store the length of the stored message
-   printk(KERN_INFO "EBBChar: Received %d characters from the user\n", len);
+   printk(KERN_INFO "EBBChar: Received %zu characters from the user\n", len);
    return len;
 }
 

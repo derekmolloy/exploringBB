@@ -13,6 +13,7 @@
 #include<errno.h>
 #include<fcntl.h>
 #include<string.h>
+#include<unistd.h>
 
 #define BUFFER_LENGTH 256               ///< The buffer length (crude but fine)
 static char receive[BUFFER_LENGTH];     ///< The receive buffer from the LKM
