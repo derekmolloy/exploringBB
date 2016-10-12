@@ -86,6 +86,7 @@ int SPIDevice::open(){
  */
 int SPIDevice::transfer(unsigned char send[], unsigned char receive[], int length){
 	struct spi_ioc_transfer	transfer;
+	memset(&transfer,0,sizeof(transfer));
 	transfer.tx_buf = (unsigned long) send;
 	transfer.rx_buf = (unsigned long) receive;
 	transfer.len = length;
