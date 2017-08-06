@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "Building the D led example script led"
+gdc dLED.d -o led
