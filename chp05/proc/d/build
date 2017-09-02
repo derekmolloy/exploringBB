@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Building the D example scripts readuptime and whologgedin"
+gdc readUptime.d -o readUptime
+gdc whologgedin.d -o whologgedin
