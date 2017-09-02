@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "Building the D read LDR example script"
+gdc readLDR.d -o readLDR
