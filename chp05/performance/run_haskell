@@ -1,0 +1,26 @@
+#!/bin/bash
+echo -e "Building the Haskell Code\n"
+echo -e "You must have installed Haskell on the BBB to run this test\n"
+echo -e "  use sudo apt install haskell-platform\n"
+echo -e "Caution: The installation requires almost 500MB of space!\n"
+
+Duration="5000000"
+
+cp nbody.ghc nbody.hs
+cp nbodyp.ghc nbodyp.hs
+ghc --make -fllvm -O2 -XBangPatterns -rtsopts -fexcess-precision nbody.hs -o nbody.ghc_run
+ghc --make -fllvm -O2 -XBangPatterns -threaded -rtsopts -fexcess-precision nbodyp.hs -o nbodyp.ghc_run
+
+echo -e "Executing the Haskell Code\n"
+T="$(date +%s%N)"
+./nbody.ghc_run $Duration
+T="$(($(date +%s%N)-T))"
+T=$((T/1000000))
+echo "It took ${T} milliseconds to run the Haskell test"
+
+echo -e "Executing the Haskell Parallel Code\n"
+T="$(date +%s%N)"
+./nbodyp.ghc_run +RTS -N4 -RTS $Duration
+T="$(($(date +%s%N)-T))"
+T=$((T/1000000))
+echo "It took ${T} milliseconds to run the Haskell Parallel test"

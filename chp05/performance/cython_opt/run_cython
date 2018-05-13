@@ -1,0 +1,14 @@
+#!/bin/bash
+echo -e "Building the Python to Cython Code\n"
+Duration="5000000"
+python setup.py build_ext --inplace
+cython --embed -o nbody.c nbody.pyx
+gcc -Os -I /usr/include/python2.7 -o nbody_cython nbody.c -lpython2.7 -lpthread -lm -lutil -ldl
+
+
+echo -e "Executing the Cython Code\n"
+T="$(date +%s%N)"
+./nbody_cython $Duration
+T="$(($(date +%s%N)-T))"
+T=$((T/1000000))
+echo "It took ${T} milliseconds to run the Cython test"
