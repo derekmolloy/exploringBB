@@ -1,0 +1,11 @@
+#!/bin/bash
+
+Duration="5000000"
+
+echo -e "\nThe Ruby Code Example"
+T="$(date +%s%N)"
+ruby nbody.ruby $Duration
+T="$(($(date +%s%N)-T))"
+T=$((T/1000000))
+echo "It took ${T} milliseconds to run the Ruby test"
+

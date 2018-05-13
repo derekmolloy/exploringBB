@@ -1,0 +1,9 @@
+#!/bin/bash
+Duration="5000000"
+echo -e "\nThe Lua Example"
+T="$(date +%s%N)"
+lua5.3 n-body.lua $Duration
+T="$(($(date +%s%N)-T))"
+T=$((T/1000000))
+echo "It took ${T} milliseconds to run the Lua test"
+

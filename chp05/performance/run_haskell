@@ -8,8 +8,8 @@ Duration="5000000"
 
 cp nbody.ghc nbody.hs
 cp nbodyp.ghc nbodyp.hs
-ghc --make -fllvm -O2 -XBangPatterns -rtsopts -fexcess-precision nbody.hs -o nbody.ghc_run
-ghc --make -fllvm -O2 -XBangPatterns -threaded -rtsopts -fexcess-precision nbodyp.hs -o nbodyp.ghc_run
+ghc --make -O2 -XBangPatterns -rtsopts -fexcess-precision nbody.hs -o nbody.ghc_run
+ghc --make -O2 -XBangPatterns -threaded -rtsopts -fexcess-precision nbodyp.hs -o nbodyp.ghc_run
 
 echo -e "Executing the Haskell Code\n"
 T="$(date +%s%N)"
