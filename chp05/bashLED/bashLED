@@ -31,8 +31,9 @@ elif [ "$1" == "flash" ]; then
   echo "Flashing the LED"
   removeTrigger
   echo "timer" >> "$LED3_PATH/trigger"
-  echo "50" >> "$LED3_PATH/delay_on"
-  echo "50" >> "$LED3_PATH/delay_off"
+  sleep 1
+  echo "100" >> "$LED3_PATH/delay_off"
+  echo "100" >> "$LED3_PATH/delay_on"
 elif [ "$1" == "status" ]; then
   cat "$LED3_PATH/trigger";
 fi
