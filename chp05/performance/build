@@ -7,4 +7,7 @@ g++ -O3 --std=c++14  n-body2.cpp -o n-body2
 echo "Building the Java Executable"
 javac nbody.java
 
+echo "Building the Rust Executable"
+rustc -C opt-level=3 -C target-cpu=core2 -C lto -C codegen-units=1 -C llvm-args='-unroll-threshold=500' nbody.rs -o nbody.rust_run
+
 echo "Finished Building the Programs"

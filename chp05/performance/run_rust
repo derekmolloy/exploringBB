@@ -9,11 +9,11 @@ echo "*** Please ensure that you do not have the ondemand governor enabled ***"
 
 Duration="5000000"
 
-echo -e "\nThe Node.js Example"
+echo -e "\nThe Rust Example"
 T="$(date +%s%N)"
-nodejs n-body.js $Duration
+./nbody.rust_run $Duration
 T="$(($(date +%s%N)-T))"
 T=$((T/1000000))
-echo "It took ${T} milliseconds to run the Node.js test"
+echo "It took ${T} milliseconds to run the Rust test"
 
 echo "Finished Running the Benchmarks"
