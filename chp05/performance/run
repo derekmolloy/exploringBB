@@ -9,14 +9,21 @@ echo "*** Please ensure that you do not have the ondemand governor enabled ***"
 
 Duration="5000000"
 
-echo -e "\nThe C/C++ Code Example"
+echo -e "\nThe C Code Example"
+T="$(date +%s%N)"
+./n-bodyc $Duration
+T="$(($(date +%s%N)-T))"
+T=$((T/1000000))
+echo "It took ${T} milliseconds to run the C test"
+
+echo -e "\nThe C++ Code Example"
 T="$(date +%s%N)"
 ./n-body $Duration
 T="$(($(date +%s%N)-T))"
 T=$((T/1000000))
 echo "It took ${T} milliseconds to run the C/C++ test"
 
-echo -e "\nThe C++11 Code Example"
+echo -e "\nThe C++14 Code Example"
 T="$(date +%s%N)"
 ./n-body2 $Duration
 T="$(($(date +%s%N)-T))"

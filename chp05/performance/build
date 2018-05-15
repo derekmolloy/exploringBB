@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Exploring BeagleBone Chapter 5 Performance Test Code"
 echo "Building the Executables"
+gcc -pipe -Wall -O3 -fomit-frame-pointer -march=native -fopenmp n-body.c -o n-bodyc -lm
 g++ -O3 n-body.cpp -o n-body
 g++ -O3 --std=c++14  n-body2.cpp -o n-body2
 
