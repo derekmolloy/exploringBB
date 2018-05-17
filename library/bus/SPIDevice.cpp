@@ -138,9 +138,8 @@ unsigned char* SPIDevice::readRegisters(unsigned int number, unsigned int fromAd
  *  @return returns 0 if successful
  */
 int SPIDevice::write(unsigned char value){
-	unsigned char null_return = 0x00;
 	//printf("[%02x]", value);
-	this->transfer(&value, &null_return, 1);
+	this->transfer(&value, nullptr, 1);
 	return 0;
 }
 
@@ -151,8 +150,7 @@ int SPIDevice::write(unsigned char value){
  *  @return returns 0 if successful
  */
 int SPIDevice::write(unsigned char value[], int length){
-	unsigned char null_return = 0x00;
-	this->transfer(value, &null_return, length);
+	this->transfer(value, nullptr, length);
 	return 0;
 }
 
