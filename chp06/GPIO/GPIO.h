@@ -81,8 +81,8 @@ private:
 	int write(string path, string filename, string value);
 	int write(string path, string filename, int value);
 	string read(string path, string filename);
-	int exportGPIO();
-	int unexportGPIO();
+//	int exportGPIO();
+//	int unexportGPIO();
 	ofstream stream;
 	pthread_t thread;
 	CallbackType callbackFunction;

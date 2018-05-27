@@ -56,7 +56,7 @@ GPIO::GPIO(int number) {
 	s << "gpio" << number;
 	this->name = string(s.str());
 	this->path = GPIO_PATH + this->name + "/";
-	this->exportGPIO();
+//	this->exportGPIO();
 	// need to give Linux time to set up the sysfs structure
 	usleep(250000); // 250ms delay
 }
@@ -91,13 +91,13 @@ int GPIO::write(string path, string filename, int value){
    return this->write(path,filename,s.str());
 }
 
-int GPIO::exportGPIO(){
-   return this->write(GPIO_PATH, "export", this->number);
-}
+//int GPIO::exportGPIO(){
+//   return this->write(GPIO_PATH, "export", this->number);
+//}
 
-int GPIO::unexportGPIO(){
-   return this->write(GPIO_PATH, "unexport", this->number);
-}
+//int GPIO::unexportGPIO(){
+//   return this->write(GPIO_PATH, "unexport", this->number);
+//}
 
 int GPIO::setDirection(GPIO_DIRECTION dir){
    switch(dir){
@@ -273,7 +273,7 @@ int GPIO::waitForEdge(CallbackType callback){
 }
 
 GPIO::~GPIO() {
-	this->unexportGPIO();
+//	this->unexportGPIO();
 }
 
 } /* namespace exploringBB */

@@ -13,12 +13,8 @@ int activateLED(int var){
 }
 
 int main(){
-   if(getuid()!=0){
-      cout << "You must run this program as root. Exiting." << endl;
-      return -1;
-   }
-   inGPIO = new GPIO(115);        //button
-   outGPIO = new GPIO(49);        //LED
+   inGPIO = new GPIO(46);         //button
+   outGPIO = new GPIO(60);        //LED
    inGPIO->setDirection(INPUT);   //button is an input
    outGPIO->setDirection(OUTPUT); //LED is an output
    outGPIO->streamOpen();         //fast write to LED

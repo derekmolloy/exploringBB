@@ -10,6 +10,7 @@
 #include<fcntl.h>
 #include<stdio.h>
 #include<stdlib.h>
+#include<unistd.h>
 #include<linux/input.h>
 #include"GPIO.h"
 using namespace std;
@@ -21,7 +22,7 @@ using namespace exploringBB;
 int main(){
    int fd, count=0;
    struct input_event event[64];
-   GPIO outGPIO(49);
+   GPIO outGPIO(60);
    outGPIO.setDirection(OUTPUT);
    outGPIO.streamOpen();
    outGPIO.streamWrite(LOW);
