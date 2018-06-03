@@ -8,7 +8,7 @@ int main(){
    GPIO outGPIO(60), inGPIO(46);
    inGPIO.setDirection(INPUT);    //button is an input
    outGPIO.setDirection(OUTPUT);  //LED is an output
-   inGPIO.setEdgeType(RISING);    //wait for rising edge
+   inGPIO.setEdgeType(FALLING);   //wait for falling edge
    outGPIO.streamOpen();          //fast write, ready file
    outGPIO.streamWrite(LOW);      //turn the LED off
    cout << "Press the button:" << endl;

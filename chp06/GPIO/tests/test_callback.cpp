@@ -19,7 +19,7 @@ int main(){
    outGPIO->setDirection(OUTPUT); //LED is an output
    outGPIO->streamOpen();         //fast write to LED
    outGPIO->streamWrite(LOW);     //turn the LED off
-   inGPIO->setEdgeType(RISING);   //wait for rising edge
+   inGPIO->setEdgeType(FALLING);  //wait for falling edge
    cout << "You have 10 seconds to press the button:" << endl;
    inGPIO->waitForEdge(&activateLED); //pass the function
    cout << "Listening, but also doing something else..." << endl;
