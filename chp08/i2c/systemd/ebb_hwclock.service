@@ -1,0 +1,12 @@
+[Unit]
+Description=EBB RTC Service
+Before=getty.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sh -c "/bin/echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device"
+ExecStart=/sbin/hwclock -s -f /dev/rtc1
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

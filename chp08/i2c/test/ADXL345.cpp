@@ -12,6 +12,7 @@
 #include<linux/i2c.h>
 #include<linux/i2c-dev.h>
 #include<iomanip>
+#include<unistd.h>
 using namespace std;
 
 // Small macro to display value in hexadecimal with 2 places
