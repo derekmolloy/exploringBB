@@ -21,13 +21,13 @@
 #include<linux/spi/spidev.h>
 
 // You need to correctly identify the SPI device bus and number
-static const char *device = "/dev/spidev1.0";
+static const char *device = "/dev/spidev0.0";
 
 int main(){
    unsigned char send[2], receive[2];
    send[0]= (0x80|0x00);  //want to read address 0x00 on the ADXL345
    uint8_t mode=3, bits=8;
-   uint32_t speed=500000;
+   uint32_t speed=5000000;
    int file;
    struct spi_ioc_transfer transfer = {
       .tx_buf = (unsigned long) send,

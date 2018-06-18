@@ -93,6 +93,10 @@ int SPIDevice::transfer(unsigned char send[], unsigned char receive[], int lengt
 	transfer.speed_hz = this->speed;
 	transfer.bits_per_word = this->bits;
 	transfer.delay_usecs = this->delay;
+        transfer.tx_nbits = 0;        // no. bits for writing (default 0)
+        transfer.rx_nbits = 0;        // no. bits for reading (default 0)
+        transfer.cs_change = 0;       // affects chip select after transfe
+        transfer.pad = 0;             // interbyte delay
 	int status = ioctl(this->file, SPI_IOC_MESSAGE(1), &transfer);
 	if (status < 0) {
 		perror("SPI: SPI_IOC_MESSAGE Failed");
