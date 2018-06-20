@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Building the D example scripts client server"
+gdc client.d -o client
+gdc server.d -o server
