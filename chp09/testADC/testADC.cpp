@@ -9,6 +9,7 @@
 #include<string>
 #include<sstream>
 #include<cmath>
+#include<unistd.h>
 using namespace std;
 
 #define LDR_PATH "/sys/bus/iio/devices/iio:device0/in_voltage"

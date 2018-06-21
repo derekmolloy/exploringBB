@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ -o tmp36 tmp36.cpp bus/SPIDevice.cpp bus/BusDevice.cpp
