@@ -1,7 +1,0 @@
-/home/debian/exploringbb/library/build/CMakeFiles/install/local.dir
-/home/debian/exploringbb/library/build/CMakeFiles/install.dir
-/home/debian/exploringbb/library/build/CMakeFiles/install/strip.dir
-/home/debian/exploringbb/library/build/CMakeFiles/edit_cache.dir
-/home/debian/exploringbb/library/build/CMakeFiles/EBBLibrary.dir
-/home/debian/exploringbb/library/build/CMakeFiles/rebuild_cache.dir
-/home/debian/exploringbb/library/build/CMakeFiles/list_install_components.dir
