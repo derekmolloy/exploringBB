@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ -o max7219 max7219.cpp bus/SPIDevice.cpp bus/BusDevice.cpp

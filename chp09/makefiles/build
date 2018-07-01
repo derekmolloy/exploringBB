@@ -1,0 +1,3 @@
+#!/bin/bash
+g++ -o3 hello.cpp -o hello
+g++ -o3 test.cpp -o test

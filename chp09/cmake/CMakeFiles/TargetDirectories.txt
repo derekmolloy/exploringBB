@@ -1,0 +1,3 @@
+/home/debian/exploringbb/chp09/cmake/CMakeFiles/rebuild_cache.dir
+/home/debian/exploringbb/chp09/cmake/CMakeFiles/edit_cache.dir
+/home/debian/exploringbb/chp09/cmake/CMakeFiles/hello.dir

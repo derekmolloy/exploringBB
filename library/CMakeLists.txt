@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 3.7.2)
 project(EBBLibrary)
 find_package (Threads)
 set(CMAKE_BUILD_TYPE Release)
