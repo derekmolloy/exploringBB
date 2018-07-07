@@ -5,13 +5,14 @@
 * directory for copyright and GNU GPLv3 license information.            */
 
 #include <iostream>
+#include <unistd.h>
 #include "motor/DCMotor.h"
 using namespace std;
 using namespace exploringBB;
 
 int main(){
    cout << "Starting EBB DC Motor Example" << endl;
-   DCMotor dcm(new PWM("pwm_test_P9_42.12"), 116); //will export GPIO116
+   DCMotor dcm(new PWM("pwmchip0/pwm-0:0/"), 116); //will export GPIO116
    dcm.setDirection(DCMotor::ANTICLOCKWISE);
    dcm.setSpeedPercent(50.0f);   //make it clear that a float is passed
    dcm.go();
