@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ adafruit.cpp network/SocketClient.cpp -o adafruit.io

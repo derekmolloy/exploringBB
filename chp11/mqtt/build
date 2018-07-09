@@ -1,0 +1,4 @@
+#!/bin/bash
+g++ publish.cpp -o publish -lpaho-mqtt3c
+g++ subscribe.cpp -o subscribe -lpaho-mqtt3c
+

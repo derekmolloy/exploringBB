@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ thingSpeak.cpp network/SocketClient.cpp -o thingSpeak

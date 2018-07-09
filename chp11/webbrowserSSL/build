@@ -1,0 +1,2 @@
+#!/bin/bash
+gcc webbrowserSSL.c -o webbrowserSSL -lcrypto -lssl
