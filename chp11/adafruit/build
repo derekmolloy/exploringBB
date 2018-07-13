@@ -1,2 +1,4 @@
 #!/bin/bash
-g++ adafruit.cpp network/SocketClient.cpp -o adafruit.io
+g++ publish.cpp -o publish -lpaho-mqtt3c
+g++ subscribe.cpp -o subscribe -lpaho-mqtt3c
+
