@@ -1,8 +1,9 @@
 var b = require('bonescript');
-var pin = "P1_08";   // Use P1.08 or P1.36 by default on PocketBeagle
+var pin = "P2_01";   // Use P1.08 or P1.36 by default on PocketBeagle
 var dutyCycle = 0.75;
 var frequency = 10000;
 
+b.pinMode(pin, b.OUTPUT);
 b.getPinMode(pin, printPinMux);
 b.analogWrite(pin, dutyCycle, frequency, display);
 

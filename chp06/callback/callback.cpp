@@ -19,7 +19,7 @@ int callbackFunction(int var){
 }
 
 int main() {
-   cout << "Hello BeagleBone" << endl;
+   cout << "Hello Beagle board" << endl;
    // pass the address of the callbackFunction() to doSomething()
    int y = doSomething(&callbackFunction);
    cout << "Value of y is: " << y << endl;
