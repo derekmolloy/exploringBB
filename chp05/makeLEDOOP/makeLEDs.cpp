@@ -74,15 +74,16 @@ void LED::flash(string delayms = "50"){
 }
 
 void LED::outputState(){
+   cout << "The status for LED " << number << " is:" << endl;   
    ifstream fs;
    fs.open( (path + "/trigger").c_str());
    string line;
-   while(getline(fs,line)) cout << line << endl;
+   while(getline(fs,line)) cout << line << endl << endl;
    fs.close();
 }
 
 LED::~LED(){
-   cout << "destroying the LED with path: " << path << endl;
+   cout << "Destroying the LED " << number << " with path: " << path << endl;
 }
 
 int main(int argc, char* argv[]){
