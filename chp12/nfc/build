@@ -1,0 +1,2 @@
+#!/bin/bash
+gcc nfc_test.c -o nfc_test -lnfc
