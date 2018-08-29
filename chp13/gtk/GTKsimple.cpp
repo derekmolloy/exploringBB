@@ -14,10 +14,10 @@ int main(int argc, char *argv[]){
    // Create the top-level window (not yet visible)
    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
    // Set the title of the window to Exploring BB
-   gtk_window_set_title ( GTK_WINDOW (window), "Exploring BB");
+   gtk_window_set_title ( GTK_WINDOW (window), "Exploring BB v2");
 
    // Create a label
-   label = gtk_label_new ("Hello BeagleBone");
+   label = gtk_label_new ("Hello Beagle Board");
    // Add the label to the window
    gtk_container_add(GTK_CONTAINER (window), label);
    // Make the label visible (must be done for every widget)

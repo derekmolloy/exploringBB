@@ -47,10 +47,10 @@ int main(int argc, char *argv[]){
    GtkWidget *window, *temp_label, *button, *button_label;
    gtk_init(&argc, &argv);
    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-   gtk_window_set_title(GTK_WINDOW (window), "Exploring BB");
+   gtk_window_set_title(GTK_WINDOW (window), "Exploring BB v2");
 
    // Fix the size of the window so that it cannot be resized
-   gtk_widget_set_size_request(window, 220, 50);
+   gtk_widget_set_size_request(window, 300, 50);
    gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
    // Place a border of 5 pixels around the inner window edge
    gtk_container_set_border_width (GTK_CONTAINER (window), 5);
