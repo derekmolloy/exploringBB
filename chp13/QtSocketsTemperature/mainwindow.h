@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);        // called by the main.cpp file
+    explicit MainWindow(QWidget *parent = nullptr);        // called by the main.cpp file
     ~MainWindow();
 
 private slots:
@@ -37,14 +37,16 @@ private:
     QTimer *timer;                    // The timer that updates the temperature
     ServerSettingsDialog *dialog;     // The Server settings dialog
 
-    bool  isFahrenheit;
-    int   alertTemperature;
-    bool  isAlertSet;
-    float curTemperature, minTemperature, maxTemperature;
-    float celsiusToFahrenheit(float valueCelsius);
-    int   getSensorTemperature();     // gets the temperature from the server
+    bool   isFahrenheit;
+    int    alertTemperature;
+    bool   isAlertSet;
+    double curTemperature, minTemperature, maxTemperature;
+    double celsiusToFahrenheit(double valueCelsius);
+    int    parseJSONData(QString str);
+    int    getSensorTemperature();     // gets the temperature from the server
 
     void createActions();             // sets up the menu for the window
 };
 
 #endif // MAINWINDOW_H
+

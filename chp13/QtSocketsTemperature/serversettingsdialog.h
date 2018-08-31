@@ -22,7 +22,7 @@ class ServerSettingsDialog : public QDialog
    Q_OBJECT                           // the Qt macro required for
 
 public:
-   explicit ServerSettingsDialog(QWidget *parent = 0); //pass ref to mainwindow
+   explicit ServerSettingsDialog(QWidget *parent = nullptr); //pass ref to mainwindow
    ~ServerSettingsDialog();
    quint32 virtual getIPAddress();    // return the IP address as a 32-bit int
    int virtual getTimeDelay()  { return timeDelay; }  // the sample time
@@ -47,3 +47,4 @@ private:
 };
 
 #endif // SERVERSETTINGSDIALOG_H
+

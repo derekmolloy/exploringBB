@@ -4,7 +4,7 @@
 * ISBN 9781118935125. Please see the file README.md in the repository root 
 * directory for copyright and GNU GPLv3 license information.            */
 
-include "mainwindow.h"
+#include "mainwindow.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

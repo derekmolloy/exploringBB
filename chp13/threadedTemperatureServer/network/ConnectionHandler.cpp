@@ -100,7 +100,8 @@ void ConnectionHandler::threadLoop(){
     if (rec == "getTemperature"){
        cout << "Received from the client [" << rec << "]" << endl;
        stringstream ss;
-       ss << this->getTemperature(this->readAnalog(0));
+       ss << " { \"sample\": { \"temperature\" : ";
+       ss <<  this->getTemperature(this->readAnalog(0)) << " } } ";
        this->send(ss.str());
        cout << "Sent [" << ss.str() << "]" << endl;
     }

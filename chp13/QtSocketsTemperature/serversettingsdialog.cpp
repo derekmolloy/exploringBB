@@ -50,3 +50,4 @@ void ServerSettingsDialog::on_buttonBox_rejected()
     ui->addrBox1->setValue(this->address[3]);
     this->setVisible(false);
 }
+

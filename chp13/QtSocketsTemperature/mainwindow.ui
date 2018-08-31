@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>EBB Internet Temperature Sensor</string>
+   <string>EBBv2 Internet Temperature Sensor</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLCDNumber" name="temperatureLCD">
@@ -254,3 +254,4 @@
  <resources/>
  <connections/>
 </ui>
+
