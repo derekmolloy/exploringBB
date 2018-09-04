@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Video Streaming for the Beaglebone - derekmolloy.ie"
+echo "Video Streaming for the Beaglebone v2 - derekmolloy.ie"
 echo "Piping the output of capture to avconv"
 
 # Next line not necessary if you are using my -F option on capture
