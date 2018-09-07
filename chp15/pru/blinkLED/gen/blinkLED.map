@@ -1,0 +1,263 @@
+******************************************************************************
+                     PRU Linker Unix v2.1.5                    
+******************************************************************************
+>> Linked Fri Sep  7 03:56:02 2018
+
+OUTPUT FILE NAME:   <gen/blinkLED.out>
+ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_noexit"  address: 00000000
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  PRU_IMEM              00000000   00002000  00000058  00001fa8  RWIX
+
+PAGE 1:
+  PRU_DMEM_0_1          00000000   00002000  00000114  00001eec  RWIX
+  PRU_DMEM_1_0          00002000   00002000  00000000  00002000  RWIX
+
+PAGE 2:
+  PRU_SHAREDMEM         00010000   00003000  00000000  00003000  RWIX
+  PRU_INTC              00020000   00001504  00000000  00001504  RWIX
+  PRU_CFG               00026000   00000044  00000044  00000000  RWIX
+  PRU_UART              00028000   00000038  00000000  00000038  RWIX
+  PRU_IEP               0002e000   0000031c  00000000  0000031c  RWIX
+  PRU_ECAP              00030000   00000060  00000000  00000060  RWIX
+  RSVD27                00032000   00000100  00000000  00000100  RWIX
+  RSVD21                00032400   00000100  00000000  00000100  RWIX
+  L3OCMC                40000000   00010000  00000000  00010000  RWIX
+  MCASP0_DMA            46000000   00000100  00000000  00000100  RWIX
+  UART1                 48022000   00000088  00000000  00000088  RWIX
+  UART2                 48024000   00000088  00000000  00000088  RWIX
+  I2C1                  4802a000   000000d8  00000000  000000d8  RWIX
+  MCSPI0                48030000   000001a4  00000000  000001a4  RWIX
+  DMTIMER2              48040000   0000005c  00000000  0000005c  RWIX
+  MMCHS0                48060000   00000300  00000000  00000300  RWIX
+  MBX0                  480c8000   00000140  00000000  00000140  RWIX
+  SPINLOCK              480ca000   00000880  00000000  00000880  RWIX
+  I2C2                  4819c000   000000d8  00000000  000000d8  RWIX
+  MCSPI1                481a0000   000001a4  00000000  000001a4  RWIX
+  DCAN0                 481cc000   000001e8  00000000  000001e8  RWIX
+  DCAN1                 481d0000   000001e8  00000000  000001e8  RWIX
+  PWMSS0                48300000   000002c4  00000000  000002c4  RWIX
+  PWMSS1                48302000   000002c4  00000000  000002c4  RWIX
+  PWMSS2                48304000   000002c4  00000000  000002c4  RWIX
+  RSVD13                48310000   00000100  00000000  00000100  RWIX
+  RSVD10                48318000   00000100  00000000  00000100  RWIX
+  TPCC                  49000000   00001098  00000000  00001098  RWIX
+  GEMAC                 4a100000   0000128c  00000000  0000128c  RWIX
+  DDR                   80000000   00000100  00000000  00000100  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.text:_c_int00* 
+*          0    00000000    00000014     
+                  00000000    00000014     rtspruv3_le.lib : boot_special.obj (.text:_c_int00_noinit_noargs_noexit)
+
+.text      0    00000014    00000044     
+                  00000014    00000034     blinkLED.object (.text:main)
+                  00000048    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
+                  00000050    00000008                     : exit.obj (.text:loader_exit)
+
+.stack     1    00000000    00000100     UNINITIALIZED
+                  00000000    00000004     rtspruv3_le.lib : boot.obj (.stack)
+                  00000004    000000fc     --HOLE--
+
+.cinit     1    00000000    00000000     UNINITIALIZED
+
+.resource_table 
+*          1    00000100    00000014     
+                  00000100    00000014     blinkLED.object (.resource_table:retain)
+
+.creg.PRU_CFG.noload.near 
+*          2    00026000    00000044     NOLOAD SECTION
+                  00026000    00000044     blinkLED.object (.creg.PRU_CFG.noload.near)
+
+.creg.PRU_CFG.near 
+*          2    00026044    00000000     UNINITIALIZED
+
+.creg.PRU_CFG.noload.far 
+*          2    00026044    00000000     NOLOAD SECTION
+
+.creg.PRU_CFG.far 
+*          2    00026044    00000000     UNINITIALIZED
+
+
+SEGMENT ATTRIBUTES
+
+    id tag      seg value
+    -- ---      --- -----
+     0 PHA_PAGE 1   1    
+     1 PHA_PAGE 2   1    
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                         
+----  -------   ----                         
+0     00000050  C$$EXIT                      
+2     00026000  CT_CFG                       
+abs   481cc000  __PRU_CREG_BASE_DCAN0        
+abs   481d0000  __PRU_CREG_BASE_DCAN1        
+abs   80000000  __PRU_CREG_BASE_DDR          
+abs   48040000  __PRU_CREG_BASE_DMTIMER2     
+abs   4a100000  __PRU_CREG_BASE_GEMAC        
+abs   4802a000  __PRU_CREG_BASE_I2C1         
+abs   4819c000  __PRU_CREG_BASE_I2C2         
+abs   40000000  __PRU_CREG_BASE_L3OCMC       
+abs   480c8000  __PRU_CREG_BASE_MBX0         
+abs   46000000  __PRU_CREG_BASE_MCASP0_DMA   
+abs   48030000  __PRU_CREG_BASE_MCSPI0       
+abs   481a0000  __PRU_CREG_BASE_MCSPI1       
+abs   48060000  __PRU_CREG_BASE_MMCHS0       
+abs   00026000  __PRU_CREG_BASE_PRU_CFG      
+abs   00000000  __PRU_CREG_BASE_PRU_DMEM_0_1 
+abs   00002000  __PRU_CREG_BASE_PRU_DMEM_1_0 
+abs   00030000  __PRU_CREG_BASE_PRU_ECAP     
+abs   0002e000  __PRU_CREG_BASE_PRU_IEP      
+abs   00020000  __PRU_CREG_BASE_PRU_INTC     
+abs   00010000  __PRU_CREG_BASE_PRU_SHAREDMEM
+abs   00028000  __PRU_CREG_BASE_PRU_UART     
+abs   48300000  __PRU_CREG_BASE_PWMSS0       
+abs   48302000  __PRU_CREG_BASE_PWMSS1       
+abs   48304000  __PRU_CREG_BASE_PWMSS2       
+abs   48318000  __PRU_CREG_BASE_RSVD10       
+abs   48310000  __PRU_CREG_BASE_RSVD13       
+abs   00032400  __PRU_CREG_BASE_RSVD21       
+abs   00032000  __PRU_CREG_BASE_RSVD27       
+abs   480ca000  __PRU_CREG_BASE_SPINLOCK     
+abs   49000000  __PRU_CREG_BASE_TPCC         
+abs   48022000  __PRU_CREG_BASE_UART1        
+abs   48024000  __PRU_CREG_BASE_UART2        
+abs   0000000e  __PRU_CREG_DCAN0             
+abs   0000000f  __PRU_CREG_DCAN1             
+abs   0000001f  __PRU_CREG_DDR               
+abs   00000001  __PRU_CREG_DMTIMER2          
+abs   00000009  __PRU_CREG_GEMAC             
+abs   00000002  __PRU_CREG_I2C1              
+abs   00000011  __PRU_CREG_I2C2              
+abs   0000001e  __PRU_CREG_L3OCMC            
+abs   00000016  __PRU_CREG_MBX0              
+abs   00000008  __PRU_CREG_MCASP0_DMA        
+abs   00000006  __PRU_CREG_MCSPI0            
+abs   00000010  __PRU_CREG_MCSPI1            
+abs   00000005  __PRU_CREG_MMCHS0            
+abs   00000004  __PRU_CREG_PRU_CFG           
+abs   00000018  __PRU_CREG_PRU_DMEM_0_1      
+abs   00000019  __PRU_CREG_PRU_DMEM_1_0      
+abs   00000003  __PRU_CREG_PRU_ECAP          
+abs   0000001a  __PRU_CREG_PRU_IEP           
+abs   00000000  __PRU_CREG_PRU_INTC          
+abs   0000001c  __PRU_CREG_PRU_SHAREDMEM     
+abs   00000007  __PRU_CREG_PRU_UART          
+abs   00000012  __PRU_CREG_PWMSS0            
+abs   00000013  __PRU_CREG_PWMSS1            
+abs   00000014  __PRU_CREG_PWMSS2            
+abs   0000000a  __PRU_CREG_RSVD10            
+abs   0000000d  __PRU_CREG_RSVD13            
+abs   00000015  __PRU_CREG_RSVD21            
+abs   0000001b  __PRU_CREG_RSVD27            
+abs   00000017  __PRU_CREG_SPINLOCK          
+abs   0000001d  __PRU_CREG_TPCC              
+abs   0000000b  __PRU_CREG_UART1             
+abs   0000000c  __PRU_CREG_UART2             
+1     00000100  __TI_STACK_END               
+abs   00000100  __TI_STACK_SIZE              
+abs   ffffffff  __binit__                    
+abs   ffffffff  __c_args__                   
+0     00000000  _c_int00_noinit_noargs_noexit
+1     00000000  _stack                       
+0     00000048  abort                        
+abs   ffffffff  binit                        
+0     00000014  main                         
+1     00000100  pru_remoteproc_ResourceTable 
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                         
+----  -------   ----                         
+0     00000000  _c_int00_noinit_noargs_noexit
+0     00000014  main                         
+0     00000048  abort                        
+0     00000050  C$$EXIT                      
+1     00000000  _stack                       
+1     00000100  __TI_STACK_END               
+1     00000100  pru_remoteproc_ResourceTable 
+2     00026000  CT_CFG                       
+abs   00000000  __PRU_CREG_BASE_PRU_DMEM_0_1 
+abs   00000000  __PRU_CREG_PRU_INTC          
+abs   00000001  __PRU_CREG_DMTIMER2          
+abs   00000002  __PRU_CREG_I2C1              
+abs   00000003  __PRU_CREG_PRU_ECAP          
+abs   00000004  __PRU_CREG_PRU_CFG           
+abs   00000005  __PRU_CREG_MMCHS0            
+abs   00000006  __PRU_CREG_MCSPI0            
+abs   00000007  __PRU_CREG_PRU_UART          
+abs   00000008  __PRU_CREG_MCASP0_DMA        
+abs   00000009  __PRU_CREG_GEMAC             
+abs   0000000a  __PRU_CREG_RSVD10            
+abs   0000000b  __PRU_CREG_UART1             
+abs   0000000c  __PRU_CREG_UART2             
+abs   0000000d  __PRU_CREG_RSVD13            
+abs   0000000e  __PRU_CREG_DCAN0             
+abs   0000000f  __PRU_CREG_DCAN1             
+abs   00000010  __PRU_CREG_MCSPI1            
+abs   00000011  __PRU_CREG_I2C2              
+abs   00000012  __PRU_CREG_PWMSS0            
+abs   00000013  __PRU_CREG_PWMSS1            
+abs   00000014  __PRU_CREG_PWMSS2            
+abs   00000015  __PRU_CREG_RSVD21            
+abs   00000016  __PRU_CREG_MBX0              
+abs   00000017  __PRU_CREG_SPINLOCK          
+abs   00000018  __PRU_CREG_PRU_DMEM_0_1      
+abs   00000019  __PRU_CREG_PRU_DMEM_1_0      
+abs   0000001a  __PRU_CREG_PRU_IEP           
+abs   0000001b  __PRU_CREG_RSVD27            
+abs   0000001c  __PRU_CREG_PRU_SHAREDMEM     
+abs   0000001d  __PRU_CREG_TPCC              
+abs   0000001e  __PRU_CREG_L3OCMC            
+abs   0000001f  __PRU_CREG_DDR               
+abs   00000100  __TI_STACK_SIZE              
+abs   00002000  __PRU_CREG_BASE_PRU_DMEM_1_0 
+abs   00010000  __PRU_CREG_BASE_PRU_SHAREDMEM
+abs   00020000  __PRU_CREG_BASE_PRU_INTC     
+abs   00026000  __PRU_CREG_BASE_PRU_CFG      
+abs   00028000  __PRU_CREG_BASE_PRU_UART     
+abs   0002e000  __PRU_CREG_BASE_PRU_IEP      
+abs   00030000  __PRU_CREG_BASE_PRU_ECAP     
+abs   00032000  __PRU_CREG_BASE_RSVD27       
+abs   00032400  __PRU_CREG_BASE_RSVD21       
+abs   40000000  __PRU_CREG_BASE_L3OCMC       
+abs   46000000  __PRU_CREG_BASE_MCASP0_DMA   
+abs   48022000  __PRU_CREG_BASE_UART1        
+abs   48024000  __PRU_CREG_BASE_UART2        
+abs   4802a000  __PRU_CREG_BASE_I2C1         
+abs   48030000  __PRU_CREG_BASE_MCSPI0       
+abs   48040000  __PRU_CREG_BASE_DMTIMER2     
+abs   48060000  __PRU_CREG_BASE_MMCHS0       
+abs   480c8000  __PRU_CREG_BASE_MBX0         
+abs   480ca000  __PRU_CREG_BASE_SPINLOCK     
+abs   4819c000  __PRU_CREG_BASE_I2C2         
+abs   481a0000  __PRU_CREG_BASE_MCSPI1       
+abs   481cc000  __PRU_CREG_BASE_DCAN0        
+abs   481d0000  __PRU_CREG_BASE_DCAN1        
+abs   48300000  __PRU_CREG_BASE_PWMSS0       
+abs   48302000  __PRU_CREG_BASE_PWMSS1       
+abs   48304000  __PRU_CREG_BASE_PWMSS2       
+abs   48310000  __PRU_CREG_BASE_RSVD13       
+abs   48318000  __PRU_CREG_BASE_RSVD10       
+abs   49000000  __PRU_CREG_BASE_TPCC         
+abs   4a100000  __PRU_CREG_BASE_GEMAC        
+abs   80000000  __PRU_CREG_BASE_DDR          
+abs   ffffffff  __binit__                    
+abs   ffffffff  __c_args__                   
+abs   ffffffff  binit                        
+
+[76 symbols]
