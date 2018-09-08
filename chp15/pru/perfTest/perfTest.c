@@ -53,12 +53,17 @@ void main(void)
         // Use pru0_pru_r31_3 as a button i.e., 1000 or 0x0008
         button = 0x0008;
 
+        // Turn the LED off
+        __R30 &= !led;
+
 	// Stop the loop when the button is pressed
 	while (!(__R31 && button)) {
-		__R30 ^= led;
-                // delay for 0.25s (one quarter second
-		__delay_cycles(50000000);
+           // Do nothing
 	}
+
+        // Turn the LED on
+	__R30 ^= led;
+
         __halt();
 }
 
