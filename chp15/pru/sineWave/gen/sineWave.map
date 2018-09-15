@@ -1,9 +1,9 @@
 ******************************************************************************
                      PRU Linker Unix v2.1.5                    
 ******************************************************************************
->> Linked Sun Sep  9 06:03:15 2018
+>> Linked Sun Sep  9 05:36:25 2018
 
-OUTPUT FILE NAME:   <gen/pwmC.out>
+OUTPUT FILE NAME:   <gen/sineWave.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_noexit"  address: 00000000
 
 
@@ -12,10 +12,10 @@ MEMORY CONFIGURATION
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
 PAGE 0:
-  PRU_IMEM              00000000   00002000  0000008c  00001f74  RWIX
+  PRU_IMEM              00000000   00002000  00001c94  0000036c  RWIX
 
 PAGE 1:
-  PRU_DMEM_0_1          00000000   00002000  00000114  00001eec  RWIX
+  PRU_DMEM_0_1          00000000   00002000  00000154  00001eac  RWIX
   PRU_DMEM_1_0          00002000   00002000  00000000  00002000  RWIX
 
 PAGE 2:
@@ -60,10 +60,35 @@ section   page    origin      length       input sections
 *          0    00000000    00000014     
                   00000000    00000014     rtspruv3_le.lib : boot_special.obj (.text:_c_int00_noinit_noargs_noexit)
 
-.text      0    00000014    00000078     
-                  00000014    00000068     pwmC.object (.text:main)
-                  0000007c    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
-                  00000084    00000008                     : exit.obj (.text:loader_exit)
+.text      0    00000014    00001c80     
+                  00000014    000003a4     rtspruv3_le.lib : addf.obj (.text:__pruabi_addf)
+                  000003b8    00000374                     : sin.obj (.text:sin)
+                  0000072c    00000314                     : frcmpyd.obj (.text:__TI_frcmpyd)
+                  00000a40    00000258                     : frcaddd.obj (.text:__TI_frcaddd)
+                  00000c98    00000254                     : mpyd.obj (.text:__pruabi_mpyd)
+                  00000eec    00000248                     : addd.obj (.text:__pruabi_addd)
+                  00001134    000001c8                     : mpyf.obj (.text:__pruabi_mpyf)
+                  000012fc    00000100                     : modf.obj (.text:modf)
+                  000013fc    000000e0     sineWave.object (.text:main)
+                  000014dc    000000b4     rtspruv3_le.lib : gtd.obj (.text:__pruabi_gtd)
+                  00001590    000000b0                     : ged.obj (.text:__pruabi_ged)
+                  00001640    000000b0                     : ltd.obj (.text:__pruabi_ltd)
+                  000016f0    000000a8                     : frcmpyf.obj (.text:__TI_frcmpyf)
+                  00001798    000000a0                     : fixdu.obj (.text:__pruabi_fixdu)
+                  00001838    0000009c                     : round.obj (.text:__pruabi_nround)
+                  000018d4    00000090                     : eqld.obj (.text:__pruabi_eqd)
+                  00001964    0000008c                     : renormd.obj (.text:__TI_renormd)
+                  000019f0    0000008c                     : fixdi.obj (.text:__pruabi_fixdi)
+                  00001a7c    00000084                     : fltid.obj (.text:__pruabi_fltid)
+                  00001b00    00000078                     : cvtfd.obj (.text:__pruabi_cvtfd)
+                  00001b78    00000050                     : fltuf.obj (.text:__pruabi_fltuf)
+                  00001bc8    0000002c                     : asri.obj (.text:__pruabi_asri)
+                  00001bf4    0000002c                     : subd.obj (.text:__pruabi_subd)
+                  00001c20    00000024                     : mpyi.obj (.text:__pruabi_mpyi)
+                  00001c44    00000020                     : negd.obj (.text:__pruabi_negd)
+                  00001c64    00000020                     : trunc.obj (.text:__pruabi_trunc)
+                  00001c84    00000008                     : exit.obj (.text:abort)
+                  00001c8c    00000008                     : exit.obj (.text:loader_exit)
 
 .stack     1    00000000    00000100     UNINITIALIZED
                   00000000    00000004     rtspruv3_le.lib : boot.obj (.stack)
@@ -71,9 +96,12 @@ section   page    origin      length       input sections
 
 .cinit     1    00000000    00000000     UNINITIALIZED
 
+.fardata   1    00000100    00000040     
+                  00000100    00000040     rtspruv3_le.lib : sin.obj (.fardata:R$1)
+
 .resource_table 
-*          1    00000100    00000014     
-                  00000100    00000014     pwmC.object (.resource_table:retain)
+*          1    00000140    00000014     
+                  00000140    00000014     sineWave.object (.resource_table:retain)
 
 
 SEGMENT ATTRIBUTES
@@ -88,7 +116,7 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 page  address   name                         
 ----  -------   ----                         
-0     00000084  C$$EXIT                      
+0     00001c8c  C$$EXIT                      
 abs   481cc000  __PRU_CREG_BASE_DCAN0        
 abs   481d0000  __PRU_CREG_BASE_DCAN1        
 abs   80000000  __PRU_CREG_BASE_DDR          
@@ -155,14 +183,39 @@ abs   0000000b  __PRU_CREG_UART1
 abs   0000000c  __PRU_CREG_UART2             
 1     00000100  __TI_STACK_END               
 abs   00000100  __TI_STACK_SIZE              
+0     00000a40  __TI_frcaddd                 
+0     0000072c  __TI_frcmpyd                 
+0     000016f0  __TI_frcmpyf                 
+0     00001964  __TI_renormd                 
 abs   ffffffff  __binit__                    
 abs   ffffffff  __c_args__                   
+0     00000eec  __pruabi_addd                
+0     00000014  __pruabi_addf                
+0     00001bc8  __pruabi_asri                
+0     00001b00  __pruabi_cvtfd               
+0     000018d4  __pruabi_eqd                 
+0     000019f0  __pruabi_fixdi               
+0     00001798  __pruabi_fixdu               
+0     00001a7c  __pruabi_fltid               
+0     00001b78  __pruabi_fltuf               
+0     00001590  __pruabi_ged                 
+0     000014dc  __pruabi_gtd                 
+0     00001640  __pruabi_ltd                 
+0     00000c98  __pruabi_mpyd                
+0     00001134  __pruabi_mpyf                
+0     00001c20  __pruabi_mpyi                
+0     00001c44  __pruabi_negd                
+0     00001838  __pruabi_nround              
+0     00001bf4  __pruabi_subd                
+0     00001c64  __pruabi_trunc               
 0     00000000  _c_int00_noinit_noargs_noexit
 1     00000000  _stack                       
-0     0000007c  abort                        
+0     00001c84  abort                        
 abs   ffffffff  binit                        
-0     00000014  main                         
-1     00000100  pru_remoteproc_ResourceTable 
+0     000013fc  main                         
+0     000012fc  modf                         
+1     00000140  pru_remoteproc_ResourceTable 
+0     000003b8  sin                          
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -170,12 +223,37 @@ GLOBAL SYMBOLS: SORTED BY Symbol Address
 page  address   name                         
 ----  -------   ----                         
 0     00000000  _c_int00_noinit_noargs_noexit
-0     00000014  main                         
-0     0000007c  abort                        
-0     00000084  C$$EXIT                      
+0     00000014  __pruabi_addf                
+0     000003b8  sin                          
+0     0000072c  __TI_frcmpyd                 
+0     00000a40  __TI_frcaddd                 
+0     00000c98  __pruabi_mpyd                
+0     00000eec  __pruabi_addd                
+0     00001134  __pruabi_mpyf                
+0     000012fc  modf                         
+0     000013fc  main                         
+0     000014dc  __pruabi_gtd                 
+0     00001590  __pruabi_ged                 
+0     00001640  __pruabi_ltd                 
+0     000016f0  __TI_frcmpyf                 
+0     00001798  __pruabi_fixdu               
+0     00001838  __pruabi_nround              
+0     000018d4  __pruabi_eqd                 
+0     00001964  __TI_renormd                 
+0     000019f0  __pruabi_fixdi               
+0     00001a7c  __pruabi_fltid               
+0     00001b00  __pruabi_cvtfd               
+0     00001b78  __pruabi_fltuf               
+0     00001bc8  __pruabi_asri                
+0     00001bf4  __pruabi_subd                
+0     00001c20  __pruabi_mpyi                
+0     00001c44  __pruabi_negd                
+0     00001c64  __pruabi_trunc               
+0     00001c84  abort                        
+0     00001c8c  C$$EXIT                      
 1     00000000  _stack                       
 1     00000100  __TI_STACK_END               
-1     00000100  pru_remoteproc_ResourceTable 
+1     00000140  pru_remoteproc_ResourceTable 
 abs   00000000  __PRU_CREG_BASE_PRU_DMEM_0_1 
 abs   00000000  __PRU_CREG_PRU_INTC          
 abs   00000001  __PRU_CREG_DMTIMER2          
@@ -245,4 +323,4 @@ abs   ffffffff  __binit__
 abs   ffffffff  __c_args__                   
 abs   ffffffff  binit                        
 
-[75 symbols]
+[100 symbols]

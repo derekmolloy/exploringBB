@@ -1,4 +1,4 @@
-/*
+ /*
  * Source Modified by Derek Molloy for Exploring BeagleBone Rev2
  * Based on the examples distributed by TI
  *
@@ -36,20 +36,32 @@
 
 #include <stdint.h>
 #include <pru_cfg.h>
-#include <pru_ctrl.h>
 #include "resource_table_empty.h"
 
-#define PRU0_DRAM   0x00000
-volatile unsigned int *shared = (unsigned int *)(PRU0_DRAM);
-
-extern void START(void);
+// Delay factor which defines the PWM frequency
+#define DELAYFACTOR 10
+volatile register uint32_t __R30;
+volatile register uint32_t __R31;
 
 void main(void)
 {
-   // The number of samples
-   shared[0] = 5000;
-   // Sample delay in ms
-   shared[1] = 2;
+   volatile uint32_t gpio, button;
+   uint32_t percent, count;
 
-   START();
+   // Copy the PWM percentage (0-100) and delay factor into PRU memory
+   percent = 50;
+   // Use pru0_pru_r30_5 as an output i.e., 100000 or 0x0020
+   gpio = 0x0020;
+   // Use pru0_pru_r31_3 as a button i.e., 1000 or 0x0008
+   button = 0x0008;
+
+   // Stop the loop when the button is pressed   while (!(__R31 && button)) {
+      for(count=0; count<100; count++){
+         if(count<percent) { __R30 |= gpio; NOP; }
+         else { __R30 &= (~gpio); }
+         __delay_cycles(DELAYFACTOR);
+      }
+   }
+   __halt();
 }
+

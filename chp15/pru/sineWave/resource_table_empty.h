@@ -1,7 +1,4 @@
 /*
- * Source Modified by Derek Molloy for Exploring BeagleBone Rev2
- * Based on the examples distributed by TI
- *
  * Copyright (C) 2015 Texas Instruments Incorporated - http://www.ti.com/
  *
  *
@@ -34,22 +31,42 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdint.h>
-#include <pru_cfg.h>
-#include <pru_ctrl.h>
-#include "resource_table_empty.h"
+/*
+ *  ======== resource_table_empty.h ========
+ *
+ *  Define the resource table entries for all PRU cores. This will be
+ *  incorporated into corresponding base images, and used by the remoteproc
+ *  on the host-side to allocated/reserve resources.  Note the remoteproc
+ *  driver requires that all PRU firmware be built with a resource table.
+ *
+ *  This file contains an empty resource table.  It can be used either as:
+ *
+ *        1) A template, or
+ *        2) As-is if a PRU application does not need to configure PRU_INTC
+ *                  or interact with the rpmsg driver
+ *
+ */
 
-#define PRU0_DRAM   0x00000
-volatile unsigned int *shared = (unsigned int *)(PRU0_DRAM);
+#ifndef _RSC_TABLE_PRU_H_
+#define _RSC_TABLE_PRU_H_
 
-extern void START(void);
+#include <stddef.h>
+#include <rsc_types.h>
 
-void main(void)
-{
-   // The number of samples
-   shared[0] = 5000;
-   // Sample delay in ms
-   shared[1] = 2;
+struct my_resource_table {
+	struct resource_table base;
 
-   START();
-}
+	uint32_t offset[1]; /* Should match 'num' in actual definition */
+};
+
+#pragma DATA_SECTION(pru_remoteproc_ResourceTable, ".resource_table")
+#pragma RETAIN(pru_remoteproc_ResourceTable)
+struct my_resource_table pru_remoteproc_ResourceTable = {
+	1,	/* we're the first version that implements this */
+	0,	/* number of entries in the table */
+	0, 0,	/* reserved, must be zero */
+	0,	/* offset[0] */
+};
+
+#endif /* _RSC_TABLE_PRU_H_ */
+

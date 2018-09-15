@@ -1,4 +1,4 @@
-/*
+ /*
  * Source Modified by Derek Molloy for Exploring BeagleBone Rev2
  * Based on the examples distributed by TI
  *
@@ -36,20 +36,44 @@
 
 #include <stdint.h>
 #include <pru_cfg.h>
-#include <pru_ctrl.h>
 #include "resource_table_empty.h"
+#include <math.h>
 
-#define PRU0_DRAM   0x00000
-volatile unsigned int *shared = (unsigned int *)(PRU0_DRAM);
-
-extern void START(void);
+// Delay factor which defines the PWM frequency
+#define DELAYFACTOR 0
+volatile register uint32_t __R30;
+volatile register uint32_t __R31;
 
 void main(void)
 {
-   // The number of samples
-   shared[0] = 5000;
-   // Sample delay in ms
-   shared[1] = 2;
+   volatile uint32_t gpio, button;
+   uint32_t count, i;
 
-   START();
+   uint32_t waveform[100];
+   float gain = 50.0f;                   // want the full range 0-99
+   float phase = 0.0f;                   // phase can be changed
+   float bias = 50.0f;                   // center on 1.65V, for full range
+   float freq = 2.0f * 3.14159f / 100.0f;
+   for (i=0; i<100; i++){                // general sine wave equation
+      waveform[i] = (unsigned int)(bias + (gain * sin((i * freq) + phase)));
+   }
+
+   // Use pru0_pru_r30_5 as an output i.e., 100000 or 0x0020
+   gpio = 0x0020;
+   // Use pru0_pru_r31_3 as a button i.e., 1000 or 0x0008
+   button = 0x0008;
+
+   // Stop the loop when the button is pressed
+   while (!(__R31 && button)) {
+      for(i=0; i<100; i++){
+         for(count=0; count<100; count++){
+            // Use two comparisons to equalize the timing
+            if(count<=waveform[i]) { __R30 |=  gpio;    }
+            if(count> waveform[i]) { __R30 &= (~gpio); }
+            __delay_cycles(DELAYFACTOR);
+         }
+      }
+   }
+   __halt();
 }
+

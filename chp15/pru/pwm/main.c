@@ -47,8 +47,8 @@ extern void START(void);
 void main(void)
 {
    // Copy the PWM percentage (0-100) and delay factor into PRU memory
-   shared[0] = 75;
-   // Delay factor -- write it into the next word location in 
+   shared[0] = 33;
+   // Delay factor -- write it into the next word location in
    // memory (i.e.,4-bytes later)
    shared[1] = 10;
 

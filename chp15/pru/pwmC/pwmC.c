@@ -49,7 +49,7 @@ void main(void)
    uint32_t percent, count;
 
    // The PWM percentage (0-100) for the positive cycle
-   percent = 75;
+   percent = 25;
    // Use pru0_pru_r30_5 as an output i.e., 100000 or 0x0020
    gpio = 0x0020;
    // Use pru0_pru_r31_3 as a button i.e., 1000 or 0x0008
