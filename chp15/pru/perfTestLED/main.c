@@ -38,27 +38,12 @@
 #include <pru_cfg.h>
 #include "resource_table_empty.h"
 
-volatile register uint32_t __R30;
-volatile register uint32_t __R31;
+// The function is defined in perfTestLED.asm in same dir
+// Declaration is here, defination is linked to the .asm
+extern void start(void);
 
 void main(void)
 {
-	volatile uint32_t led, button;
-
-	// Clear SYSCFG[STANDBY_INIT] to enable OCP master port
-	CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
-
-	// Use pru0_pru_r30_5 as an output i.e., 100000 or 0x0020
-	led = 0x0020;
-        // Use pru0_pru_r31_3 as a button i.e., 1000 or 0x0008
-        button = 0x0008;
-
-	// Stop the loop when the button is pressed
-	while (!(__R31 && button)) {
-		__R30 ^= led;
-                // delay for 0.25s (one quarter second
-		__delay_cycles(50000000);
-	}
-        __halt();
+   START();
 }
 

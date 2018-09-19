@@ -1,4 +1,4 @@
- /*
+/*
  * Source Modified by Derek Molloy for Exploring BeagleBone Rev2
  * Based on the examples distributed by TI
  *
@@ -38,32 +38,23 @@
 #include <pru_cfg.h>
 #include "resource_table_empty.h"
 
-// Delay factor which defines the PWM frequency
-#define DELAYFACTOR 10
-volatile register uint32_t __R30;
-volatile register uint32_t __R31;
+#define PRU0_DRAM  0x00000000
+volatile uint32_t *pru0Mem = (unsigned int *) PRU0_DRAM;
+#define PRU1_DRAM  0x00002000
+volatile uint32_t *pru1Mem = (unsigned int *) PRU1_DRAM;
+#define SHARE_MEM  0x00010000
+volatile uint32_t *shared =  (unsigned int *) SHARE_MEM;
+
+extern void start(void);
 
 void main(void)
 {
-   volatile uint32_t gpio, button;
-   uint32_t percent, count;
-
-   // The PWM percentage (0-100) for the positive cycle
-   percent = 75;
-   // Use pru0_pru_r30_5 as an output i.e., 100000 or 0x0020
-   gpio = 0x0020;
-   // Use pru0_pru_r31_3 as a button i.e., 1000 or 0x0008
-   button = 0x0008;
-
-   // Stop the loop when the button is pressed
-   while (!(__R31 && button)) {
-      for(count=0; count<100; count++){
-         // Use two comparisons to equalize the timing
-         if(count<=percent) { __R30 |=  gpio;    }
-         if(count> percent) { __R30 &= (~gpio); }
-         __delay_cycles(DELAYFACTOR);
-      }
-   }
-   __halt();
+   pru0Mem[0] = 0xEBBFEED0;
+   pru0Mem[1] = 0xEBBFEED1;
+   pru1Mem[0] = 0xEBBFEED2;
+   pru1Mem[1] = 0xEBBFEED3;
+   shared[0]  = 0xEBBFEED4;
+   shared[1]  = 0xEBBFEED5;
+   shared[2]  = 0xEBBFEED6;
+   start();
 }
-

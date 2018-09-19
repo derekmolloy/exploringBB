@@ -38,9 +38,6 @@
 #include <pru_cfg.h>
 #include "resource_table_empty.h"
 
-// The function is defined in perfTestASM.asm in same dir
-// We just need to add a declaration here, the defination can be
-// seperately linked
 extern void start(void);
 
 void main(void)

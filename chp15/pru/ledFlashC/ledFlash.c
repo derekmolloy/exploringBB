@@ -1,4 +1,4 @@
- /*
+/*
  * Source Modified by Derek Molloy for Exploring BeagleBone Rev2
  * Based on the examples distributed by TI
  *
@@ -38,32 +38,23 @@
 #include <pru_cfg.h>
 #include "resource_table_empty.h"
 
-// Delay factor which defines the PWM frequency
-#define DELAYFACTOR 10
-volatile register uint32_t __R30;
-volatile register uint32_t __R31;
+volatile register uint32_t __R30;   //32 output gpios
+volatile register uint32_t __R31;   //32 input gpios
 
 void main(void)
 {
-   volatile uint32_t gpio, button;
-   uint32_t percent, count;
+	volatile uint32_t led, button;
 
-   // The PWM percentage (0-100) for the positive cycle
-   percent = 75;
-   // Use pru0_pru_r30_5 as an output i.e., 100000 or 0x0020
-   gpio = 0x0020;
-   // Use pru0_pru_r31_3 as a button i.e., 1000 or 0x0008
-   button = 0x0008;
+	// Use pru0_pru_r30_5 as an output i.e., 100000 or 0x0020
+	led = 0x0020;
+        // Use pru0_pru_r31_3 as a button i.e., 1000 or 0x0008
+        button = 0x0008;
 
-   // Stop the loop when the button is pressed
-   while (!(__R31 && button)) {
-      for(count=0; count<100; count++){
-         // Use two comparisons to equalize the timing
-         if(count<=percent) { __R30 |=  gpio;    }
-         if(count> percent) { __R30 &= (~gpio); }
-         __delay_cycles(DELAYFACTOR);
-      }
-   }
-   __halt();
+	// Stop the loop when the button is pressed
+	while (!(__R31 && button)) {
+		__R30 ^= led;
+                // delay for approx. 0.25s (one quarter second)
+		__delay_cycles(50000000);
+	}
+        __halt();
 }
-

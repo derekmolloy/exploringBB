@@ -1,7 +1,4 @@
- /*
- * Source Modified by Derek Molloy for Exploring BeagleBone Rev2
- * Based on the examples distributed by TI
- *
+/*
  * Copyright (C) 2015 Texas Instruments Incorporated - http://www.ti.com/
  *
  *
@@ -34,36 +31,42 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdint.h>
-#include <pru_cfg.h>
-#include "resource_table_empty.h"
+/*
+ *  ======== resource_table_empty.h ========
+ *
+ *  Define the resource table entries for all PRU cores. This will be
+ *  incorporated into corresponding base images, and used by the remoteproc
+ *  on the host-side to allocated/reserve resources.  Note the remoteproc
+ *  driver requires that all PRU firmware be built with a resource table.
+ *
+ *  This file contains an empty resource table.  It can be used either as:
+ *
+ *        1) A template, or
+ *        2) As-is if a PRU application does not need to configure PRU_INTC
+ *                  or interact with the rpmsg driver
+ *
+ */
 
-// Delay factor which defines the PWM frequency
-#define DELAYFACTOR 10
-volatile register uint32_t __R30;
-volatile register uint32_t __R31;
+#ifndef _RSC_TABLE_PRU_H_
+#define _RSC_TABLE_PRU_H_
 
-void main(void)
-{
-   volatile uint32_t gpio, button;
-   uint32_t percent, count;
+#include <stddef.h>
+#include <rsc_types.h>
 
-   // The PWM percentage (0-100) for the positive cycle
-   percent = 75;
-   // Use pru0_pru_r30_5 as an output i.e., 100000 or 0x0020
-   gpio = 0x0020;
-   // Use pru0_pru_r31_3 as a button i.e., 1000 or 0x0008
-   button = 0x0008;
+struct my_resource_table {
+	struct resource_table base;
 
-   // Stop the loop when the button is pressed
-   while (!(__R31 && button)) {
-      for(count=0; count<100; count++){
-         // Use two comparisons to equalize the timing
-         if(count<=percent) { __R30 |=  gpio;    }
-         if(count> percent) { __R30 &= (~gpio); }
-         __delay_cycles(DELAYFACTOR);
-      }
-   }
-   __halt();
-}
+	uint32_t offset[1]; /* Should match 'num' in actual definition */
+};
+
+#pragma DATA_SECTION(pru_remoteproc_ResourceTable, ".resource_table")
+#pragma RETAIN(pru_remoteproc_ResourceTable)
+struct my_resource_table pru_remoteproc_ResourceTable = {
+	1,	/* we're the first version that implements this */
+	0,	/* number of entries in the table */
+	0, 0,	/* reserved, must be zero */
+	0,	/* offset[0] */
+};
+
+#endif /* _RSC_TABLE_PRU_H_ */
 

@@ -2,7 +2,6 @@
 ; This program flashes an LED on P9_11/P2.05 until a button that is
 ; attached to P9_13/P2.07 is pressed.
   .cdecls "main.c"
-
   .clink
   .global START
   .asg  "5000000",  DELAY
