@@ -1,0 +1,5 @@
+#!/bin/bash
+g++ -o example example.cpp gpioExpander.cpp bus/SPIDevice.cpp bus/I2CDevice.cpp bus/BusDevice.cpp
+g++ -Wall -o testSPI testSPI.cpp bus/SPIDevice.cpp bus/I2CDevice.cpp bus/BusDevice.cpp
+g++ -o testI2C testI2C.cpp bus/I2CDevice.cpp bus/BusDevice.cpp
+g++ -o display displayRegisters.cpp gpioExpander.cpp bus/I2CDevice.cpp bus/SPIDevice.cpp bus/BusDevice.cpp
