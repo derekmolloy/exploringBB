@@ -1,10 +1,3 @@
-/*
- * gpioExpander.h  Created on: 17 May 2015
- * Copyright (c) 2015 Derek Molloy (www.derekmolloy.ie)
- * Made available for the book "Exploring Raspberry Pi"
- * See: www.exploringrpi.com
- * Licensed under the EUPL V.1.1 */
-
 #ifndef GPIOEXPANDER_H_
 #define GPIOEXPANDER_H_
 #include "bus/SPIDevice.h"
@@ -13,7 +6,7 @@
 /// The MCP23X17 has 11 register pairs (registers 0x00 to 0x1A)
 #define BUFFER_SIZE 0x1A
 
-namespace exploringRPi {
+namespace exploringBB {
 
 /**
  * @class GPIOExpander
@@ -98,6 +91,6 @@ public:
    virtual ~GPIOExpander() {};
 };
 
-} /* namespace exploringRPi */
+} /* namespace exploringBB */
 
 #endif /* GPIOEXPANDER_H_ */

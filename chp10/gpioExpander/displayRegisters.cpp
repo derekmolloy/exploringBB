@@ -10,7 +10,7 @@
 #include "gpioExpander.h"
 
 using namespace std;
-using namespace exploringRPi;
+using namespace exploringBB;
 
 int main(){
    unsigned char receive; // used to store the send/rec data

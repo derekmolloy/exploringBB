@@ -1,8 +1,3 @@
-/*
- * SPIDevice.cpp  Created on: 22 June 2015
- * Copyright (c) 2014 Derek Molloy (www.derekmolloy.ie)
- * Made available for the book "Exploring Raspberry Pi"
- */
 
 #include "SPIDevice.h"
 #include <iostream>
@@ -22,7 +17,7 @@ using namespace std;
 
 #define HEX(x) setw(2) << setfill('0') << hex << (int)(x)
 
-namespace exploringRPi {
+namespace exploringBB {
 
 /**
  * The constructor for the SPIDevice that sets up and opens the SPI connection.
@@ -190,4 +185,4 @@ SPIDevice::~SPIDevice() {
 	this->close();
 }
 
-} /* namespace exploringRPi */
+} /* namespace exploringBB */

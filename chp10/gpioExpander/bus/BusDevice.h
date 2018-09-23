@@ -1,13 +1,7 @@
-/*
- * BusDevice.h  Created on: 23 May 2015
- * Copyright (c) 2014 Derek Molloy (www.derekmolloy.ie)
- * Made available for the book "Exploring Raspberry Pi"
- */
-
 #ifndef BUSDEVICE_H_
 #define BUSDEVICE_H_
 
-namespace exploringRPi {
+namespace exploringBB {
 
 /**
  * @class BusDevice
@@ -33,6 +27,6 @@ public:
 	virtual ~BusDevice();
 };
 
-} /* namespace exploringRPi */
+} /* namespace exploringBB */
 
 #endif /* BUSDEVICE_H_ */

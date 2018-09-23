@@ -1,10 +1,3 @@
-/*
- * gpioExpander.cpp  Created on: 17 May 2015
- * Copyright (c) 2015 Derek Molloy (www.derekmolloy.ie)
- * Made available for the book "Exploring Raspberry Pi"
- * See: www.exploringrpi.com
- * Licensed under the EUPL V.1.1  */
-
 #include "gpioExpander.h"
 #include <iostream>
 #include <unistd.h>
@@ -15,7 +8,7 @@
 #include <iomanip>
 using namespace std;
 
-namespace exploringRPi {
+namespace exploringBB {
 
 //From Table 1-3 for the MCP23X17 Data sheet
 #define IODIRA   0x00   //< Input/Output direction Port A Register
@@ -275,4 +268,4 @@ void GPIOExpander::dumpRegisters(){
   }
 }
 
-} /* namespace exploringRPi */
+} /* namespace exploringBB */

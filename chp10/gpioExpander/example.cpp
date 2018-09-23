@@ -13,7 +13,7 @@
 #include "gpioExpander.h"
 
 using namespace std;
-using namespace exploringRPi;
+using namespace exploringBB;
 
 int main(){
    cout << "Starting the GPIO Expander Example" << endl;

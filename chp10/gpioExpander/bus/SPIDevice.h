@@ -1,9 +1,3 @@
-/*
- * SPIDevice.h  Created on: 22 May 2015
- * Copyright (c) 2015 Derek Molloy (www.derekmolloy.ie)
- * Made available for the book "Exploring Raspberry Pi"
- */
-
 #ifndef SPIDEVICE_H_
 #define SPIDEVICE_H_
 #include<string>
@@ -12,7 +6,7 @@
 
 #define SPI_PATH "/dev/spidev"
 
-namespace exploringRPi{
+namespace exploringBB{
 
 /**
  * @class SPIDevice
@@ -55,6 +49,6 @@ private:
 	uint16_t delay;
 };
 
-} /* namespace exploringRPi */
+} /* namespace exploringBB */
 
 #endif /* SPIDEVICE_H_ */
