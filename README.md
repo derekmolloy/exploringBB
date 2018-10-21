@@ -1,5 +1,5 @@
-Molloy, D. (2018). Exploring BeagleBone: Tools and Techniques for Building 
-with Embedded Linux. New York: Wiley, Revsion 2, 978-1119533160, 700pp.
+Molloy, D. (2019). Exploring BeagleBone: Tools and Techniques for Building 
+with Embedded Linux. New York: Wiley, Second Edition, 978-1119533160, 720pp.
 
 This is the source code repository for all of the content in this book.
 Copyright (C) 2014- Derek Molloy. Please reference the book if you use this 
@@ -33,7 +33,7 @@ this repository in the License.txt file.
    Title = {Exploring BeagleBone: Tools and Techniques for Building with Embedded Linux},
    Publisher = {Wiley},
    Edition = {Second},
-   Year = {2018},
+   Year = {2019},
    ISBN = {9781119533160},
    URL = {http://www.exploringbeaglebone.com/}
 }
