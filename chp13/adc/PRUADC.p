@@ -7,7 +7,7 @@
 //   CLK             :   P9_30    pr1_pru0_pru_r30_2  r30.t2
 //   Sample Clock    :   P8_46    pr1_pru1_pru_r30_1  -- for testing only
 // This program was writen by Derek Molloy to align with the content of the book 
-// Exploring BeagleBone. See exploringbeaglebone.com/chapter13/
+// Exploring BeagleBone. See exploringbeaglebone.com/chapter15/
 
 .setcallreg  r29.w2		 // set a non-default CALL/RET register
 .origin 0                        // start of program in PRU memory
