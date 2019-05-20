@@ -1,3 +1,7 @@
+Warning: This code is related to Revision 1 of EBB, not Revision 2. The code would 
+have to be adapted for the new file paths that are set by config-pin and the note 
+below on $SLOTS is no longer relevant.
+
 An example to use the PWM class on a PWM pin -- See pages 232-233 in the book 
 Exploring BeagleBone by Derek Molloy
 
